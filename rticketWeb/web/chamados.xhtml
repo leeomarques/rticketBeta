@@ -11,10 +11,9 @@
     <h:body>
         <f:view>
             <ui:include src="cabecalho.xhtml" /><br /><br />
-
-            <h:form class="cadastros">                              
+            <h:form class="formulario">
                 <p:selectOneMenu id="tipo" var="tipoChamado" value="#{chamadosBean.listarTipoChamado}" style="width:250px">
-                    <f:selectItem itemLabel="Tipo" itemValue="" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Tipo" itemValue="" />
                     <f:selectItems value="#{tipoChamado.nome}" />
                 </p:selectOneMenu><br /><br />
                 <p:selectOneMenu id="situacao" value="#{chamadosBean.chamado.statusChamados}" style="width:250px">
@@ -23,8 +22,13 @@
                 </p:selectOneMenu><br /><br />
                 <p:inputText value="#{chamadosBean.chamado.titulo}" placeholder="Titulo" required="true" style="width:500px"></p:inputText><br /><br />
                 <p:inputTextarea rows="6" cols="33" placeholder="Descrição" style="width:500px" /><br /><br />
+                <p:calendar class="camposEsquerda" value="#{chamadosBean.chamado.dataCriacao}" showOn="button" placeholder="Criado Em"/><br /><br />
+                <p:calendar class="camposEsquerda" value="#{chamadosBean.chamado.dataFechamento}" showOn="button" placeholder="Fechado Em"/><br /><br />
+                <p:inputTextarea rows="6" cols="33" placeholder="Resposta Help Desk" style="width:500px" /><br /><br />
+                <h:outputText class="avaliacaoChamado" value="Avalicação:" />
+                <p:rating value="#{chamadosBean.chamado.notaChamado}" /><br /><br />
+                
                 <p:commandButton value="Salvar" action="#{chamadosBean.inserirChamados}" ajax="false" />
-                >>>>>>> origin/maven
             </h:form>           
         </f:view>         
     </h:body>

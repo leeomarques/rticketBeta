@@ -1,7 +1,6 @@
 package com.rticket.beans;
 
 import com.rticket.excecao.ValidarLoginException;
-import com.rticket.model.Usuario;
 import com.rticket.negocio.Fachada;
 import com.rticket.negocio.IFachada;
 import java.io.IOException;
@@ -10,12 +9,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
 public class LoginBean {
-
+    
     private String login;
     private String senha;
     private String mensagem;
@@ -59,27 +57,30 @@ public class LoginBean {
         this.usuarioLogado = usuarioLogado;
     }
 
-    public void efetuarLogin() throws ValidarLoginException,
+    public void efetuarLogin() throws ValidarLoginException, 
             NoSuchAlgorithmException, IOException {
         try {
-
-            if (login.equals("admin") && senha.equals("1234")) {
+            
+            if (login.equals("admin") && senha.equals("1234")){
                 FacesContext.getCurrentInstance().getExternalContext()
                         .redirect("principal.xhtml");
-            } else {
+            }
+            else{
                 usuarioLogado = fach.efetuarLogin(login, senha);
-
-                if (usuarioLogado == true) {
+            
+                if (usuarioLogado == true){
                     FacesContext.getCurrentInstance().getExternalContext()
                             .redirect("principal.xhtml");
-                } else {
+                }
+                else{
                     setMensagem("Usuario ou Senha Invalidos!");
                 }
             }
         } catch (ValidarLoginException e) {
-            FacesContext.getCurrentInstance().addMessage(null,
+            FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage("Login/Senha inexistente"));
         }
+
 
     }
 }

@@ -6,37 +6,43 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
+    
     <h:head>
         <title>RTicket - Chamados</title>
     </h:head>
     <h:body>
-
         <f:view>
             <ui:include src="cabecalho.xhtml" /><br /><br />
-            <p:button outcome="chamados.xhtml" value="Novo" icon="ui-icon-star"></p:button><br /><br /><br />
-            <p:dataTable var="chamado" value="#{chamadosBean.listarChamados()}">
-                <p:column style="width: 8%" headerText="Id">
-                    <h:outputText value="#{chamadosBean.id}" />
+            <h:form class="formulario">
+            <p:commandButton action="#{chamadosBean.novoChamado}" value="Novo" icon="ui-icon-star" /><br /><br /><br />
+            
+            <p:dataTable var="chamado" value="#{chamadosBean.listarChamados}">
+                <p:column style="width: 5%" headerText="Id">
+                    <h:outputText value="#{chamado.id}" />
                 </p:column>
-
-                <p:column style="width: 20%" headerText="Tipo">
+                
+                <p:column style="width: 15%" headerText="Tipo">
                     <h:outputText value="#{chamado.tipoChamados.nome}" />
                 </p:column>
 
-                <p:column style="width: 20%" headerText="Situação">
+                <p:column style="width: 15%" headerText="Situação">
                     <h:outputText value="#{chamado.statusChamados.nome}" />
                 </p:column>
-
+                
                 <p:column style="width: 40%" headerText="Titulo">
                     <h:outputText value="#{chamado.titulo}" />
                 </p:column>
 
-                <p:column style="width: 12%" headerText="Criado Em">
-
-                    <h:outputText value="#{chamado.dataCriacao}" />                   
+                <p:column style="width: 10%" headerText="Criado Em">
+                    <h:outputText value="#{chamado.dataCriacao}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column style="width: 5%" headerText="Editar">
+                    <p:commandButton actionListener="#{chamadosBean.buscarChamados(id)}" icon="ui-icon-disk" title="Icon Only" />
                 </p:column>
             </p:dataTable>
+            </h:form>
         </f:view>
     </h:body>
 </html>

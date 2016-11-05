@@ -20,6 +20,18 @@ body{
 .menu{
     margin: 0;
 }
-.cadastros{
+
+.formulario{
+    position: absolute;
     margin: 0 5%;
+}
+
+.camposEsquerda{
+   position: relative;
+   text-align: right;
+}
+
+.avaliacaoChamado{
+    font-family: Verdana;
+    font-size: 20px;
 }

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>RTicket - Usuários</title>
+    </h:head>
+    <h:body>
+        <ui:include src="cabecalho.xhtml" />
+
+        <h:form>
+            <p:growl id="msgs" showDetail="true" />
+
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel  value="ID:"/> <p:inputText id="nome" style="width:30px" value="" />
+                <p:outputLabel for="console" value="Situação:" />
+                <p:selectOneMenu id="console" value="#{usuarioBean.console}" style="width:125px">
+                    <f:selectItem itemLabel="Ativo" itemValue="1" />
+                    <f:selectItem itemLabel="Inativo" itemValue="2" />
+                </p:selectOneMenu>
+                <p:outputLabel  value="Nome:"/> <p:inputText id="nome2" style="width:500px" value="" />
+            </h:panelGrid>
+
+            <p:commandButton value="Gravar" icon="ui-icon-check"  />
+
+
+        </h:form>
+    </h:body>
+</html>
+

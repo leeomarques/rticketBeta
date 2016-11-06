@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>RTicket - Usuários</title>
+    </h:head>
+    <h:body>
+        <ui:include src="cabecalho.xhtml" />
+
+        <h:form>
+            <p:layout style="min-width:400px;min-height:200px;">
+                <!--<p:layoutUnit position="center" style="grid" >-->
+                <p:layoutUnit position="center"  resizable="true" collapsible="true">
+                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="nome" value="Nome: "/>
+                        <p:inputText id="nome" value="#{moduloBean.modulo.nome}" />
+
+                        <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo(modulo)}" ajax="false" />
+                    </p:panelGrid>
+                </p:layoutUnit>
+            </p:layout>
+
+        </h:form>  
+
+
+        <p:dataTable var="car" value="#{moduloBean.listarModulo()}">
+            <p:column headerText="ID">
+                <h:outputText value="#{moduloBean.modulo.id}" />
+            </p:column>
+
+            <p:column headerText="Módulo">
+                <h:outputText value="#{moduloBean.modulo.nome}" />
+            </p:column>
+
+        </p:dataTable>
+    </h:body>
+</html>
+

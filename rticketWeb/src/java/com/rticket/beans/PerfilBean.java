@@ -11,12 +11,12 @@ import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "perfilBean")
 public class PerfilBean {
-    
+
     IFachada fach = new Fachada();
-    
+
     public void inserirPerfil(Perfil perfil)
             throws CampoExistenteException, FormatoInvalidoException,
-                CampoVazioException{
+            CampoVazioException {
         fach.inserirPerfil(perfil);
     }
 
@@ -31,4 +31,5 @@ public class PerfilBean {
     public Collection<Perfil> listarPerfil() {
         return fach.listarPerfil();
     }
+
 }

@@ -11,24 +11,26 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="MODULO")
+@Table(name = "MODULO")
 public class Modulo {
 
     @Id
     @GeneratedValue
-    @Column(name="ID", length=6, nullable=false, unique=true)
+    @Column(name = "ID", length = 6, nullable = false, unique = true)
     private int id;
 
-    @Column(name="NOME", length=100, nullable=false, unique=true)
+    @Column(name = "NOME", length = 100, nullable = false, unique = true)
     private String nome;
 
     @ManyToMany
-    @JoinTable(name="PERFIL_MODULO",
-               joinColumns={@JoinColumn(name="ID_MODULO")},
-               inverseJoinColumns={@JoinColumn(name="ID_PERFIL")})
+    @JoinTable(name = "PERFIL_MODULO",
+            joinColumns = {
+                @JoinColumn(name = "ID_MODULO")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "ID_PERFIL")})
     private Collection<Perfil> perfis;
 
-    @Column(name="ATIVO", length=1, nullable=true, unique=false)
+    @Column(name = "ATIVO", length = 1, nullable = true, unique = false)
     private String ativo;
 
     public Modulo() {

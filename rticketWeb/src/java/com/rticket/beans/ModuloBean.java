@@ -11,12 +11,14 @@ import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "moduloBean")
 public class ModuloBean {
-    
+
+    private Modulo modulo;
+
     IFachada fach = new Fachada();
-    
+
     public void inserirModulo(Modulo modulo)
             throws CampoExistenteException, FormatoInvalidoException,
-                CampoVazioException {
+            CampoVazioException {
         fach.inserirModulo(modulo);
     }
 
@@ -31,4 +33,13 @@ public class ModuloBean {
     public Collection<Modulo> listarModulo() {
         return fach.listarModulo();
     }
+
+    public Modulo getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(Modulo modulo) {
+        this.modulo = modulo;
+    }
+
 }

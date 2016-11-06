@@ -12,27 +12,29 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PERFIL")
+@Table(name = "PERFIL")
 public class Perfil {
 
     @Id
     @GeneratedValue
-    @Column(name="ID", length=6, nullable=false, unique=true)
+    @Column(name = "ID", length = 6, nullable = false, unique = true)
     private int id;
 
-    @Column(name="NOME", length=100, nullable=false, unique=true)
+    @Column(name = "NOME", length = 100, nullable = false, unique = true)
     private String nome;
 
     @ManyToMany
-    @JoinTable(name="PERFIL_MODULO",
-               joinColumns={@JoinColumn(name="ID_PERFIL")},
-               inverseJoinColumns={@JoinColumn(name="ID_MODULO")})
+    @JoinTable(name = "PERFIL_MODULO",
+            joinColumns = {
+                @JoinColumn(name = "ID_PERFIL")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "ID_MODULO")})
     private Collection<Modulo> modulos;
 
     @OneToMany(mappedBy = "perfil")
     private Collection<Usuario> usuarios;
 
-    @Column(name="ATIVO", length=1, nullable=true, unique=false)
+    @Column(name = "ATIVO", length = 1, nullable = true, unique = false)
     private String ativo;
 
     public Perfil() {

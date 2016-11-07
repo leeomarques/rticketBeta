@@ -5,7 +5,8 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>RTicket - Usuários</title>
+        <title>RTicket - Status de Chamados</title>
+        <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml" />
@@ -14,7 +15,7 @@
             <p:outputLabel class="nomeStatusChamado" value="Nome: " />
             <p:inputText value="#{statusChamadoBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
             <br/>
-            <p:commandButton value="Salvar" action="#{statusChamadoBean.inserirStatusChamado()}" ajax="false" />
+            <p:commandButton value="Salvar" action="#{statusChamadoBean.inserirStatusChamado()}" ajax="false" /><br /><br /><br />
 
             <p:dataTable var="listStatusChamado" value="#{statusChamadoBean.listarStatusChamado}">
                 <p:column style="width: 1%" headerText="ID">

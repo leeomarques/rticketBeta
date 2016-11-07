@@ -5,34 +5,16 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>RTicket - Usuários</title>
+        <title>RTicket - Modulos</title>
+        <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
-        <ui:include src="cabecalho.xhtml" />
-
-        <h:form>
-            <p:layout style="min-width:400px;min-height:200px;">
-                <!--<p:layoutUnit position="center" style="grid" >-->
-                <p:layoutUnit position="center"  resizable="true" collapsible="true">
-                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
-                        <p:outputLabel for="nome" value="Nome: "/>
-                        <p:inputText id="nome" value="#{moduloBean.nome}" />
-
-                        <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo()}" ajax="false" />
-                    </p:panelGrid>
-                </p:layoutUnit>
-            </p:layout>
-
-        </h:form>  
-
-
-
-        <br />
+        <ui:include src="cabecalho.xhtml" /><br />
         <h:form class="formulario">
             <p:outputLabel class="nomeModulo" value="Nome: " />
             <p:inputText value="#{moduloBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
             <br/>
-            <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo()}" ajax="false" />
+            <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo()}" ajax="false" /><br /><br /><br />
 
             <p:dataTable var="listModulo" value="#{moduloBean.listarModulo}">
                 <p:column style="width: 1%" headerText="ID">

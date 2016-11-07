@@ -5,7 +5,8 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>RTicket - Usuários</title>
+        <title>RTicket - Tipos de Chamados</title>
+        <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml" />
@@ -14,7 +15,7 @@
             <p:outputLabel class="nomeTipoChamado" value="Nome: " />
             <p:inputText value="#{tipoChamadoBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
             <br/>
-            <p:commandButton value="Salvar" action="#{tipoChamadoBean.inserirTipoChamado()}" ajax="false" />
+            <p:commandButton value="Salvar" action="#{tipoChamadoBean.inserirTipoChamado()}" ajax="false" /><br /><br /><br />
 
             <p:dataTable var="listTipoChamado" value="#{tipoChamadoBean.listarTipoChamado}">
                 <p:column style="width: 1%" headerText="ID">

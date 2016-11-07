@@ -6,12 +6,9 @@ import com.rticket.excecao.FormatoInvalidoException;
 import com.rticket.negocio.ControladorStatusChamado;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class StatusChamadoTest {
     
@@ -31,23 +28,40 @@ public class StatusChamadoTest {
     @Test
     public void verificarCaracteres(){
         
-        boolean resultado = false;
-        String nome = "Novo";
+        boolean resultado  = false;
+        boolean resultado1 = true;
+        boolean resultado2 = true;
+        boolean resultado3 = true;
+        String nome  = "Novo";
+        String nome1 = "Novo123";
+        String nome2 = "123Novo";
+        String nome3 = "No123vo";
 
-        resultado = controladorSChamado.verificarCaracteres(nome);
+        resultado  = controladorSChamado.verificarCaracteres(nome);
+        resultado1 = controladorSChamado.verificarCaracteres(nome1);
+        resultado2 = controladorSChamado.verificarCaracteres(nome2);
+        resultado3 = controladorSChamado.verificarCaracteres(nome3);
 
         Assert.assertEquals(true, resultado);
+        Assert.assertEquals(false, resultado1);
+        Assert.assertEquals(false, resultado2);
+        Assert.assertEquals(false, resultado3);
     }
 
     @Test
     public void buscarNome(){
         
-        String nome = "novo";
         boolean resultado = false;
+        boolean resultado1 = true;
+        String nome = "Novo";
+        String nome1 = "Nomenaonxiste";
+        
         
         resultado = controladorSChamado.buscarNome(nome);
+        resultado1 = controladorSChamado.buscarNome(nome1);
         
-        Assert.assertEquals(true, resultado);       
+        Assert.assertEquals(true, resultado);
+        Assert.assertEquals(false, resultado1);  
     }
 
     @Test
@@ -74,8 +88,19 @@ public class StatusChamadoTest {
 
     @Test
     public void buscarStatusChamado() {
+        
         int id = 1;
-        boolean resultado = false;
+        int id1 = 100;
+        boolean resultado  = false;
+        boolean resultado1 = true;
+               
+        statusChamado = controladorSChamado.buscarStatusChamado(id1);
+        
+        if(statusChamado == null){
+            resultado1 = false;
+        }
+        
+        Assert.assertEquals(false, resultado1);
         
         statusChamado = controladorSChamado.buscarStatusChamado(id);
         
@@ -89,15 +114,15 @@ public class StatusChamadoTest {
     @Test
     public void alterarStatusChamado() {
 
-        statusChamado.setId(1);
-        statusChamado.setNome("Novo");
-        statusChamado.setAtivo("I");
+        statusChamado.setId(2);
+        statusChamado.setNome("Teste");
+        statusChamado.setFinaliza("S");
         StatusChamado statusChamadoResul = new StatusChamado();
         boolean resultado = false;
         
         controladorSChamado.alterarStatusChamado(statusChamado);
         
-        statusChamadoResul = controladorSChamado.buscarStatusChamado(1);
+        statusChamadoResul = controladorSChamado.buscarStatusChamado(2);
         
         if(statusChamadoResul.getNome().equals(statusChamado.getNome())){
             resultado = true;

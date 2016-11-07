@@ -11,24 +11,13 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
-import javax.swing.JOptionPane;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "moduloBean")
 public class ModuloBean {
 
-    private Modulo modulo;
     private String nome;
-
-    IFachada fach = new Fachada();
-
-    public Modulo getModulo() {
-        return modulo;
-    }
-
-    public void setModulo(Modulo modulo) {
-        this.modulo = modulo;
-    }
+    private Collection<Modulo> listarModulo;
     
     public String getNome() {
         return nome;
@@ -37,22 +26,16 @@ public class ModuloBean {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    public void inserirModulo(){
-        try{
-            modulo.setNome(this.nome);
-            fach.inserirModulo(modulo);
-        }catch(CampoExistenteException e){
-            JOptionPane.showMessageDialog(null, e);
-        }catch(CampoVazioException e){
-            JOptionPane.showMessageDialog(null, e);
-        }catch(FormatoInvalidoException e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
-        
-    private String nome;
-    private Collection<Modulo> listarModulo;
+
+    public Collection<Modulo> getListarModulo() {
+        this.listarModulo = fach.listarModulo();
+        return this.listarModulo;
+
+    }
+
+    public void setListarModulo(Collection<Modulo> listarModulo) {
+        this.listarModulo = listarModulo;
+    }
 
     IFachada fach = new Fachada();
 
@@ -75,23 +58,4 @@ public class ModuloBean {
     public void alterarModulo(Modulo modulo) {
         fach.alterarModulo(modulo);
     }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Collection<Modulo> getListarModulo() {
-        this.listarModulo = fach.listarModulo();
-        return this.listarModulo;
-
-    }
-
-    public void setListarModulo(Collection<Modulo> listarModulo) {
-        this.listarModulo = listarModulo;
-    }
-
 }

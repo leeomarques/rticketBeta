@@ -18,9 +18,35 @@ public class StatusChamadoBean {
 
     private String nome;
     private Collection<StatusChamado> listarStatusChamado;
+    private StatusChamado statusChamado;
 
     IFachada fach = new Fachada();
+    
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Collection<StatusChamado> getListarStatusChamado() {
+
+        return fach.listarStatusChamado();
+    }
+
+    public void setListarStatusChamado(Collection<StatusChamado> listarStatusChamado) {
+        this.listarStatusChamado = listarStatusChamado;
+    }
+
+    public StatusChamado getStatusChamado() {
+        return statusChamado;
+    }
+
+    public void setStatusChamado(StatusChamado statusChamado) {
+        this.statusChamado = statusChamado;
+    }
+    
     public void inserirStatusChamado() throws FormatoInvalidoException, CampoExistenteException, CampoVazioException {
         StatusChamado sts = new StatusChamado();
         sts.setNome(nome);
@@ -38,22 +64,5 @@ public class StatusChamadoBean {
 
     public void alterarStatusChamado(StatusChamado statusChamado) {
         fach.alterarStatusChamado(statusChamado);
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Collection<StatusChamado> getListarStatusChamado() {
-
-        return fach.listarStatusChamado();
-    }
-
-    public void setListarStatusChamado(Collection<StatusChamado> listarStatusChamado) {
-        this.listarStatusChamado = listarStatusChamado;
     }
 }

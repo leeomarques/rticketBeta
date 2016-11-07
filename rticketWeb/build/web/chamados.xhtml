@@ -7,28 +7,36 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>RTicket - Novo Chamado</title>
+        <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
         <f:view>
             <ui:include src="cabecalho.xhtml" /><br /><br />
             <h:form class="formulario">
-                <p:selectOneMenu id="tipo" var="tipoChamado" value="#{chamadosBean.listarTipoChamado}" style="width:250px">
-                    <f:selectItem itemLabel="Tipo" itemValue="" />
-                    <f:selectItems value="#{tipoChamado.nome}" />
+                 <p:commandButton value="Salvar" action="#{chamadosBean.inserirChamados}" ajax="false" /><br /><br /><br />
+                 
+                 <p:selectOneMenu value="#{tipoChamadoBean.tipoChamado}" style="width:250px" required="true">
+                    <f:selectItem itemLabel="Tipo..." itemValue="" />
+                    <f:selectItems value="#{tipoChamadoBean.listarTipoChamado}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.id}" />
                 </p:selectOneMenu><br /><br />
-                <p:selectOneMenu id="situacao" value="#{chamadosBean.chamado.statusChamados}" style="width:250px">
-                    <f:selectItem itemLabel="Situação" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{chamadosBean.chamado.statusChamados.nome}" />
-                </p:selectOneMenu><br /><br />
-                <p:inputText value="#{chamadosBean.chamado.titulo}" placeholder="Titulo" required="true" style="width:500px"></p:inputText><br /><br />
-                <p:inputTextarea rows="6" cols="33" placeholder="Descrição" style="width:500px" /><br /><br />
-                <p:calendar class="camposEsquerda" value="#{chamadosBean.chamado.dataCriacao}" showOn="button" placeholder="Criado Em"/><br /><br />
-                <p:calendar class="camposEsquerda" value="#{chamadosBean.chamado.dataFechamento}" showOn="button" placeholder="Fechado Em"/><br /><br />
-                <p:inputTextarea rows="6" cols="33" placeholder="Resposta Help Desk" style="width:500px" /><br /><br />
-                <h:outputText class="avaliacaoChamado" value="Avalicação:" />
-                <p:rating value="#{chamadosBean.chamado.notaChamado}" /><br /><br />
                 
-                <p:commandButton value="Salvar" action="#{chamadosBean.inserirChamados}" ajax="false" />
+                <p:selectOneMenu value="#{statusChamadoBean.statusChamado}" style="width:250px" required="true">
+                    <f:selectItem itemLabel="Situação..." itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{statusChamadoBean.listarStatusChamado}" var="status" itemLabel="#{status.nome}" itemValue="#{status.id}" />
+                </p:selectOneMenu><br /><br />
+                
+                <p:inputText value="#{chamadosBean.titulo}" placeholder="Titulo" required="true" style="width:500px"></p:inputText><br /><br />
+                
+                <p:inputTextarea value="#{chamadosBean.descricao}" rows="6" cols="33" placeholder="Descrição" style="width:500px" required="true" /><br /><br />
+                
+                <p:calendar value="#{chamadosBean.criadoEm}" showOn="button" placeholder="Criado Em" required="true" /><br /><br />
+                
+                <p:calendar value="#{chamadosBean.fechadoEm}" showOn="button" placeholder="Fechado Em" /><br /><br />
+                
+                <p:inputTextarea value="#{chamadosBean.respostaHelp}" rows="6" cols="33" placeholder="Resposta Help Desk" style="width:500px" /><br /><br />
+                
+                <h:outputText class="avaliacaoChamado" value="Avalicação:" />
+                <p:rating value="#{chamadosBean.notaAtendimento}" /><br /><br />
             </h:form>           
         </f:view>         
     </h:body>

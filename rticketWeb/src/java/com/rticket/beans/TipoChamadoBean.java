@@ -18,8 +18,39 @@ public class TipoChamadoBean {
 
     private String nome;
     private Collection<TipoChamado> listarTipoChamado;
+    private TipoChamado tipoChamado;
 
+    public TipoChamadoBean() {       
+        if(this.tipoChamado == null){
+            this.tipoChamado = new TipoChamado();
+        }
+    }
     IFachada fach = new Fachada();
+    
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public Collection<TipoChamado> getListarTipoChamado() {
+        return fach.listarTipoChamado();
+    }
+
+    public void setListarTipoChamado(Collection<TipoChamado> listarTipoChamado) {
+        this.listarTipoChamado = listarTipoChamado;
+    }
+    
+    
+    public TipoChamado getTipoChamado() {
+        return tipoChamado;
+    }
+
+    public void setTipoChamado(TipoChamado tipoChamado) {
+        this.tipoChamado = tipoChamado;
+    }
 
     public void inserirTipoChamado() throws FormatoInvalidoException, CampoExistenteException, CampoVazioException {
         TipoChamado tpc = new TipoChamado();
@@ -41,21 +72,4 @@ public class TipoChamadoBean {
     public void alterarTipoChamado(TipoChamado tipoChamado) {
         fach.alterarTipoChamado(tipoChamado);
     }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Collection<TipoChamado> getListarTipoChamado() {
-        return fach.listarTipoChamado();
-    }
-
-    public void setListarTipoChamado(Collection<TipoChamado> listarTipoChamado) {
-        this.listarTipoChamado = listarTipoChamado;
-    }
-
 }

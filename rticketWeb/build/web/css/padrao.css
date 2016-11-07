@@ -26,11 +26,6 @@ body{
     margin: 0 5%;
 }
 
-.camposEsquerda{
-   position: relative;
-   text-align: right;
-}
-
 .avaliacaoChamado{
     font-family: Verdana;
     font-size: 20px;

@@ -28,4 +28,16 @@ public class StatusChamadoDAO extends DAOGenerico<StatusChamado>{
         }
         return verificaNome;
     }
+    
+    public Collection<StatusChamado> listarStatusChamado(){
+        
+        Collection<StatusChamado> colecao = null;
+        String sql = "";
+        sql = ("SELECT s FROM StatusChamado s WHERE s.ativo = null");
+        Query q = getEntityManager().createQuery(sql, StatusChamado.class);
+        
+        colecao = q.getResultList();
+
+        return colecao;
+    }
 }

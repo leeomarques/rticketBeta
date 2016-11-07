@@ -75,6 +75,6 @@ public class ControladorStatusChamado {
 
     //Listar todos os StatusChamado
     public Collection<StatusChamado> listarStatusChamado(){
-        return statusChamadoDAO.listarColecao();
+        return statusChamadoDAO.listarStatusChamado();
     }
 }

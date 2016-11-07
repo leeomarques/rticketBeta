@@ -49,7 +49,7 @@ public class ControladorTipoChamado {
 
         buscarNome(tipoChamado.getNome());
 
-        if (this.resultado == false){
+        if (this.resultado == true){
             throw new CampoExistenteException();
         }
 

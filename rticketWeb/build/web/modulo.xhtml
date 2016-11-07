@@ -9,33 +9,22 @@
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml" />
+        <br />
+        <h:form class="formulario">
+            <p:outputLabel class="nomeModulo" value="Nome: " />
+            <p:inputText value="#{moduloBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
+            <br/>
+            <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo()}" ajax="false" />
 
-        <h:form>
-            <p:layout style="min-width:400px;min-height:200px;">
-                <!--<p:layoutUnit position="center" style="grid" >-->
-                <p:layoutUnit position="center"  resizable="true" collapsible="true">
-                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
-                        <p:outputLabel for="nome" value="Nome: "/>
-                        <p:inputText id="nome" value="#{moduloBean.modulo.nome}" />
-
-                        <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo(modulo)}" ajax="false" />
-                    </p:panelGrid>
-                </p:layoutUnit>
-            </p:layout>
-
+            <p:dataTable var="listModulo" value="#{moduloBean.listarModulo}">
+                <p:column style="width: 1%" headerText="ID">
+                    <h:outputText value="#{listModulo.id}" />
+                </p:column>
+                <p:column style="width: 20%" headerText="Nome">
+                    <h:outputText value="#{listModulo.nome}" />
+                </p:column>
+            </p:dataTable>
         </h:form>  
-
-
-        <p:dataTable var="car" value="#{moduloBean.listarModulo()}">
-            <p:column headerText="ID">
-                <h:outputText value="#{moduloBean.modulo.id}" />
-            </p:column>
-
-            <p:column headerText="Módulo">
-                <h:outputText value="#{moduloBean.modulo.nome}" />
-            </p:column>
-
-        </p:dataTable>
     </h:body>
 </html>
 

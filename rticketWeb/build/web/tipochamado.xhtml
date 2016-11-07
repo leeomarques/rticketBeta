@@ -11,20 +11,19 @@
         <ui:include src="cabecalho.xhtml" />
         <br />
         <h:form class="formulario">
-            <p:outputLabel class="nomeModulo" value="Nome: " />
-            <p:inputText value="#{moduloBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
+            <p:outputLabel class="nomeTipoChamado" value="Nome: " />
+            <p:inputText value="#{tipoChamadoBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
             <br/>
-            <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo()}" ajax="false" />
+            <p:commandButton value="Salvar" action="#{tipoChamadoBean.inserirTipoChamado()}" ajax="false" />
 
-            <p:dataTable var="listModulo" value="#{moduloBean.listarModulo}">
+            <p:dataTable var="listTipoChamado" value="#{tipoChamadoBean.listarTipoChamado}">
                 <p:column style="width: 1%" headerText="ID">
-                    <h:outputText value="#{listModulo.id}" />
+                    <h:outputText value="#{listTipoChamado.id}" />
                 </p:column>
                 <p:column style="width: 20%" headerText="Nome">
-                    <h:outputText value="#{listModulo.nome}" />
+                    <h:outputText value="#{listTipoChamado.nome}" />
                 </p:column>
             </p:dataTable>
         </h:form>  
     </h:body>
 </html>
-

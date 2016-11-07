@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
@@ -11,6 +11,11 @@
             <file>file:/C:/Projeto/ProjetoPSC/rticketBeta/rticketBeta/rticketWeb/src/java/com/rticket/dao/dados/ChamadosDAO.java</file>
             <file>file:/C:/Projeto/ProjetoPSC/rticketBeta/rticketBeta/rticketWeb/src/java/com/rticket/dao/dados/TipoChamadoDAO.java</file>
             <file>file:/C:/Projeto/ProjetoPSC/rticketBeta/rticketBeta/rticketWeb/src/java/com/rticket/dao/dados/StatusChamadoDAO.java</file>
+            <file>file:/home/leonardo/Área%20de%20Trabalho/Projeto/rticketBeta/rticketWeb/src/java/com/rticket/beans/StatusChamadoBean.java</file>
+            <file>file:/home/leonardo/Área%20de%20Trabalho/Projeto/rticketBeta/rticketWeb/src/java/com/rticket/negocio/ControladorStatusChamado.java</file>
+            <file>file:/home/leonardo/Área%20de%20Trabalho/Projeto/rticketBeta/rticketWeb/src/java/com/rticket/beans/TipoChamadoBean.java</file>
+            <file>file:/home/leonardo/Área%20de%20Trabalho/Projeto/rticketBeta/rticketWeb/web/tipochamado.xhtml</file>
+            <file>file:/home/leonardo/Área%20de%20Trabalho/Projeto/rticketBeta/rticketWeb/src/java/com/rticket/negocio/ControladorTipoChamado.java</file>
         </group>
     </open-files>
 </project-private>

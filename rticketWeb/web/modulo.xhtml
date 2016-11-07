@@ -16,9 +16,9 @@
                 <p:layoutUnit position="center"  resizable="true" collapsible="true">
                     <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="nome" value="Nome: "/>
-                        <p:inputText id="nome" value="#{moduloBean.modulo.nome}" />
+                        <p:inputText id="nome" value="#{moduloBean.nome}" />
 
-                        <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo(modulo)}" ajax="false" />
+                        <p:commandButton value="Salvar" action="#{moduloBean.inserirModulo()}" ajax="false" />
                     </p:panelGrid>
                 </p:layoutUnit>
             </p:layout>
@@ -26,16 +26,7 @@
         </h:form>  
 
 
-        <p:dataTable var="car" value="#{moduloBean.listarModulo()}">
-            <p:column headerText="ID">
-                <h:outputText value="#{moduloBean.modulo.id}" />
-            </p:column>
 
-            <p:column headerText="Módulo">
-                <h:outputText value="#{moduloBean.modulo.nome}" />
-            </p:column>
-
-        </p:dataTable>
     </h:body>
 </html>
 

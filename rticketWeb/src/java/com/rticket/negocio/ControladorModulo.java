@@ -49,7 +49,7 @@ public class ControladorModulo {
 
         buscarNome(modulo.getNome());
 
-        if (this.resultado == false){
+        if (this.resultado == true){
             throw new CampoExistenteException();
         }
 

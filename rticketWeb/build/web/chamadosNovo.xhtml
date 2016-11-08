@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>RTicket - Novo Chamado</title>
+        <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
+    </h:head>
+    <h:body>
+        <f:view>
+            <ui:include src="cabecalho.xhtml" /><br /><br />
+            <h:form class="formulario">
+                <p:commandButton value="Salvar" action="#{chamadosBean.inserirChamados}" ajax="false" icon="ui-icon-disk" /><br /><br /><br />
+              
+                <p:selectOneMenu value="#{chamadosBean.tipoChamado}" style="width:250px" required="true" requiredMessage="Selecione um tipo de Chamado">
+                    <f:selectItem itemLabel="Tipo..." itemValue="" />
+                    <f:selectItems value="#{chamadosBean.listarTipoChamados}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.id}" />
+                </p:selectOneMenu><br /><br />
+                
+                
+                <p:selectOneMenu value="#{chamadosBean.statusChamado}" style="width:250px" required="true" requiredMessage="Selecione um Status de Chamado">
+                    <f:selectItem itemLabel="Status..." itemValue="" />
+                    <f:selectItems value="#{chamadosBean.listarStatusChamados}" var="status" itemLabel="#{status.nome}" itemValue="#{status.id}" />
+                </p:selectOneMenu><br /><br />
+                
+                <p:inputText value="#{chamadosBean.titulo}" placeholder="Titulo" style="width:1000px" required="true" requiredMessage="Insira Titulo"></p:inputText><br /><br />
+                
+                <p:inputTextarea value="#{chamadosBean.descricao}" rows="6" cols="33" placeholder="Descrição" style="width:1000px" required="true" requiredMessage="Insira Descrição" /><br /><br />                
+            </h:form>
+        </f:view>         
+    </h:body>
+</html>

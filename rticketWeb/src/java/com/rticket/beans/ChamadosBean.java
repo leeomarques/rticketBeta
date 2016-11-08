@@ -20,46 +20,50 @@ import javax.swing.JOptionPane;
 public class ChamadosBean {
 
     private Collection<Chamados> listarChamados;
-    private Chamados chamado;
-    private String mensagem;
+    private Collection<TipoChamado> listarTipoChamados;
+    private Collection<StatusChamado> listarStatusChamados;
+    private String tipoChamado;
     private String titulo;
     private String descricao;
-    private Date criadoEm;
-    private Date fechadoEm;
-    private String respostaHelp;
-    private int notaAtendimento;
-    private TipoChamado tipoChamado;
-    private StatusChamado statusChamado;
-    private Usuario user;
+    private String statusChamado;
+    
     
     IFachada fach = new Fachada();
     
     public Collection<Chamados> getListarChamados() {
                              
-        this.listarChamados = fach.listarChamados();
-        return this.listarChamados;
+        return fach.listarChamados();
     }
 
     public void setListarChamados(Collection<Chamados> listarChamados) {
         this.listarChamados = listarChamados;
     }
     
-    public Chamados getChamado() {
-        return chamado;
+    public Collection<TipoChamado> getListarTipoChamados() {
+        
+        return fach.listarTipoChamado();
     }
 
-    public void setChamado(Chamados chamado) {
-        this.chamado = chamado;
+    public void setListarTipoChamados(Collection<TipoChamado> listarTipoChamados) {
+        this.listarTipoChamados = listarTipoChamados;
     }
     
-    public String getMensagem() {
-        return mensagem;
+    public Collection<StatusChamado> getListarStatusChamados() {
+        
+        return fach.listarStatusChamado();
     }
 
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
+    public void setListarStatusChamados(Collection<StatusChamado> listarStatusChamados) {
+        this.listarStatusChamados = listarStatusChamados;
     }
     
+    public String getTipoChamado() {
+        return tipoChamado;
+    }
+
+    public void setTipoChamado(String tipoChamado) {
+        this.tipoChamado = tipoChamado;
+    }
     
     public String getTitulo() {
         return titulo;
@@ -76,87 +80,19 @@ public class ChamadosBean {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-    public Date getCriadoEm() {
-        return criadoEm;
-    }
-
-    public void setCriadoEm(Date criadoEm) {
-        this.criadoEm = criadoEm;
-    }
-
-    public Date getFechadoEm() {
-        return fechadoEm;
-    }
-
-    public void setFechadoEm(Date fechadoEm) {
-        this.fechadoEm = fechadoEm;
-    }
-
-    public String getRespostaHelp() {
-        return respostaHelp;
-    }
-
-    public void setRespostaHelp(String respostaHelp) {
-        this.respostaHelp = respostaHelp;
-    }
-
-    public int getNotaAtendimento() {
-        return notaAtendimento;
-    }
-
-    public void setNotaAtendimento(int notaAtendimento) {
-        this.notaAtendimento = notaAtendimento;
-    }
-
-    public TipoChamado getTipoChamado() {
-        return tipoChamado;
-    }
-
-    public void setTipoChamado(TipoChamado tipoChamado) {
-        this.tipoChamado = tipoChamado;
-    }
-
-    public StatusChamado getStatusChamado() {
+    
+    public String getStatusChamado() {
         return statusChamado;
     }
 
-    public void setStatusChamado(StatusChamado statusChamado) {
+    public void setStatusChamado(String statusChamado) {
         this.statusChamado = statusChamado;
-    }
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
-    
-    public void inserirChamados(){
-        try {
-            chamado.setTipoChamado(tipoChamado);
-            chamado.setStatusChamado(statusChamado);
-            chamado.setTitulo(titulo);
-            chamado.setDescricao(descricao);
-            chamado.setDataCriacao(criadoEm);
-            chamado.setDataFechamento(fechadoEm);
-            chamado.setResposta(respostaHelp);
-            chamado.setNotaChamado(notaAtendimento);
-            chamado.setUsuarios(user);
-            
-            
-            fach.inserirChamados(chamado);
-        } catch (CampoVazioException ex) {
-            JOptionPane.showMessageDialog(null, "Favor preencher todos os Campos");
-        }
     }
     
     public void novoChamado(){
         
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("chamados.xhtml");
-            setMensagem("Usuario ou Senha Invalidos!");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosNovo.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -165,11 +101,53 @@ public class ChamadosBean {
     public void buscarChamados(int id){
         
         try {
-            chamado = fach.buscarChamados(id);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("chamados.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosConsultar.xhtml");
             
         } catch (IOException ex) {
             Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void editarChamados(){
+        
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosAlterar.xhtml");          
+        } catch (IOException ex) {
+            Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void inserirChamados(){
+        try {
+            Chamados cham = new Chamados();
+            Date dt = new Date();
+            Usuario user = new Usuario();
+            
+            user.setId(1);
+            user.setNome("Antonio");
+            user.setLogin("toinho");
+            user.setSenha("1234");
+                      
+            IFachada fachadaTipo = new Fachada();
+            int idTipo = Integer.valueOf(tipoChamado);
+            
+            IFachada fachadaStatus = new Fachada();
+            int idStatus = Integer.valueOf(statusChamado);
+            
+            cham.setDataCriacao(dt);
+            cham.setTipoChamado(fachadaTipo.buscarTipoChamado(idTipo));
+            cham.setTitulo(titulo);
+            cham.setDescricao(descricao);
+            cham.setStatusChamado(fachadaStatus.buscarStatusChamado(idStatus));          
+            cham.setUsuarios(user);
+                       
+            fach.inserirChamados(cham);
+  
+            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosList.xhtml");
+        } catch (CampoVazioException ex) {
+            JOptionPane.showMessageDialog(null, "Favor preencher todos os Campos");
+        }catch (IOException ex) {
+                Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 }

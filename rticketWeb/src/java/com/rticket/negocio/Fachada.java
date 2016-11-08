@@ -165,5 +165,9 @@ public class Fachada implements IFachada {
     public Collection<TipoChamado> listarTipoChamado() {
         return novoTipoChamado.listarTipoChamado();
     }
+    
+    public TipoChamado buscarTipoChamadoNome(String nome){
+         return this.novoTipoChamado.buscarTipoChamadoNome(nome);
+    }
 //</editor-fold>
 }

@@ -7,6 +7,7 @@ import com.rticket.model.TipoChamado;
 import com.rticket.negocio.Fachada;
 import com.rticket.negocio.IFachada;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,17 +15,17 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "tipoChamadoBean")
-public class TipoChamadoBean {
+public class TipoChamadoBean implements Serializable{
 
     private String nome;
     private Collection<TipoChamado> listarTipoChamado;
     private TipoChamado tipoChamado;
-
+    private int id;
+    
     public TipoChamadoBean() {       
-        if(this.tipoChamado == null){
-            this.tipoChamado = new TipoChamado();
-        }
+
     }
+    
     IFachada fach = new Fachada();
     
     public String getNome() {
@@ -42,14 +43,21 @@ public class TipoChamadoBean {
     public void setListarTipoChamado(Collection<TipoChamado> listarTipoChamado) {
         this.listarTipoChamado = listarTipoChamado;
     }
-    
-    
+      
     public TipoChamado getTipoChamado() {
         return tipoChamado;
     }
 
     public void setTipoChamado(TipoChamado tipoChamado) {
         this.tipoChamado = tipoChamado;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void inserirTipoChamado() throws FormatoInvalidoException, CampoExistenteException, CampoVazioException {

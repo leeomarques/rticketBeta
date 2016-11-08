@@ -89,6 +89,8 @@ public interface IFachada {
                 CampoVazioException;
 
     public TipoChamado buscarTipoChamado(int id);
+    
+    TipoChamado buscarTipoChamadoNome(String nome);
 
     public void alterarTipoChamado(TipoChamado tipoChamado);
 

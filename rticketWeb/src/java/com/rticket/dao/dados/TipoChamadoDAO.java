@@ -9,7 +9,8 @@ import javax.persistence.Query;
 
 public class TipoChamadoDAO extends DAOGenerico<TipoChamado>{
 
-    Collection<TipoChamado> tipoChamados = new ArrayList();
+    Collection<TipoChamado> listaTipoChamados = new ArrayList();
+    TipoChamado tipoChamado = new TipoChamado();
 
     public TipoChamadoDAO(EntityManager em) {
 	super(em);
@@ -21,8 +22,8 @@ public class TipoChamadoDAO extends DAOGenerico<TipoChamado>{
         sql = ("SELECT m FROM TipoChamado m WHERE m.nome = :nome");
         Query q = getEntityManager().createQuery(sql, TipoChamado.class);
         q.setParameter("nome", nome);
-        tipoChamados = q.getResultList();
-        if (tipoChamados.isEmpty()){
+        listaTipoChamados = q.getResultList();
+        if (listaTipoChamados.isEmpty()){
             verificaNome = false;
         }
         return verificaNome;
@@ -39,5 +40,16 @@ public class TipoChamadoDAO extends DAOGenerico<TipoChamado>{
         colecao = q.getResultList();
 
         return colecao;
+    }
+    
+    public TipoChamado buscarTipoChamadoNome(String nome){
+        String sql;
+
+        sql = ("SELECT m FROM TipoChamado m WHERE m.nome = :nome");
+        Query q = getEntityManager().createQuery(sql, TipoChamado.class);
+        q.setParameter("nome", nome);
+        tipoChamado = (TipoChamado) q.getSingleResult();
+        
+        return tipoChamado;
     }
 }

@@ -67,6 +67,10 @@ public class ControladorTipoChamado {
     public TipoChamado buscarTipoChamado(int id){
         return tipoChamadoDAO.buscarPorChave(id);
     }
+    
+    public TipoChamado buscarTipoChamadoNome(String nome){
+        return tipoChamadoDAO.buscarTipoChamadoNome(nome);
+    }
 
     //Metodo para Alterar TipoChamado
     public void alterarTipoChamado(TipoChamado tipoChamado){

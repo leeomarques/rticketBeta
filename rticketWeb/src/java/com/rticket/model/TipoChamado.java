@@ -65,4 +65,26 @@ public class TipoChamado {
     public void setAtivo(String ativo) {
         this.ativo = ativo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoChamado other = (TipoChamado) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
 }

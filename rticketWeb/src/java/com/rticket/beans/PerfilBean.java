@@ -10,14 +10,14 @@ import com.rticket.negocio.IFachada;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.faces.bean.ManagedBean;
-import org.primefaces.model.DualListModel;
+//import org.primefaces.model.DualListModel;
 
 @ManagedBean(name = "perfilBean")
 public class PerfilBean {
 
     private Collection<Modulo> modEsq = new ArrayList<Modulo>();
     private Collection<Modulo> modDir = new ArrayList<Modulo>();
-    private DualListModel<Modulo> modulos;
+    //private DualListModel<Modulo> modulos;
 
     IFachada fach = new Fachada();
 
@@ -53,12 +53,12 @@ public class PerfilBean {
         this.modDir = modDir;
     }
 
-    public DualListModel<Modulo> getModulos() {
+    /*public DualListModel<Modulo> getModulos() {
         return modulos;
     }
 
     public void setModulos(DualListModel<Modulo> modulos) {
         this.modulos = modulos;
-    }
+    }*/
 
 }

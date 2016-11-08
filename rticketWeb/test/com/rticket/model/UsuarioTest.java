@@ -97,8 +97,8 @@ public class UsuarioTest {
     public void inserirUsuario(){
        
         try {
-            user.setNome("Antonio");
-            user.setLogin("testetete");
+            user.setNome("AntonioTeste");
+            user.setLogin("testeteteAntonio");
             user.setSenha("1234");
             boolean resultado = false;
             

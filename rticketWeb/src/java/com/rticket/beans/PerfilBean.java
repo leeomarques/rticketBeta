@@ -5,24 +5,37 @@ import com.rticket.excecao.CampoVazioException;
 import com.rticket.excecao.FormatoInvalidoException;
 import com.rticket.model.Modulo;
 import com.rticket.model.Perfil;
+import com.rticket.model.StatusChamado;
 import com.rticket.negocio.Fachada;
 import com.rticket.negocio.IFachada;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 //import org.primefaces.model.DualListModel;
 
 @ManagedBean(name = "perfilBean")
 public class PerfilBean {
 
-    private Collection<Modulo> modEsq = new ArrayList<Modulo>();
-    private Collection<Modulo> modDir = new ArrayList<Modulo>();
-    //private DualListModel<Modulo> modulos;
+    private String nome;
+    private Collection<Modulo> listarModulo;
+    private Collection<Perfil> listarPerfil;
+    private Perfil perfil;
+    private Modulo modulo;
 
     IFachada fach = new Fachada();
 
-    public void inserirPerfil(Perfil perfil) throws CampoExistenteException, FormatoInvalidoException, CampoVazioException {
-        fach.inserirPerfil(perfil);
+    public void inserirPerfil() throws CampoExistenteException, FormatoInvalidoException, CampoVazioException {
+        Perfil per = new Perfil();
+        per.setNome(nome);
+        fach.inserirPerfil(per);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(ModuloBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Perfil buscarPerfil(int id) {
@@ -33,32 +46,45 @@ public class PerfilBean {
         fach.alterarPerfil(perfil);
     }
 
-    public Collection<Perfil> listarPerfil() {
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Collection<Modulo> getListarModulo() {
+
+        return fach.listarModulo();
+    }
+
+    public void setListarModulo(Collection<Modulo> listarModulo) {
+        this.listarModulo = listarModulo;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
+    public Modulo getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(Modulo modulo) {
+        this.modulo = modulo;
+    }
+
+    public Collection<Perfil> getListarPerfil() {
         return fach.listarPerfil();
     }
 
-    public Collection<Modulo> getModEsq() {
-        return modEsq;
+    public void setListarPerfil(Collection<Perfil> listarPerfil) {
+        this.listarPerfil = listarPerfil;
     }
-
-    public void setModEsq(Collection<Modulo> modEsq) {
-        this.modEsq = modEsq;
-    }
-
-    public Collection<Modulo> getModDir() {
-        return modDir;
-    }
-
-    public void setModDir(Collection<Modulo> modDir) {
-        this.modDir = modDir;
-    }
-
-    /*public DualListModel<Modulo> getModulos() {
-        return modulos;
-    }
-
-    public void setModulos(DualListModel<Modulo> modulos) {
-        this.modulos = modulos;
-    }*/
 
 }

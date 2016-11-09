@@ -3,28 +3,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>RTicket - Tipos de Chamados</title>
         <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
         <ui:include src="cabecalho.xhtml" />
-        <br />
         <h:form class="formulario">
+            <p></p>
             <p:outputLabel class="nomeTipoChamado" value="Nome: " />
-            <p:inputText value="#{tipoChamadoBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
-            <br/>
-            <p:commandButton value="Salvar" action="#{tipoChamadoBean.inserirTipoChamado()}" ajax="false" /><br /><br /><br />
+            <p:inputText value="#{perfilBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText>
+            <p></p>
+            <p:outputLabel class="ListadeModulos" value="Módulos: " />
+            <!--<p:orderList value="#{perfilBean.listarModulo}" var="listmodulo" controlsLocation="none" itemLabel="#{listmodulo.nome}" itemValue="#{listmodulo.id}" />-->
+            <h:selectManyListbox value="#{perfilBean.modulo.nome}" size="5" >
+                <f:selectItems value="#{perfilBean.listarModulo}" />
+            </h:selectManyListbox> 
 
-            <p:dataTable var="listTipoChamado" value="#{tipoChamadoBean.listarTipoChamado}">
-                <p:column style="width: 1%" headerText="ID">
-                    <h:outputText value="#{listTipoChamado.id}" />
-                </p:column>
-                <p:column style="width: 20%" headerText="Nome">
-                    <h:outputText value="#{listTipoChamado.nome}" />
-                </p:column>
-            </p:dataTable>
+
+
+
+            <p:commandButton value="Salvar" action="#{perfilBean.inserirPerfil()}" ajax="false" />
+            <p></p>
         </h:form>  
+        <p:dataTable var="listperfil" value="#{perfilBean.listarPerfil}">
+            <p:column style="width: 10%" headerText="ID">
+                <h:outputText value="#{listperfil.id}" />
+            </p:column>
+            <p:column style="width: 80%" headerText="Nome">
+                <h:outputText value="#{listperfil.nome}" />
+            </p:column>
+            <p:column style="width: 10%" headerText="Módulos">
+                <h:outputText value="#{listperfil.modulos}" />
+            </p:column>
+        </p:dataTable>
     </h:body>
 </html>

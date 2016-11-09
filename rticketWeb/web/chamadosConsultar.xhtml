@@ -10,40 +10,48 @@
         <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
-        <f:view>
+        <f:view>           
             <ui:include src="cabecalho.xhtml" /><br /><br />
             <h:form class="formulario">
-                <p:commandButton value="Editar" actionListener="#{chamadosBean.editarChamados}" ajax="false" icon="ui-icon-pencil" /><br /><br /><br />               
-                
+                <p:button outcome="chamadosAlterar" value="Editar" icon="ui-icon-pencil">
+                    <f:param name="chamadosIdEdit" value="#{chamadosConsultaBean.idChamado}" />
+                </p:button>
+                <br /><br /><br />               
+                <f:metadata>
+                    <f:viewParam name="chamadoId" value="#{chamadosConsultaBean.idChamado}" />                   
+                </f:metadata>              
                 <p:layoutUnit position="center">
+                    <br />
+                    <div class="numeroChamado">
+                        <p:outputLabel id="tipo" value="#{chamadosConsultaBean.tipo}" />
+                        <p:outputLabel for="tipo" value=" #" />
+                        <p:outputLabel id="id" value="#{chamadosConsultaBean.idChamado}" /><br /><br />                   
+                    </div> 
                     <p:outputLabel for="titulo" value="Titulo: " />
-                    <p:outputLabel id="titulo" value="#{chamadosBean.titulo}" /><br /><br /><br />
-                    
-                    <p:outputLabel for="tipo" value="Tipo: " />
-                    <p:outputLabel id="tipo" value="#{chamadosBean.tipoChamado.nome}" /><br /><br />
+                    <p:outputLabel id="titulo" value="#{chamadosConsultaBean.titulo}" /><br /><br /><br />
                     
                     <p:outputLabel for="status" value="Situação: " />
-                    <p:outputLabel id="status" value="#{chamadosBean.statusChamado.nome}" /><br /><br />
+                    <p:outputLabel id="status" value="#{chamadosConsultaBean.status}" /><br /><br />
                     
                     <p:outputLabel for="atribuidoPara" value="Atribuido Para: " />
-                    <p:outputLabel id="atribuidoPara"  /><br /><br />
+                    <p:outputLabel id="atribuidoPara" value="#{chamadosConsultaBean.usuarioAtendente}" /><br /><br />
                     
                     <p:outputLabel for="criadoEm" value="Criado Em: " />
-                    <p:outputLabel id="criadoEm" value="#{chamadosBean.criadoEm}" /><br /><br />
+                    <p:outputLabel id="criadoEm" value="#{chamadosConsultaBean.criadoEm}" /><br /><br />
                     
                     <p:outputLabel for="fechadoEm" value="Fechado Em: " />
-                    <p:outputLabel id="fechadoEm" value="#{chamadosBean.fechadoEm}" /><br /><br />
+                    <p:outputLabel id="fechadoEm" value="#{chamadosConsultaBean.fechadoem}" /><br /><br />
                     
                     <p:outputLabel for="resposta" value="Resposta HelpDesk: " />
-                    <p:outputLabel id="resposta" value="#{chamadosBean.respostaHelp}" /><br /><br />
+                    <p:outputLabel id="resposta" value="#{chamadosConsultaBean.resposta}" /><br /><br />
                     
                     <p:outputLabel for="nota" value="Nota Atendimento: " />
-                    <p:outputLabel id="nota" value="#{chamadosBean.notaAtendimento}" /><br /><br />
+                    <p:outputLabel id="nota" value="#{chamadosConsultaBean.avaliacao}" /><br /><br />
                     
                     <hr></hr><br />
                     
                     <p:outputLabel for="descricao" value="Descrição: " />
-                    <p:outputLabel id="descricao" value="#{chamadosBean.descricao}" /><br /><br />
+                    <p:outputLabel id="descricao" value="#{chamadosConsultaBean.descricao}" /><br /><br />
                 </p:layoutUnit>               
             </h:form>
         </f:view>         

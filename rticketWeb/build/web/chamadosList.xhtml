@@ -17,34 +17,62 @@
             <h:form class="formulario">
                 <p:commandButton action="#{chamadosBean.novoChamado}" value="Novo" icon="ui-icon-star" /><br /><br /><br />
             
-                <p:dataTable var="chamado" value="#{chamadosBean.listarChamados}">
-                    <p:column style="width: 3%" headerText="Id">
-                        <h:outputText value="#{chamado.id}" />
+                <p:dataTable id="tbl" var="chamado" value="#{chamadosBean.listarChamados}"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                             paginator="true" rows="10" style="margin-bottom:20px">
+ 
+                    <f:facet name="{Exporters}">
+                        <h:commandLink>
+                            <p:graphicImage name="img/excel.png" width="24"/>
+                            <p:dataExporter type="xls" target="tbl" fileName="listChamados" />
+                        </h:commandLink>
+
+                        <h:commandLink>
+                            <p:graphicImage name="img/pdf.png" width="24"/>
+                            <p:dataExporter type="pdf" target="tbl" fileName="listChamados"/>
+                        </h:commandLink>
+                    </f:facet>
+ 
+                    <p:column style="width:20px">
+                        <f:facet name="header">
+                            <h:outputText value="Id" />
+                        </f:facet>
+                        <p:link style="color: #269abc" outcome="chamadosConsultar" value="#{chamado.id}">
+                            <f:param name="chamadoId" value="#{chamado.id}" />
+                        </p:link>                      
                     </p:column>
 
-                    <p:column style="width: 12%" headerText="Tipo">
+                    <p:column style="width:200px">
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
                         <h:outputText value="#{chamado.tipoChamados.nome}" />
                     </p:column>
 
-                    <p:column style="width: 12%" headerText="Situação">
+                    <p:column style="width:200px">
+                        <f:facet name="header">
+                            <h:outputText value="Situação" />
+                        </f:facet>
                         <h:outputText value="#{chamado.statusChamados.nome}" />
                     </p:column>
 
-                    <p:column style="width: 30%" headerText="Titulo">
+                    <p:column style="width:600px">
+                        <f:facet name="header">
+                            <h:outputText value="Titulo" />
+                        </f:facet>
                         <h:outputText value="#{chamado.titulo}" />
                     </p:column>
 
-                    <p:column style="width: 7%" headerText="Criado Em">
+                    <p:column style="width:100px">
+                        <f:facet name="header">
+                            <h:outputText value="Criado Em" />
+                        </f:facet>
                         <h:outputText value="#{chamado.dataCriacao}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
-                    </p:column>
-                    <p:column style="width: 3.5%">
-                        <p:commandButton actionListener="#{chamadosBean.buscarChamados(id)}" icon="ui-icon-search" title="Consultar Chamado" />
                     </p:column>
                 </p:dataTable>
             </h:form>
         </f:view>
     </h:body>
 </html>
-

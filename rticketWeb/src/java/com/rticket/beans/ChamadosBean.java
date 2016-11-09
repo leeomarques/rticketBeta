@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 @ManagedBean(name = "chamadosBean")
 public class ChamadosBean {
 
+    private int idChamado;
     private Collection<Chamados> listarChamados;
     private Collection<TipoChamado> listarTipoChamados;
     private Collection<StatusChamado> listarStatusChamados;
@@ -27,8 +28,15 @@ public class ChamadosBean {
     private String descricao;
     private String statusChamado;
     
-    
     IFachada fach = new Fachada();
+    
+    public int getIdChamado() {
+        return idChamado;
+    }
+
+    public void setIdChamado(int idChamado) {
+        this.idChamado = idChamado;
+    }
     
     public Collection<Chamados> getListarChamados() {
                              
@@ -98,20 +106,19 @@ public class ChamadosBean {
         }
     }
     
-    public void buscarChamados(int id){
+    public void consultarChamados(){
         
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosConsultar.xhtml");
-            
-        } catch (IOException ex) {
-            Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        IFachada fachCham = new Fachada();
+        Chamados cham = new Chamados();
+        cham = fachCham.buscarChamados(idChamado);
+        
+        setTitulo(cham.getTitulo());
     }
     
     public void editarChamados(){
         
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosAlterar.xhtml");          
+            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosAlterar.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
         }

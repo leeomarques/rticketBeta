@@ -19,8 +19,7 @@
                     <f:selectItem itemLabel="Tipo..." itemValue="" />
                     <f:selectItems value="#{chamadosBean.listarTipoChamados}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.id}" />
                 </p:selectOneMenu><br /><br />
-                
-                
+                               
                 <p:selectOneMenu value="#{chamadosBean.statusChamado}" style="width:250px" required="true" requiredMessage="Selecione um Status de Chamado">
                     <f:selectItem itemLabel="Status..." itemValue="" />
                     <f:selectItems value="#{chamadosBean.listarStatusChamados}" var="status" itemLabel="#{status.nome}" itemValue="#{status.id}" />

@@ -1,16 +1,17 @@
 package com.rticket.beans;
 
 import com.rticket.model.Chamados;
-import com.rticket.model.LogChamado;
+import com.rticket.model.StatusChamado;
+import com.rticket.model.TipoChamado;
+import com.rticket.model.Usuario;
 import com.rticket.negocio.Fachada;
 import com.rticket.negocio.IFachada;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Iterator;
 import javax.faces.bean.ManagedBean;
 
-@ManagedBean(name = "chamadosConsultaBean")
-public class ChamadosConsultaBean {
+@ManagedBean(name = "chamadosAlterarBean")
+public class ChamadosAlterarBean {
     
     private String idChamado;
     private String Titulo;
@@ -23,8 +24,9 @@ public class ChamadosConsultaBean {
     private String resposta;
     private String avaliacao;
     private String descricao;
-    private String logChamadoHistorico;
-    private String logChamadoAcao;
+    private Collection<TipoChamado> listarTipoChamados;
+    private Collection<StatusChamado> listarStatusChamados;
+    private Collection<Usuario> listarUsuariosChamados;
 
     public String getIdChamado() {
         return idChamado;
@@ -43,7 +45,7 @@ public class ChamadosConsultaBean {
         setTitulo(cham.getTitulo());
         setTipo(cham.getTipoChamados().getNome());
         setPrioridade(cham.getPrioridade());
-        setStatus(cham.getStatusChamados().getNome());
+        setStatus(cham.getStatusChamados().getNome());                 
         setCriadoEm(String.valueOf(dt.format(cham.getDataCriacao())));
         setFechadoem(String.valueOf(cham.getDataFechamento()));
         if(getFechadoem().equals("")){
@@ -53,17 +55,6 @@ public class ChamadosConsultaBean {
         setResposta(cham.getResposta());
         setAvaliacao(String.valueOf(cham.getNotaChamado()));
         setDescricao(cham.getDescricao());
-        
-        IFachada fachLog = new Fachada();
-        Iterator<LogChamado> iterator;
-        
-        iterator = fachLog.listarLogChamados().iterator();
-        
-         while(iterator.hasNext()) {
-             LogChamado item = (LogChamado)iterator.next();
-             setLogChamadoAcao(item.getAcao());
-             setlogChamadoHistorico(item.getHistorico());
-         }
     }
     
     public String getTitulo() {
@@ -146,19 +137,33 @@ public class ChamadosConsultaBean {
         this.descricao = descricao;
     }
 
-    public String getlogChamadoHistorico() {
-        return logChamadoHistorico;
+    public Collection<TipoChamado> getListarTipoChamados() {
+        
+        IFachada fachTipo = new Fachada();
+        return fachTipo.listarTipoChamado();
     }
 
-    public void setlogChamadoHistorico(String logChamadoHistorico) {
-        this.logChamadoHistorico = logChamadoHistorico;
+    public void setListarTipoChamados(Collection<TipoChamado> listarTipoChamados) {
+        this.listarTipoChamados = listarTipoChamados;
     }
 
-    public String getLogChamadoAcao() {
-        return logChamadoAcao;
+    public Collection<StatusChamado> getListarStatusChamados() {
+        
+        IFachada fachStatus = new Fachada();
+        return fachStatus.listarStatusChamado();
     }
 
-    public void setLogChamadoAcao(String logChamadoAcao) {
-        this.logChamadoAcao = logChamadoAcao;
+    public void setListarStatusChamados(Collection<StatusChamado> listarStatusChamados) {
+        this.listarStatusChamados = listarStatusChamados;
+    }
+
+    public Collection<Usuario> getListarUsuariosChamados() {
+        
+        IFachada fachUsuario = new Fachada();
+        return fachUsuario.listarUsuario();
+    }
+
+    public void setListarUsuariosChamados(Collection<Usuario> listarUsuariosChamados) {
+        this.listarUsuariosChamados = listarUsuariosChamados;
     }
 }

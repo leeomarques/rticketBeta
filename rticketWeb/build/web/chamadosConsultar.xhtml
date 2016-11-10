@@ -16,10 +16,12 @@
                 <p:button outcome="chamadosAlterar" value="Editar" icon="ui-icon-pencil">
                     <f:param name="chamadosIdEdit" value="#{chamadosConsultaBean.idChamado}" />
                 </p:button>
-                <br /><br /><br />               
+                <br /><br /><br />   
+                
                 <f:metadata>
                     <f:viewParam name="chamadoId" value="#{chamadosConsultaBean.idChamado}" />                   
                 </f:metadata>              
+                
                 <p:layoutUnit position="center">
                     <br />
                     <div class="numeroChamado">
@@ -52,7 +54,14 @@
                     
                     <p:outputLabel for="descricao" value="Descrição: " />
                     <p:outputLabel id="descricao" value="#{chamadosConsultaBean.descricao}" /><br /><br />
-                </p:layoutUnit>               
+                </p:layoutUnit>
+                
+                <p:fieldset legend="Log" style="margin-bottom:20px">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="#{chamadosConsultaBean.logChamadoAcao}" />
+                        <h:outputText value="#{chamadosConsultaBean.logChamadoHistorico}" />
+                    </h:panelGrid>
+                </p:fieldset>
             </h:form>
         </f:view>         
     </h:body>

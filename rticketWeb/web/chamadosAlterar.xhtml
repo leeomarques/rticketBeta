@@ -16,9 +16,57 @@
             <h:form class="formulario">
                 <p:commandButton value="Salvar" action="#{chamadosBean.inserirChamados}" ajax="false" icon="ui-icon-disk" /><br /><br /><br />
                 
-                <p:inputText value="#{chamadosConsultaBean.titulo}" placeholder="Titulo" required="true" style="width:1000px"></p:inputText><br /><br />
-                <p:inputTextarea value="#{chamadosConsultaBean.descricao}" rows="6" cols="33" placeholder="Descrição" style="width:1000px" required="true" /><br /><br />
+                <f:metadata>
+                    <f:viewParam name="chamadosIdEdit" value="#{chamadosAlterarBean.idChamado}" />
+                </f:metadata>
                 
+                <p:outputLabel value="Tipo: " /><br />
+                <p:selectOneMenu value="#{chamadosAlterarBean.tipo}" style="width:250px" required="true" requiredMessage="Campo Tipo Obrigatorio">
+                    <f:selectItem itemLabel="#{chamadosAlterarBean.tipo}" itemValue="" />
+                    <f:selectItems value="#{chamadosAlterarBean.listarTipoChamados}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.id}" />
+                </p:selectOneMenu><br /><br />
+                
+                <p:outputLabel value="Situação: " /><br />
+                <p:selectOneMenu value="#{chamadosAlterarBean.status}" style="width:250px" required="true" requiredMessage="Campo Status Obrigatorio">
+                    <f:selectItem itemLabel="#{chamadosAlterarBean.status}" itemValue="" />
+                    <f:selectItems value="#{chamadosAlterarBean.listarStatusChamados}" var="status" itemLabel="#{status.nome}" itemValue="#{status.id}" />
+                </p:selectOneMenu><br /><br />
+                
+                <p:outputLabel value="Prioridade: " /><br />
+                <p:selectOneMenu value="#{chamadosAlterarBean.prioridade}" style="width:100px" required="true" requiredMessage="Campo Tipo Obrigatorio">
+                    <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Baixa" itemValue="baixa" />
+                    <f:selectItem itemLabel="Media" itemValue="media" />
+                    <f:selectItem itemLabel="Alta"  itemValue="alta" />
+                </p:selectOneMenu><br /><br />
+                
+                <p:outputLabel value="Titulo: " /><br />
+                <p:inputText value="#{chamadosAlterarBean.titulo}" style="width:1000px" required="true" requiredMessage="Titulo Obrigatorio!"></p:inputText><br /><br />
+                
+                <p:outputLabel value="Descrição: " /><br />
+                <p:inputTextarea value="#{chamadosAlterarBean.descricao}" rows="6" cols="33" style="width:1000px" required="true" requiredMessage="Descricao Obrigatorio!"/><br /><br />
+                
+                <p:outputLabel value="Criado Em: " /><br />
+                <p:calendar id="criadoEm" value="#{chamadosAlterarBean.criadoEm}" showOn="button">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />   
+                </p:calendar><br /><br />
+                
+                <p:outputLabel value="Fechado Em: " /><br />
+                <p:calendar id="fechadoEm" value="#{chamadosAlterarBean.fechadoem}" showOn="button">
+                    <f:convertDateTime pattern="dd/MM/yyyy" />   
+                </p:calendar><br /><br />
+                
+                <p:outputLabel value="Atribuido Para: " /><br />
+                <p:selectOneMenu value="#{chamadosAlterarBean.usuarioAtendente}" style="width:250px" required="true" requiredMessage="Campo Status Obrigatorio">
+                    <f:selectItem itemLabel="#{chamadosAlterarBean.usuarioAtendente}" itemValue="" />
+                    <f:selectItems value="#{chamadosAlterarBean.listarUsuariosChamados}" var="status" itemLabel="#{status.nome}" itemValue="#{status.id}" />
+                </p:selectOneMenu><br /><br />
+                
+                <p:outputLabel value="Resposta HelpDesk: " /><br />
+                <p:inputTextarea value="#{chamadosAlterarBean.resposta}" rows="6" cols="33" style="width:1000px" /><br /><br />
+ 
+                <p:outputLabel class="avaliacaoChamado" value="Avaliação: " />
+                <p:rating value="#{chamadosAlterarBean.avaliacao}" />
             </h:form>          
         </f:view>         
     </h:body>

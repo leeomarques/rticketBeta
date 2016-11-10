@@ -3,6 +3,7 @@ package com.rticket.negocio;
 import com.rticket.model.LogChamado;
 import com.rticket.dao.DAOFactory;
 import com.rticket.dao.dados.LogChamadoDAO;
+import com.rticket.model.Chamados;
 import java.util.Collection;
 
 public class ControladorLogChamado {

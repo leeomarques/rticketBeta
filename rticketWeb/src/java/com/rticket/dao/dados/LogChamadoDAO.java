@@ -17,9 +17,9 @@ public class LogChamadoDAO extends DAOGenerico<LogChamado>{
         
         Collection<LogChamado> listaLogChamado;
         String sql;
-        sql = ("SELECT l FROM LogChamado l");
+        sql = ("SELECT l FROM LogChamado l WHERE l.chamados.id = :chamado");
         Query q = getEntityManager().createQuery(sql, LogChamado.class);
-        //q.setParameter("chamado", chamado);
+        q.setParameter("chamado", chamado.getId());
         listaLogChamado = q.getResultList();
         
         return listaLogChamado;

@@ -39,7 +39,7 @@ public class ControladorUsuario {
     }
 
     //Metodo para EfetuarLogin
-    public Boolean efetuarLogin(String login, String senha)
+    public Collection<Usuario> efetuarLogin(String login, String senha)
             throws ValidarLoginException, NoSuchAlgorithmException{
         this.resultado = false;
         senha = converterSenhaMD5(senha);

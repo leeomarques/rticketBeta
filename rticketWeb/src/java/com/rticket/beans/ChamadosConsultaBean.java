@@ -25,6 +25,7 @@ public class ChamadosConsultaBean {
     private String descricao;
     private String logChamadoHistorico;
     private String logChamadoAcao;
+    private Collection<LogChamado> listarLogChamados;
 
     public String getIdChamado() {
         return idChamado;
@@ -53,17 +54,6 @@ public class ChamadosConsultaBean {
         setResposta(cham.getResposta());
         setAvaliacao(String.valueOf(cham.getNotaChamado()));
         setDescricao(cham.getDescricao());
-        
-        IFachada fachLog = new Fachada();
-        Iterator<LogChamado> iterator;
-        
-        iterator = fachLog.listarLogChamados().iterator();
-        
-         while(iterator.hasNext()) {
-             LogChamado item = (LogChamado)iterator.next();
-             setLogChamadoAcao(item.getAcao());
-             setlogChamadoHistorico(item.getHistorico());
-         }
     }
     
     public String getTitulo() {
@@ -160,5 +150,19 @@ public class ChamadosConsultaBean {
 
     public void setLogChamadoAcao(String logChamadoAcao) {
         this.logChamadoAcao = logChamadoAcao;
+    }
+
+    public Collection<LogChamado> getListarLogChamados() {
+        
+        IFachada fach = new Fachada();
+        Chamados cham = new Chamados();
+        cham = fach.buscarChamados(Integer.valueOf(idChamado));
+        listarLogChamados = fach.listarLogChamados(cham);
+        
+        return listarLogChamados;
+    }
+
+    public void setListarLogChamados(Collection<LogChamado> listarLogChamados) {
+        this.listarLogChamados = listarLogChamados;
     }
 }

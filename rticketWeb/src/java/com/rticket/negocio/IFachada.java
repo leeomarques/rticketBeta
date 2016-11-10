@@ -41,7 +41,7 @@ public interface IFachada {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Assinaturas para Usuarios">
-    Boolean efetuarLogin(String login, String senha)
+    Collection<Usuario> efetuarLogin(String login, String senha)
             throws ValidarLoginException, NoSuchAlgorithmException;
 
     void inserirUsuario(Usuario usuario)
@@ -68,7 +68,7 @@ public interface IFachada {
     //<editor-fold defaultstate="collapsed" desc="Assinaturas para LogChamados">
     LogChamado buscarLogChamados(int id);
 
-    Collection<LogChamado> listarLogChamados();
+    Collection<LogChamado> listarLogChamados(Chamados chamado);
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Assinaturas para StatusChamado">

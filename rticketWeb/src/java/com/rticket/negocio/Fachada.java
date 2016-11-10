@@ -75,7 +75,7 @@ public class Fachada implements IFachada {
 //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Metodos para Usuarios">
-    public Boolean efetuarLogin(String login, String senha)
+    public Collection<Usuario> efetuarLogin(String login, String senha)
             throws ValidarLoginException, NoSuchAlgorithmException{
         return this.novoUsuario.efetuarLogin(login, senha);
     }
@@ -122,8 +122,8 @@ public class Fachada implements IFachada {
         return this.novoLogChamado.buscarLogChamado(id);
     }
 
-    public Collection<LogChamado> listarLogChamados() {
-        return novoLogChamado.listarLogChamados();
+    public Collection<LogChamado> listarLogChamados(Chamados chamado) {
+        return novoLogChamado.listarLogChamados(chamado);
     }
 //</editor-fold>
 

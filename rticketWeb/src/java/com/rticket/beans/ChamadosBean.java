@@ -27,6 +27,7 @@ public class ChamadosBean {
     private String titulo;
     private String descricao;
     private String statusChamado;
+    private String usuarioSolicitante;
     
     IFachada fach = new Fachada();
     
@@ -97,28 +98,18 @@ public class ChamadosBean {
         this.statusChamado = statusChamado;
     }
     
+    public String getUsuarioSolicitante() {
+        return usuarioSolicitante;
+    }
+
+    public void setUsuarioSolicitante(String usuarioSolicitante) {
+        this.usuarioSolicitante = usuarioSolicitante;
+    }
+    
     public void novoChamado(){
         
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosNovo.xhtml");
-        } catch (IOException ex) {
-            Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void consultarChamados(){
-        
-        IFachada fachCham = new Fachada();
-        Chamados cham = new Chamados();
-        cham = fachCham.buscarChamados(idChamado);
-        
-        setTitulo(cham.getTitulo());
-    }
-    
-    public void editarChamados(){
-        
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosAlterar.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,12 +120,8 @@ public class ChamadosBean {
             Chamados cham = new Chamados();
             Date dt = new Date();
             Usuario user = new Usuario();
-            
-            user.setId(1);
-            user.setNome("Antonio");
-            user.setLogin("toinho");
-            user.setSenha("1234");
                       
+            user.setId(1);
             IFachada fachadaTipo = new Fachada();
             int idTipo = Integer.valueOf(tipoChamado);
             
@@ -146,7 +133,8 @@ public class ChamadosBean {
             cham.setTitulo(titulo);
             cham.setDescricao(descricao);
             cham.setStatusChamado(fachadaStatus.buscarStatusChamado(idStatus));          
-            cham.setUsuarios(user);
+            cham.setLoginSolicitante("Login da Sessao");
+            cham.setUsuarios(user);//Objeto Usuario da Sessao
                        
             fach.inserirChamados(cham);
   

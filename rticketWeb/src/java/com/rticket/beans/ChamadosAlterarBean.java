@@ -1,25 +1,32 @@
 package com.rticket.beans;
 
+import com.rticket.excecao.CampoVazioException;
 import com.rticket.model.Chamados;
 import com.rticket.model.StatusChamado;
 import com.rticket.model.TipoChamado;
 import com.rticket.model.Usuario;
 import com.rticket.negocio.Fachada;
 import com.rticket.negocio.IFachada;
+import java.io.IOException;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.swing.JOptionPane;
 
 @ManagedBean(name = "chamadosAlterarBean")
 public class ChamadosAlterarBean {
     
     private String idChamado;
-    private String Titulo;
+    private String titulo;
     private String tipo;
     private String prioridade;
     private String status;
     private String criadoEm;
-    private String fechadoem;
+    private String fechadoEm;
     private String usuarioAtendente;
     private String resposta;
     private String avaliacao;
@@ -47,9 +54,9 @@ public class ChamadosAlterarBean {
         setPrioridade(cham.getPrioridade());
         setStatus(cham.getStatusChamados().getNome());                 
         setCriadoEm(String.valueOf(dt.format(cham.getDataCriacao())));
-        setFechadoem(String.valueOf(cham.getDataFechamento()));
-        if(getFechadoem().equals("")){
-            setFechadoem("-");
+        setFechadoEm(String.valueOf(cham.getDataFechamento()));
+        if(getFechadoEm().equals("")){
+            setFechadoEm("-");
         }
         setUsuarioAtendente(cham.getUsuarios().getNome());
         setResposta(cham.getResposta());
@@ -58,11 +65,11 @@ public class ChamadosAlterarBean {
     }
     
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
 
-    public void setTitulo(String Titulo) {
-        this.Titulo = Titulo;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getTipo() {
@@ -97,12 +104,12 @@ public class ChamadosAlterarBean {
         this.criadoEm = criadoEm;
     }
 
-    public String getFechadoem() {
-        return fechadoem;
+    public String getFechadoEm() {
+        return fechadoEm;
     }
 
-    public void setFechadoem(String fechadoem) {
-        this.fechadoem = fechadoem;
+    public void setFechadoEm(String fechadoEm) {
+        this.fechadoEm = fechadoEm;
     }
 
     public String getUsuarioAtendente() {
@@ -165,5 +172,45 @@ public class ChamadosAlterarBean {
 
     public void setListarUsuariosChamados(Collection<Usuario> listarUsuariosChamados) {
         this.listarUsuariosChamados = listarUsuariosChamados;
+    }
+    
+    public void alterarChamados(){
+        
+        try{
+            IFachada fach = new Fachada();
+            Chamados chamado = new Chamados();
+            //SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+            Date data = new Date();
+            Usuario user = new Usuario();
+
+            TipoChamado tipoCham;
+            tipoCham = fach.buscarTipoChamado(Integer.valueOf(tipo));
+
+            StatusChamado statusCham;
+            statusCham = fach.buscarStatusChamado(Integer.valueOf(status));
+
+            user.setId(1);
+            user.setLogin("Toinhotony");
+            user.setNome("AntonioCorrea");
+
+            chamado.setId(Integer.valueOf(idChamado));
+            chamado.setTitulo(titulo);
+            chamado.setTipoChamado(tipoCham);
+            chamado.setPrioridade(prioridade);
+            chamado.setStatusChamado(statusCham);
+            chamado.setDataCriacao(data);
+            chamado.setDataFechamento(data);
+            chamado.setLoginSolicitante(user.getLogin());
+            chamado.setUsuarios(user);
+            chamado.setResposta(resposta);
+            chamado.setNotaChamado(Integer.valueOf(avaliacao));
+            chamado.setDescricao(descricao);
+
+            fach.alterarChamados(chamado);
+
+            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosList.xhtml");
+        }catch (IOException ex) {
+                Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

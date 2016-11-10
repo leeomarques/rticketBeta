@@ -7,13 +7,14 @@ import com.rticket.model.Chamados;
 import com.rticket.model.StatusChamado;
 import com.rticket.model.TipoChamado;
 import com.rticket.model.Usuario;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class GUITeste {
     public static void main(String[] args) 
-            throws FormatoInvalidoException, CampoExistenteException{
-        //try{
+            throws FormatoInvalidoException, CampoExistenteException, NoSuchAlgorithmException{
+        try{
         IFachada fach = new Fachada();
         /*IFachada fach1 = new Fachada();
         IFachada fach2 = new Fachada();
@@ -21,9 +22,9 @@ public class GUITeste {
         Chamados cham = new Chamados();
         StatusChamado statusChamado = new StatusChamado();
         TipoChamado tipoChamado = new TipoChamado();
-        Usuario user = new Usuario();
-        Date dt = new Date();
         
+        Date dt = new Date();*/
+        Usuario user = new Usuario();
             //tipoChamado.setId(1);
 //            tipoChamado.setNome("TESTE");
 //            fach.inserirTipoChamado(tipoChamado);
@@ -32,10 +33,10 @@ public class GUITeste {
             //statusChamado.setFinaliza("S");
 //            fach1.inserirStatusChamado(statusChamado);
             //user.setId(1);
-            user.setNome("Antonio Correa");
+            user.setNome("AntonioCorrea");
             user.setLogin("toinhotony");
             user.setSenha("1785");
-            fach2.inserirUsuario(user);
+            fach.inserirUsuario(user);
             /*JOptionPane.showMessageDialog(null, "Login OK");
             cham.setId(1);
             cham.setDataCriacao(dt);
@@ -50,9 +51,10 @@ public class GUITeste {
             cham.setResposta("sfsdfkasdfsdhfjasdhfjkshbhvfjshf sffjkshfcasjk fhsdkjfhcsjkhfcasjkf hsjkcfhj");
 //            fach3.inserirChamados(cham);*/
             //fach3.alterarChamados(cham);*/
-        /*}catch(CampoVazioException e){
-            JOptionPane.showMessageDialog(null, "Para fechar o chamado tem que informar a resposta e a nota");*/
-
+        }catch(CampoVazioException e){
+            JOptionPane.showMessageDialog(null, "Para fechar o chamado tem que informar a resposta e a nota");
+        }
+        
         //fach.listarChamados();
         
         

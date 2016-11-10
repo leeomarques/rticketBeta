@@ -57,22 +57,27 @@ public class ControladorChamados {
         cham = chamadosDAO.buscarPorChave(chamado.getId());
         
         logChamado.setChamados(chamado);
+        logChamado.setUsuario(chamado.getUsuarios());
+        
+        if(cham.getTipoChamados().getId() != chamado.getTipoChamados().getId()){
+            
+            logHistorico = ("Tipo: "+chamado.getTipoChamados().getNome());
+        }
         
         if(cham.getStatusChamados().getId() != chamado.getStatusChamados().getId()){
             
-            logHistorico = ("Status: "+cham.getStatusChamados().getNome());
+            logHistorico += (" Status: "+chamado.getStatusChamados().getNome());
         }
-        if(chamado.getStatusChamados().getFinaliza().equals("S")){
+
+        if(chamado.getStatusChamados().getFinaliza().equals("N")){
             
-            /*if(chamado.getNotaChamado() == 0 || chamado.getResposta().isEmpty()){
-                throw new CampoVazioException();
-            }*/
-            logChamado.setAcao("Fechar");
-            chamado.setDataFechamento(data);
-            logChamado.setData(data);
+            logChamado.setAcao("Alterar");
+            logChamado.setData(data);          
         }
         else{
-            logChamado.setAcao("Alterar");
+            
+            logChamado.setAcao("Fechar");
+            chamado.setDataFechamento(data);
             logChamado.setData(data);
         }
         

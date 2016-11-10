@@ -46,7 +46,7 @@ public class UsuarioTest {
             String senha = "1234";
             boolean resultado = false;
         
-            resultado = controladorUsuario.efetuarLogin(login, senha);
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
             if (user != null){
                 resultado = true;
             }

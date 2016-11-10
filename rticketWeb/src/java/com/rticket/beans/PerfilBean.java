@@ -5,7 +5,6 @@ import com.rticket.excecao.CampoVazioException;
 import com.rticket.excecao.FormatoInvalidoException;
 import com.rticket.model.Modulo;
 import com.rticket.model.Perfil;
-import com.rticket.model.StatusChamado;
 import com.rticket.negocio.Fachada;
 import com.rticket.negocio.IFachada;
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-//import org.primefaces.model.DualListModel;
 
 @ManagedBean(name = "perfilBean")
 public class PerfilBean {

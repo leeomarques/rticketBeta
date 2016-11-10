@@ -20,7 +20,7 @@ public class ControladorLogChamado {
     }
 
     //Listar todos os LogChamados
-    public Collection<LogChamado> listarLogChamados(){
-        return logChamadoDAO.listarColecao();
+    public Collection<LogChamado> listarLogChamados(Chamados chamado){
+        return logChamadoDAO.listarLogChamado(chamado);
     }
 }

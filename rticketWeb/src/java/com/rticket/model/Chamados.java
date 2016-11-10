@@ -42,9 +42,12 @@ public class Chamados {
 
     @Column(name = "NOTA_CHAMADO", length = 1, nullable = true, unique = false)
     private int notaChamado;
-
+    
+    @Column(name = "USUARIO_SOLICITANTE", length = 20, nullable = false, unique = false)
+    private String loginSolicitante;
+    
     @ManyToOne
-    @JoinColumn(name = "ID_USUARIO")
+    @JoinColumn(name = "ID_USUARIO_ATENDENTE")
     private Usuario usuarios;
 
     @OneToMany(mappedBy = "chamados")
@@ -124,6 +127,14 @@ public class Chamados {
 
     public void setNotaChamado(int notaChamado) {
         this.notaChamado = notaChamado;
+    }
+    
+    public String getLoginSolicitante() {
+        return loginSolicitante;
+    }
+
+    public void setLoginSolicitante(String loginSolicitante) {
+        this.loginSolicitante = loginSolicitante;
     }
 
     public Usuario getUsuarios() {

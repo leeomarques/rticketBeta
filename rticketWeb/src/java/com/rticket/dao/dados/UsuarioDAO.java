@@ -33,9 +33,8 @@ public class UsuarioDAO extends DAOGenerico<Usuario>{
         return verificaLogin;
     }
 
-    public Boolean efetuarLogin(String login, String senha){
-
-        boolean verificaLogin = true;
+    public Collection<Usuario> efetuarLogin(String login, String senha){
+ 
         String sql;
         sql = ("SELECT u FROM Usuario u WHERE u.login = :usuarioLogin and u.senha = :usuarioSenha");
         Query q = getEntityManager().createQuery(sql, Usuario.class);
@@ -43,9 +42,7 @@ public class UsuarioDAO extends DAOGenerico<Usuario>{
         q.setParameter("usuarioSenha", senha);
         
         user = q.getResultList();
-        if (user.isEmpty()){
-            verificaLogin = false;
-        }
-        return verificaLogin;
+
+        return user;
     }
 }

@@ -45,6 +45,11 @@ public class LogChamadoTest {
         if(colecaoLogChamado != null){
             resultado = true;
         }
+//        colecaoLogChamado = controladorLogChamado.listarLogChamados();
+//        
+//        if(colecaoLogChamado != null){
+//            resultado = true;
+//        }
         
         Assert.assertEquals(true, resultado);*/
     }

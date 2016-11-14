@@ -5,6 +5,7 @@ import com.rticket.dao.DAOFactory;
 import com.rticket.dao.dados.ChamadosDAO;
 import com.rticket.excecao.CampoVazioException;
 import com.rticket.model.LogChamado;
+import com.rticket.model.Usuario;
 import java.util.Collection;
 import java.util.Date;
 
@@ -19,6 +20,8 @@ public class ControladorChamados {
     //Metodo para Inserir Chamados
     public void inserirChamados(Chamados chamado)throws CampoVazioException{
         
+        Date dt = new Date();
+        chamado.setDataCriacao(dt);
         if(chamado.getDataCriacao() == null || chamado.getTitulo().isEmpty() ||
                 chamado.getDescricao().isEmpty() || 
                 chamado.getStatusChamados() == null || 
@@ -28,7 +31,7 @@ public class ControladorChamados {
         }
         
         LogChamado log = new LogChamado();
-        Date dt = new Date();
+        
         log.setData(dt);
         log.setAcao("Incluir");
         log.setUsuario(chamado.getUsuarios());
@@ -56,6 +59,8 @@ public class ControladorChamados {
         String logHistorico = "";
         cham = chamadosDAO.buscarPorChave(chamado.getId());
         
+        chamado.setDataCriacao(cham.getDataCriacao());
+        chamado.setLoginSolicitante(cham.getLoginSolicitante());
         logChamado.setChamados(chamado);
         logChamado.setUsuario(chamado.getUsuarios());
         
@@ -66,7 +71,7 @@ public class ControladorChamados {
         
         if(cham.getStatusChamados().getId() != chamado.getStatusChamados().getId()){
             
-            logHistorico += (" Status: "+chamado.getStatusChamados().getNome());
+            logHistorico += ("; Status: "+chamado.getStatusChamados().getNome());
         }
 
         if(chamado.getStatusChamados().getFinaliza().equals("N")){
@@ -77,31 +82,38 @@ public class ControladorChamados {
         else{
             
             logChamado.setAcao("Fechar");
-            chamado.setDataFechamento(data);
             logChamado.setData(data);
+            chamado.setDataFechamento(data);
+            logHistorico += ("; Data Fechamento: "+chamado.getDataFechamento());
+ 
         }
         
         if(cham.getResposta() != chamado.getResposta()){
             
-            logHistorico += (" Resposta: "+chamado.getResposta());
+            logHistorico += ("; Resposta: "+chamado.getResposta());
         }
         
         if(cham.getPrioridade() != chamado.getPrioridade()){
             
-            logHistorico += (" Prioridade: "+chamado.getPrioridade());
+            logHistorico += ("; Prioridade: "+chamado.getPrioridade());
         }
         
         if(cham.getNotaChamado() != chamado.getNotaChamado()){
             
-            logHistorico += (" Nota_Chamado: "+chamado.getNotaChamado());
+            logHistorico += ("; Nota_Chamado: "+chamado.getNotaChamado());
         }
         
         logChamado.setHistorico(logHistorico);
         chamadosDAO.alterarChamados(chamado, logChamado);
     }
 
+    //Listar Chamados por Usuario
+    public Collection<Chamados> listarChamados(Usuario user){
+        return chamadosDAO.listarChamados(user);
+    }
+    
     //Listar todos os Chamados
-    public Collection<Chamados> listarChamados(){
+    public Collection<Chamados> listarChamadosTotal(){
         return chamadosDAO.listarColecao();
     }
 }

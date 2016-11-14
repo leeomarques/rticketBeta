@@ -62,7 +62,9 @@ public interface IFachada {
 
     void alterarChamados(Chamados chamado);
 
-    Collection<Chamados> listarChamados();
+    Collection<Chamados> listarChamados(Usuario user);
+    
+    Collection<Chamados> listarChamadosTotal();
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Assinaturas para LogChamados">

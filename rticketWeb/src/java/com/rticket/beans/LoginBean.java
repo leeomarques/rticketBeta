@@ -71,6 +71,10 @@ public class LoginBean {
         this.logout = logout;
     }
     
+    public void mensagemErro() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Login ou Senha Inválidos!"));
+    }
+    
     public void efetuarLogin() throws ValidarLoginException, 
             NoSuchAlgorithmException, IOException {
         try {
@@ -83,7 +87,8 @@ public class LoginBean {
                 usuarioLogado = fach.efetuarLogin(login, senha);
             
                 if (usuarioLogado.isEmpty()){
-                    setMensagem("Usuario ou Senha Invalidos!");                  
+                    //setMensagem("Usuario ou Senha Invalidos!");
+                    mensagemErro();
                 }
                 else{
                     Iterator<Usuario> iterator;

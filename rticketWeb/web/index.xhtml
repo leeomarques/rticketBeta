@@ -19,12 +19,11 @@
                 <fieldset>
                     <legend>Controle de Acesso</legend><br />
                     <p:inputText value="#{loginBean.login}" placeholder="Login"></p:inputText><br /><br />
-                    <p:password  value="#{loginBean.senha}" placeholder="Senha" feedback="false" />
-                    <div class="respLogin">
-                        <b><i>#{loginBean.mensagem}</i></b><br />
-                    </div>                  
-                    <p:commandButton value="Logar" action="#{loginBean.efetuarLogin()}" ajax="false" />                          
+                    <p:password id="nonFeedback" value="#{loginBean.senha}" placeholder="Senha" feedback="false" />                 
+                    <br /><br />
+                    <p:commandButton value="Logar" action="#{loginBean.efetuarLogin()}" ajax="false" />                    
                 </fieldset>
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
             </h:form>           
         </f:view>
     </body>

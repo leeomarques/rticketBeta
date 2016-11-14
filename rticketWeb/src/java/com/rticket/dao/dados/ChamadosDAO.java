@@ -3,9 +3,12 @@ package com.rticket.dao.dados;
 import com.rticket.model.Chamados;
 import com.rticket.dao.DAOGenerico;
 import com.rticket.model.LogChamado;
+import com.rticket.model.Usuario;
+import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
 public class ChamadosDAO extends DAOGenerico<Chamados>{
     
@@ -28,20 +31,30 @@ public class ChamadosDAO extends DAOGenerico<Chamados>{
         }
     }
     
-    public Chamados alterarChamados(Chamados chamado, LogChamado logChamado) {
+    public void alterarChamados(Chamados chamado, LogChamado logChamado) {
         
         EntityTransaction tx = getEntityManager().getTransaction();
         try {
             tx.begin();
 
-            chamado = getEntityManager().merge(chamado);
+            getEntityManager().merge(chamado);
             getEntityManager().persist(logChamado);
         
             tx.commit();
         }catch(PersistenceException e){
             tx.rollback();
         }
+    }
+    
+    public Collection<Chamados> listarChamados(Usuario user){
         
-        return chamado;
+        Collection<Chamados> listarChamado;
+        String sql;
+        sql = ("SELECT c FROM Chamados c WHERE c.usuarios.id = :usuario");
+        Query q = getEntityManager().createQuery(sql, Chamados.class);
+        q.setParameter("usuario", user.getId());
+        listarChamado = q.getResultList();
+        
+        return listarChamado;
     }
 }

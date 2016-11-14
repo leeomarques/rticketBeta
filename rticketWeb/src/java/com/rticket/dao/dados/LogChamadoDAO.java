@@ -13,7 +13,7 @@ public class LogChamadoDAO extends DAOGenerico<LogChamado>{
 	super(em);
     }
     
-     public Collection<LogChamado> listarLogChamado(Chamados chamado){
+    public Collection<LogChamado> listarLogChamado(Chamados chamado){
         
         Collection<LogChamado> listaLogChamado;
         String sql;

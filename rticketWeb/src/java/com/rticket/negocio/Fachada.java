@@ -112,8 +112,12 @@ public class Fachada implements IFachada {
         this.novoChamado.alterarChamados(chamado);
     }
 
-    public Collection<Chamados> listarChamados() {
-        return novoChamado.listarChamados();
+    public Collection<Chamados> listarChamados(Usuario user) {
+        return novoChamado.listarChamados(user);
+    }
+    
+    public Collection<Chamados> listarChamadosTotal() {
+        return novoChamado.listarChamadosTotal();
     }
 //</editor-fold>
 

@@ -50,7 +50,8 @@ public interface IFachada {
 
     Usuario buscarUsuario(int id);
 
-    void alterarUsuario(Usuario usuario);
+    void alterarUsuario(Usuario usuario) throws FormatoInvalidoException,
+            NoSuchAlgorithmException;
 
     Collection<Usuario> listarUsuario();
     //</editor-fold>

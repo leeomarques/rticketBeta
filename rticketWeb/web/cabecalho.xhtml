@@ -7,12 +7,10 @@
     <h:head>
         <link href="css/padrao.css" rel="stylesheet"></link>
     </h:head>
-    <h:body>
-        
-        
+    <h:body>       
         <f:view>
-            <div class="cabecalho">
-                <h1 class="logoTipo">RTicket</h1>
+            <div class="cabecalho">          
+                <h1 class="logoTipo">RTicket</h1> 
             </div>
             <h:form class="menu">  
                 <p:growl id="messages" />
@@ -26,13 +24,12 @@
                         <p:menuitem value="Tipos de Chamados" url="tipochamado.xhtml" icon="ui-icon-newwin" />
                         <p:menuitem value="Usuarios" url="usuario.xhtml" icon="ui-icon-newwin" />
                     </p:submenu>
-                    
-
+                  
                     <f:facet name="options">
-                        <p:inputText style="margin-right:10px" placeholder="Busca" />
+                        <span style="margin-right: 10px;">Olá, #{loginBean.login}</span>     
                         <p:commandButton type="button" value="Sair" icon="ui-icon-close" action="#{loginBean.logout}" />
                     </f:facet>
-                </p:menubar>
+                </p:menubar>                
             </h:form>
         </f:view>    
     </h:body>

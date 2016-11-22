@@ -8,11 +8,13 @@ body{
     background-color: #52555E;
     height: 100px;
     color: #FFF;
+    text-align: right;
 }
 
+.exibeLogin {
+    margin-right: 10px;
+}
 .logoTipo{
-    margin: 0;
-    padding-top: 25px;
     font-family: Lucida Handwriting;
     text-align: center;
 }

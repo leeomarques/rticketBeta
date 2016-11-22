@@ -94,8 +94,18 @@ public class ControladorUsuario {
     }
 
     //Metodo para Alterar Usuario
-    public void alterarUsuario(Usuario usuario){
-        usuarioDAO.alterar(usuario);
+    public void alterarUsuario(Usuario usuario) throws FormatoInvalidoException,
+            NoSuchAlgorithmException{
+        
+        verificarCaracteres(usuario.getNome());
+
+        if(this.resultado == false){
+            throw new FormatoInvalidoException();
+        }
+        else{
+            usuario.setSenha(converterSenhaMD5(usuario.getSenha())) ;
+            usuarioDAO.alterar(usuario);
+        }      
     }
 
     //Listar todos os Usuarios

@@ -8,6 +8,8 @@ import com.rticket.negocio.Fachada;
 import com.rticket.negocio.IFachada;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 
 @ManagedBean(name = "usuarioBean")
@@ -26,7 +28,13 @@ public class UsuarioBean {
     }
 
     public void alterarUsuario(Usuario usuario) {
-        fach.alterarUsuario(usuario);
+        try {
+            fach.alterarUsuario(usuario);
+        } catch (FormatoInvalidoException ex) {
+            Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Collection<Usuario> listarUsuario() {

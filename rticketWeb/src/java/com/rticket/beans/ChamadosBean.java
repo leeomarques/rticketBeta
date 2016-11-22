@@ -42,7 +42,7 @@ public class ChamadosBean {
     private String resposta;
     private int avaliacao;
     private String logChamadoHistorico;
-    private String logChamadoAcao;
+    private String logChamadoAcao;    
        
     IFachada fach = new Fachada();
     
@@ -51,8 +51,7 @@ public class ChamadosBean {
     }
 
     public void setIdChamado(int idChamado) {
-        this.idChamado = idChamado;
-        
+        this.idChamado = idChamado;       
         
         int id = this.idChamado;
         Chamados cham;
@@ -80,13 +79,6 @@ public class ChamadosBean {
         
         Usuario usuarioLogado = new Usuario();
         usuarioLogado.setId(1);
-        /*
-        if(usuarioLogado.getPerfil().getId() == 1){
-            this.listarChamados = fach.listarChamados(usuarioLogado);
-        }
-        else{
-            this.listarChamados = fach.listarChamadosTotal();
-        }*/
         
         return fach.listarChamadosTotal();
     }

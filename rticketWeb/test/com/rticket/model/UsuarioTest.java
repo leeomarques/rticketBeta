@@ -8,6 +8,8 @@ import com.rticket.negocio.ControladorUsuario;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +17,6 @@ import org.junit.Test;
 public class UsuarioTest {
     
     private ControladorUsuario controladorUsuario = new ControladorUsuario();
-    private Usuario user = new Usuario();
     private Collection<Usuario> colecaoUser = new ArrayList();
     
     public UsuarioTest() {
@@ -25,6 +26,185 @@ public class UsuarioTest {
     @Before
     public void setUp() {
         
+    }
+    
+    @Test
+    public void efetuarLogin(){
+        
+        try {
+            String login = "toinhotony";
+            String senha = "1785";
+            boolean resultado = false;
+        
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
+            if (colecaoUser != null){
+                resultado = true;
+            }
+        
+        Assert.assertEquals(true, resultado);
+            
+        } catch (ValidarLoginException ex) {
+            Assert.fail();
+        } catch (NoSuchAlgorithmException ex) {
+            Assert.fail();
+        }       
+    }
+    
+    @Test
+    public void efetuarLoginSenhaInvalida(){
+        
+        try {
+            String login = "toinhotonyte";
+            String senha = "123456789s";
+            
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
+            boolean resultado = true;
+            if (colecaoUser.isEmpty()){
+                resultado = false;
+            }
+        
+        Assert.assertEquals(false, resultado);
+            
+        } catch (ValidarLoginException ex) {
+            Assert.fail();
+        } catch (NoSuchAlgorithmException ex) {
+            Assert.fail();
+        }       
+    }
+    
+    @Test
+    public void efetuarLoginInvalido(){
+        
+        try {
+            String login = "toinho";
+            String senha = "1785";
+        
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
+            boolean resultado = true;
+            if (colecaoUser.isEmpty()){
+                resultado = false;
+            }
+        
+        Assert.assertEquals(false, resultado);
+            
+        } catch (ValidarLoginException ex) {
+            Assert.fail();
+        } catch (NoSuchAlgorithmException ex) {
+            Assert.fail();
+        }       
+    }
+    
+    @Test
+    public void efetuarLoginESenhaVazio(){
+        
+        try {
+            String login = "";
+            String senha = "";
+        
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
+            boolean resultado = true;
+            if (colecaoUser.isEmpty()){
+                resultado = false;
+            }
+        
+        Assert.assertEquals(false, resultado);
+            
+        } catch (ValidarLoginException ex) {
+            Assert.fail();
+        } catch (NoSuchAlgorithmException ex) {
+            Assert.fail();
+        }       
+    }
+    
+    @Test
+    public void efetuarLoginSenhaVazio(){
+        
+        try {
+            String login = "toinhotony";
+            String senha = "";
+        
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
+            boolean resultado = true;
+            if (colecaoUser.isEmpty()){
+                resultado = false;
+            }
+        
+        Assert.assertEquals(false, resultado);
+            
+        } catch (ValidarLoginException ex) {
+            Assert.fail();
+        } catch (NoSuchAlgorithmException ex) {
+            Assert.fail();
+        }       
+    }
+    
+    @Test
+    public void efetuarLoginVazio(){
+        
+        try {
+            String login = "";
+            String senha = "1785";
+        
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
+            boolean resultado = true;
+            if (colecaoUser.isEmpty()){
+                resultado = false;
+            }
+        
+        Assert.assertEquals(false, resultado);
+            
+        } catch (ValidarLoginException ex) {
+            Assert.fail();
+        } catch (NoSuchAlgorithmException ex) {
+            Assert.fail();
+        }       
+    }
+    
+    @Test
+    public void efetuarLoginSenhaLimiteCaracteres(){
+        
+        try {
+            String login = "toinhotony";
+            String senha = "6da6d456as4d56as4d56as4d56as4d564as56d4as56d4a56s4"
+                    + "4dad456as4d";
+        
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
+            boolean resultado = true;
+            if (colecaoUser.isEmpty()){
+                resultado = false;
+            }
+        
+        Assert.assertEquals(false, resultado);
+            
+        } catch (ValidarLoginException ex) {
+            Assert.fail();
+        } catch (NoSuchAlgorithmException ex) {
+            Assert.fail();
+        }       
+    }
+    
+    @Test
+    public void efetuarLoginLimiteCaracteres(){
+        
+        try {
+            String login = "jfklsdhfljkhjksdhfjklsahfjklhfjkhfjkfhjkhfjkgghfjk"
+                    + "shfjksdahfkjasdhfjkasdhfjksdhffjksdhfjkasdhfjksadhfsjkad"
+                    + "hfasjkhfsjkadfhasjkdfhsjkadfhsdjkafhsdjkffhssfjkaasfhj";
+            String senha = "1785";
+        
+            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
+            boolean resultado = true;
+            if (colecaoUser.isEmpty()){
+                resultado = false;
+            }
+        
+        Assert.assertEquals(false, resultado);
+            
+        } catch (ValidarLoginException ex) {
+            Assert.fail();
+        } catch (NoSuchAlgorithmException ex) {
+            Assert.fail();
+        }       
     }
     
     @Test
@@ -39,31 +219,9 @@ public class UsuarioTest {
     }
 
     @Test
-    public void efetuarLogin(){
-        
-        try {
-            String login = "toinho";
-            String senha = "1234";
-            boolean resultado = false;
-        
-            colecaoUser = controladorUsuario.efetuarLogin(login, senha);
-            if (user != null){
-                resultado = true;
-            }
-        
-        Assert.assertEquals(true, resultado);
-            
-        } catch (ValidarLoginException ex) {
-            Assert.fail();
-        } catch (NoSuchAlgorithmException ex) {
-            Assert.fail();
-        }       
-    }
-
-    @Test
     public void buscarLogin(){
         
-        String login = "toinho";
+        String login = "toinhotony";
         boolean resultado = false;
         
         resultado = controladorUsuario.buscarLogin(login);
@@ -97,9 +255,10 @@ public class UsuarioTest {
     public void inserirUsuario(){
        
         try {
-            user.setNome("AntonioTeste");
-            user.setLogin("testeteteAntonio");
-            user.setSenha("1234");
+            Usuario user = new Usuario();
+            user.setNome("PedroTesteOliver");
+            user.setLogin("Pedro");
+            user.setSenha("123456789");
             boolean resultado = false;
             
             controladorUsuario.inserirUsuario(user);
@@ -124,6 +283,7 @@ public class UsuarioTest {
         
         int id = 1;
         boolean resultado = false;
+        Usuario user = new Usuario();
         
         user = controladorUsuario.buscarUsuario(id);
         
@@ -135,24 +295,33 @@ public class UsuarioTest {
     }
 
     @Test
-    public void alterarUsuario(){
+    public void alterarUsuario() {
         
-        user.setId(1);
-        user.setNome("Antonio Correa de Oliveira");
-        user.setLogin("TESTEDD");
-        user.setSenha("1234");
-        Usuario userResul = new Usuario();
-        boolean resultado = false;
+        try {
+            Usuario user = new Usuario();
+            user.setId(1);
+            user.setNome("AntonioCorreadeOliveira");
+            user.setLogin("TESTEDD");
+            user.setSenha("123456789");
+            Usuario userResul = new Usuario();
+            boolean resultado = false;
+              
         
-        controladorUsuario.alterarUsuario(user);
-        
-        userResul = controladorUsuario.buscarUsuario(1);
-        
-        if(userResul.getNome().equals(user.getNome())){
-            resultado = true;
-        }
-        
-        Assert.assertEquals(true, resultado);
+            controladorUsuario.alterarUsuario(user);
+            
+            userResul = controladorUsuario.buscarUsuario(1);
+            
+            if(userResul.getNome().equals(user.getNome())){
+                resultado = true;
+            }
+            
+            Assert.assertEquals(true, resultado);
+            
+        } catch (FormatoInvalidoException ex) {
+            Logger.getLogger(UsuarioTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioTest.class.getName()).log(Level.SEVERE, null, ex);
+        }      
     }
 
     @Test

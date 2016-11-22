@@ -5,6 +5,7 @@ import com.rticket.model.Usuario;
 import com.rticket.negocio.Fachada;
 import com.rticket.negocio.IFachada;
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -15,13 +16,13 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
-public class LoginBean {
+public class LoginBean implements Serializable{
     
     private String login;
     private String senha;
-    private String mensagem;
     private Collection<Usuario> usuarioLogado;
     private String logout;
+    private Usuario user;
 
     IFachada fach = new Fachada();
 
@@ -45,14 +46,6 @@ public class LoginBean {
         this.senha = senha;
     }
 
-    public String getMensagem() {
-        return mensagem;
-    }
-
-    public void setMensagem(String mensagem) {
-        this.mensagem = mensagem;
-    }
-
     public Collection<Usuario> getUsuarioLogado() {
         return usuarioLogado;
     }
@@ -63,7 +56,9 @@ public class LoginBean {
 
     public String getLogout() {
         
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();        
+        FacesContext.getCurrentInstance().getExternalContext()
+                .invalidateSession();
+        
         return "/Login?faces-redirect=true";
     }
 
@@ -71,23 +66,32 @@ public class LoginBean {
         this.logout = logout;
     }
     
-    public void mensagemErro() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Login ou Senha Inválidos!"));
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
     }
     
-    public void efetuarLogin() throws ValidarLoginException, 
+    public void mensagemErro() {
+        FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                        "Erro!", "Login ou Senha Inválidos!"));
+    }
+    
+    public String efetuarLogin() throws ValidarLoginException, 
             NoSuchAlgorithmException, IOException {
-        try {
-            
+        
+        try {           
             if (login.equals("admin") && senha.equals("1234")){
                 FacesContext.getCurrentInstance().getExternalContext()
                         .redirect("principal.xhtml");
             }
             else{
                 usuarioLogado = fach.efetuarLogin(login, senha);
-            
+                
                 if (usuarioLogado.isEmpty()){
-                    //setMensagem("Usuario ou Senha Invalidos!");
                     mensagemErro();
                 }
                 else{
@@ -96,7 +100,8 @@ public class LoginBean {
                     iterator = usuarioLogado.iterator();      
         
                     while(iterator.hasNext()) {
-                        Usuario user = (Usuario)iterator.next();
+                        this.user = (Usuario)iterator.next();
+                        
                     }
                     FacesContext.getCurrentInstance().getExternalContext()
                             .redirect("principal.xhtml");
@@ -106,5 +111,7 @@ public class LoginBean {
             FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage("Login/Senha inexistente"));
         }
+        
+        return "/index.xhtml?faces-redirect=true";
     }
 }

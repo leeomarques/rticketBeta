@@ -33,7 +33,7 @@ public class LogChamadoTest {
             resultado = true;
         }
         
-        Assert.assertEquals(true, resultado);
+        Assert.assertEquals(false, resultado);
     }
 
     @Test

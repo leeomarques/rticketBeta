@@ -19,8 +19,9 @@
             <h3 style="margin-top: 0">Seleção de Modulos</h3>
             <p:pickList id="pickList" value="#{perfilBean.dualListModulo}" var="modulo" itemLabel="#{modulo}" itemValue="#{modulo}" />
             <br />
-            <p:commandButton id="citySubmit" action="#{perfilBean.inserirPerfil()}" value="Salvar" update="displayModulo" oncomplete="PF('moduloDialog').show()" style="margin-top:5px" />
- 
+            <p:commandButton id="salvaPerfil" action="#{perfilBean.inserirPerfil()}" value="SalvaPerfil" style="margin-top:5px"></p:commandButton>
+            <p:commandButton id="citySubmit" action="#{perfilBean.inserirPerfil()}" value="Salvar/Visualizar" update="displayModulo" oncomplete="PF('moduloDialog').show()" style="margin-top:5px" />
+
             <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="moduloDialog">
                 <h:panelGrid id="displayModulo" columns="2">
                     <h:outputText value="Source: " style="font-weight:bold" />
@@ -41,9 +42,6 @@
                 </p:column>
                 <p:column style="width: 80%" headerText="Nome">
                     <h:outputText value="#{listperfil.nome}" />
-                </p:column>
-                <p:column style="width: 10%" headerText="Módulos">
-                    <h:outputText value="#{listperfil.modulos}" />
                 </p:column>
             </p:dataTable>
         </h:form>

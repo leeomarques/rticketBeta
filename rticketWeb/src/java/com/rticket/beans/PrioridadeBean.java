@@ -13,16 +13,16 @@ import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 
 public class PrioridadeBean {
-    
+
     private String nome;
     private Collection<Prioridade> listarPrioridade;
     private Prioridade prioridade;
     private int id;
-    
-    public PrioridadeBean(){
-        
+
+    public PrioridadeBean() {
+
     }
-    
+
     IFachada fach = new Fachada();
 
     public String getNome() {
@@ -56,7 +56,7 @@ public class PrioridadeBean {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public void inserirPrioridade() throws FormatoInvalidoException, CampoExistenteException, CampoVazioException {
         Prioridade novoPri = new Prioridade();
         novoPri.setNome(nome);
@@ -66,8 +66,9 @@ public class PrioridadeBean {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("prioridade.xhtml");
         } catch (IOException ex) {
-            Logger.getLogger(ModuloBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrioridadeBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     public Prioridade buscarPrioridade(int id) {

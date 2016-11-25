@@ -23,14 +23,6 @@ public class Perfil {
     @Column(name = "NOME", length = 100, nullable = false, unique = true)
     private String nome;
 
-    @ManyToMany
-    @JoinTable(name = "PERFIL_MODULO",
-            joinColumns = {
-                @JoinColumn(name = "ID_PERFIL")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "ID_MODULO")})
-    private Collection<Modulo> modulos;
-
     @OneToMany(mappedBy = "perfil")
     private Collection<Usuario> usuarios;
 
@@ -55,14 +47,6 @@ public class Perfil {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Collection<Modulo> getModulos() {
-        return modulos;
-    }
-
-    public void setModulos(Collection<Modulo> modulos) {
-        this.modulos = modulos;
     }
 
     public Collection<Usuario> getUsuarios() {

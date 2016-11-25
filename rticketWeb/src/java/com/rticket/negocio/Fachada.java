@@ -6,7 +6,6 @@ import com.rticket.excecao.CampoExistenteException;
 import com.rticket.excecao.FormatoInvalidoException;
 import com.rticket.model.StatusChamado;
 import com.rticket.model.Perfil;
-import com.rticket.model.Modulo;
 import com.rticket.model.Usuario;
 import com.rticket.model.LogChamado;
 import com.rticket.model.Chamados;
@@ -17,50 +16,30 @@ import java.util.Collection;
 
 public class Fachada implements IFachada {
 
-    private ControladorModulo        novoModulo;
-    private ControladorPerfil        novoPerfil;
-    private ControladorUsuario       novoUsuario;
-    private ControladorChamados      novoChamado;
-    private ControladorLogChamado    novoLogChamado;
+    private ControladorPerfil novoPerfil;
+    private ControladorUsuario novoUsuario;
+    private ControladorChamados novoChamado;
+    private ControladorLogChamado novoLogChamado;
     private ControladorStatusChamado novoStatusChamado;
     private ControladorTipoChamado   novoTipoChamado;
     private ControladorPrioridade    novoPrioridade;
+    private ControladorTipoChamado novoTipoChamado;
 
     public Fachada() {
-        this.novoUsuario       = new ControladorUsuario();
-        this.novoPerfil        = new ControladorPerfil();
-        this.novoModulo        = new ControladorModulo();
-        this.novoChamado       = new ControladorChamados();
-        this.novoLogChamado    = new ControladorLogChamado();
+        this.novoUsuario = new ControladorUsuario();
+        this.novoPerfil = new ControladorPerfil();
+        this.novoChamado = new ControladorChamados();
+        this.novoLogChamado = new ControladorLogChamado();
         this.novoStatusChamado = new ControladorStatusChamado();
         this.novoTipoChamado   = new ControladorTipoChamado();
         this.novoPrioridade    = new ControladorPrioridade();
+        this.novoTipoChamado = new ControladorTipoChamado();
     }
-
-    //<editor-fold defaultstate="collapsed" desc="Metodos para Modulos">
-    public void inserirModulo(Modulo modulo)
-            throws CampoExistenteException, FormatoInvalidoException,
-                CampoVazioException {
-        this.novoModulo.inserirModulo(modulo);
-    }
-
-    public Modulo buscarModulo(int id) {
-        return this.novoModulo.buscarModulo(id);
-    }
-
-    public void alterarModulo(Modulo modulo) {
-        this.novoModulo.alterarModulo(modulo);
-    }
-
-    public Collection<Modulo> listarModulo() {
-        return novoModulo.listarModulo();
-    }
-//</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Metodos para Perfis">
     public void inserirPerfil(Perfil perfil)
             throws CampoExistenteException, FormatoInvalidoException,
-                CampoVazioException{
+            CampoVazioException {
         this.novoPerfil.inserirPerfil(perfil);
     }
 
@@ -79,13 +58,13 @@ public class Fachada implements IFachada {
 
     //<editor-fold defaultstate="collapsed" desc="Metodos para Usuarios">
     public Collection<Usuario> efetuarLogin(String login, String senha)
-            throws ValidarLoginException, NoSuchAlgorithmException{
+            throws ValidarLoginException, NoSuchAlgorithmException {
         return this.novoUsuario.efetuarLogin(login, senha);
     }
 
     public void inserirUsuario(Usuario usuario)
             throws CampoVazioException, CampoExistenteException,
-                NoSuchAlgorithmException, FormatoInvalidoException{
+            NoSuchAlgorithmException, FormatoInvalidoException {
         this.novoUsuario.inserirUsuario(usuario);
     }
 
@@ -94,7 +73,7 @@ public class Fachada implements IFachada {
     }
 
     public void alterarUsuario(Usuario usuario) throws FormatoInvalidoException,
-            NoSuchAlgorithmException{
+            NoSuchAlgorithmException {
         this.novoUsuario.alterarUsuario(usuario);
     }
 
@@ -112,14 +91,14 @@ public class Fachada implements IFachada {
         return this.novoChamado.buscarChamados(id);
     }
 
-    public void alterarChamados(Chamados chamado){
+    public void alterarChamados(Chamados chamado) {
         this.novoChamado.alterarChamados(chamado);
     }
 
     public Collection<Chamados> listarChamados(Usuario user) {
         return novoChamado.listarChamados(user);
     }
-    
+
     public Collection<Chamados> listarChamadosTotal() {
         return novoChamado.listarChamadosTotal();
     }
@@ -138,7 +117,7 @@ public class Fachada implements IFachada {
     //<editor-fold defaultstate="collapsed" desc="Metodos para StatusChamado">
     public void inserirStatusChamado(StatusChamado statusChamado)
             throws FormatoInvalidoException, CampoExistenteException,
-                CampoVazioException{
+            CampoVazioException {
         this.novoStatusChamado.inserirStatusChamado(statusChamado);
     }
 
@@ -158,7 +137,7 @@ public class Fachada implements IFachada {
     //<editor-fold defaultstate="collapsed" desc="Metodos para TipoChamado">
     public void inserirTipoChamado(TipoChamado tipoChamado)
             throws FormatoInvalidoException, CampoExistenteException,
-                CampoVazioException{
+            CampoVazioException {
         this.novoTipoChamado.inserirTipoChamado(tipoChamado);
     }
 
@@ -173,9 +152,9 @@ public class Fachada implements IFachada {
     public Collection<TipoChamado> listarTipoChamado() {
         return novoTipoChamado.listarTipoChamado();
     }
-    
-    public TipoChamado buscarTipoChamadoNome(String nome){
-         return this.novoTipoChamado.buscarTipoChamadoNome(nome);
+
+    public TipoChamado buscarTipoChamadoNome(String nome) {
+        return this.novoTipoChamado.buscarTipoChamadoNome(nome);
     }
 //</editor-fold>
     

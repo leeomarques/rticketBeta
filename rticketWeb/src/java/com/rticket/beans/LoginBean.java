@@ -59,7 +59,7 @@ public class LoginBean implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
         
-        return "/Login?faces-redirect=true";
+        return "/index?faces-redirect=true";
     }
 
     public void setLogout(String logout) {
@@ -112,6 +112,6 @@ public class LoginBean implements Serializable{
                     new FacesMessage("Login/Senha inexistente"));
         }
         
-        return "/index.xhtml?faces-redirect=true";
+        return "/index?faces-redirect=true";
     }
 }

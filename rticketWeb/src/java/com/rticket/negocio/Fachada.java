@@ -10,6 +10,7 @@ import com.rticket.model.Modulo;
 import com.rticket.model.Usuario;
 import com.rticket.model.LogChamado;
 import com.rticket.model.Chamados;
+import com.rticket.model.Prioridade;
 import com.rticket.model.TipoChamado;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
@@ -23,6 +24,7 @@ public class Fachada implements IFachada {
     private ControladorLogChamado    novoLogChamado;
     private ControladorStatusChamado novoStatusChamado;
     private ControladorTipoChamado   novoTipoChamado;
+    private ControladorPrioridade    novoPrioridade;
 
     public Fachada() {
         this.novoUsuario       = new ControladorUsuario();
@@ -32,6 +34,7 @@ public class Fachada implements IFachada {
         this.novoLogChamado    = new ControladorLogChamado();
         this.novoStatusChamado = new ControladorStatusChamado();
         this.novoTipoChamado   = new ControladorTipoChamado();
+        this.novoPrioridade    = new ControladorPrioridade();
     }
 
     //<editor-fold defaultstate="collapsed" desc="Metodos para Modulos">
@@ -173,6 +176,30 @@ public class Fachada implements IFachada {
     
     public TipoChamado buscarTipoChamadoNome(String nome){
          return this.novoTipoChamado.buscarTipoChamadoNome(nome);
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Metodos para Prioridade">
+    public void inserirPrioridade(Prioridade tipoChamado)
+            throws FormatoInvalidoException, CampoExistenteException,
+                CampoVazioException{
+        this.novoPrioridade.inserirPrioridade(tipoChamado);
+    }
+
+    public Prioridade buscarPrioridade(int id) {
+        return this.novoPrioridade.buscarPrioridade(id);
+    }
+
+    public void alterarPrioridade(Prioridade prioridade) {
+        this.novoPrioridade.alterarPrioridade(prioridade);
+    }
+
+    public Collection<Prioridade> listarPrioridade() {
+        return novoPrioridade.listarPrioridade();
+    }
+    
+    public Prioridade buscarPrioridadeNome(String nome){
+         return this.novoPrioridade.buscarPrioridadeNome(nome);
     }
 //</editor-fold>
 }

@@ -8,6 +8,7 @@ import com.rticket.model.Chamados;
 import com.rticket.model.LogChamado;
 import com.rticket.model.Modulo;
 import com.rticket.model.Perfil;
+import com.rticket.model.Prioridade;
 import com.rticket.model.StatusChamado;
 import com.rticket.model.TipoChamado;
 import com.rticket.model.Usuario;
@@ -100,4 +101,17 @@ public interface IFachada {
     public Collection<TipoChamado> listarTipoChamado();
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Assinaturas para Prioridade">
+    public void inserirPrioridade(Prioridade prioridade)
+            throws FormatoInvalidoException, CampoExistenteException,
+                CampoVazioException;
+
+    public Prioridade buscarPrioridade(int id);
+    
+    Prioridade buscarPrioridadeNome(String nome);
+
+    public void alterarPrioridade(Prioridade prioridade);
+
+    public Collection<Prioridade> listarPrioridade();
+    //</editor-fold>
 }

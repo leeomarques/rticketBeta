@@ -37,9 +37,6 @@ public class Chamados {
     @Column(name = "RESPOSTA", length = 500, nullable = true, unique = false)
     private String resposta;
 
-    @Column(name = "PRIORIDADE", length = 10, nullable = true, unique = false)
-    private String prioridade;
-
     @Column(name = "NOTA_CHAMADO", length = 1, nullable = true, unique = false)
     private int notaChamado;
     
@@ -60,6 +57,10 @@ public class Chamados {
     @ManyToOne
     @JoinColumn(name = "ID_STATUS_CHAMADO")
     private StatusChamado statusChamados;
+    
+    @ManyToOne
+    @JoinColumn(name = "ID_PRIORIDADE_CHAMADO")
+    private Prioridade prioridade;
 
     public Chamados() {
 
@@ -113,14 +114,6 @@ public class Chamados {
         this.resposta = resposta;
     }
 
-    public String getPrioridade() {
-        return prioridade;
-    }
-
-    public void setPrioridade(String prioridade) {
-        this.prioridade = prioridade;
-    }
-
     public int getNotaChamado() {
         return notaChamado;
     }
@@ -167,5 +160,13 @@ public class Chamados {
 
     public void setStatusChamado(StatusChamado statusChamados) {
         this.statusChamados = statusChamados;
+    }
+
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+    
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
     }
 }

@@ -3,6 +3,7 @@ package com.rticket.beans;
 import com.rticket.excecao.CampoVazioException;
 import com.rticket.model.Chamados;
 import com.rticket.model.LogChamado;
+import com.rticket.model.Prioridade;
 import com.rticket.model.StatusChamado;
 import com.rticket.model.TipoChamado;
 import com.rticket.model.Usuario;
@@ -29,7 +30,8 @@ public class ChamadosBean {
     private Collection<StatusChamado> listarStatusChamados;
     private Collection<Usuario> listarUsuariosChamados;
     private Collection<LogChamado> listarLogChamados;
-
+    private Collection<Prioridade> listarPrioridade;
+    
     private String titulo;
     private String descricao;
     private String tipoChamado;
@@ -62,7 +64,7 @@ public class ChamadosBean {
         
         setTitulo(cham.getTitulo());
         setTipoChamado(cham.getTipoChamados().getNome());
-        setPrioridade(cham.getPrioridade());
+        setPrioridade(cham.getPrioridade().getNome());
         setStatusChamado(cham.getStatusChamados().getNome());
         setUsuarioSolicitante(cham.getLoginSolicitante());
         setCriadoEm(cham.getDataCriacao());
@@ -124,6 +126,15 @@ public class ChamadosBean {
 
     public void setListarLogChamados(Collection<LogChamado> listarLogChamados) {
         this.listarLogChamados = listarLogChamados;
+    }
+    
+    public Collection<Prioridade> getListarPrioridade() {
+        
+        return fach.listarPrioridade();
+    }
+
+    public void setListarPrioridade(Collection<Prioridade> listarPrioridade) {
+        this.listarPrioridade = listarPrioridade;
     }
     
     public String getTitulo() {
@@ -283,6 +294,9 @@ public class ChamadosBean {
             StatusChamado statusCham;
             statusCham = fach.buscarStatusChamado(Integer.valueOf(statusChamado));
 
+            Prioridade novoPrioridade;
+            novoPrioridade = fach.buscarPrioridade(Integer.valueOf(statusChamado));
+            
             user.setId(1);
             user.setLogin("Toinhotony");
             user.setNome("AntonioCorrea");
@@ -291,7 +305,7 @@ public class ChamadosBean {
             chamado.setTitulo(titulo);
             chamado.setDescricao(descricao);
             chamado.setTipoChamado(tipoCham);
-            chamado.setPrioridade(prioridade);
+            chamado.setPrioridade(novoPrioridade);
             chamado.setStatusChamado(statusCham);
             
             if (fechadoEm != null && chamado.getStatusChamados().getId() != 2){

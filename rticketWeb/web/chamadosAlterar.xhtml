@@ -35,10 +35,8 @@
                 
                 <p:outputLabel value="Prioridade: " /><br />
                 <p:selectOneMenu value="#{chamadosBean.prioridade}" style="width:100px" required="true" requiredMessage="Campo Prioridade Obrigatorio">
-                    <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
-                    <f:selectItem itemLabel="Baixa" itemValue="baixa" />
-                    <f:selectItem itemLabel="Media" itemValue="media" />
-                    <f:selectItem itemLabel="Alta"  itemValue="alta" />
+                    <f:selectItem itemLabel="#{chamadosBean.prioridade}" itemValue="" />
+                    <f:selectItems value="#{chamadosBean.listarPrioridade}" var="prio" itemLabel="#{prio.nome}" itemValue="#{prio.id}" />
                 </p:selectOneMenu><br /><br />
                 
                 <p:outputLabel value="Titulo: " /><br />

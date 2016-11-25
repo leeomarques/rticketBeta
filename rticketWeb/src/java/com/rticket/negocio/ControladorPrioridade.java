@@ -1,22 +1,22 @@
 package com.rticket.negocio;
 
-import com.rticket.model.TipoChamado;
 import com.rticket.dao.DAOFactory;
-import com.rticket.dao.dados.TipoChamadoDAO;
+import com.rticket.dao.dados.PrioridadeDAO;
 import com.rticket.excecao.CampoExistenteException;
 import com.rticket.excecao.CampoVazioException;
 import com.rticket.excecao.FormatoInvalidoException;
+import com.rticket.model.Prioridade;
 import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ControladorTipoChamado {
-
-    private TipoChamadoDAO tipoChamadoDAO;
+public class ControladorPrioridade {
+    
+    private PrioridadeDAO prioridadeDAO;
     private Boolean resultado;
 
-    public ControladorTipoChamado() {
-        tipoChamadoDAO = DAOFactory.getTipoChamadoDAO();
+    public ControladorPrioridade() {
+        prioridadeDAO = DAOFactory.getPrioridadeDAO();
     }
 
     //Metodo de Verificar Caracteres Especiais
@@ -35,50 +35,50 @@ public class ControladorTipoChamado {
 
     //Metodo para verificar se o nome ja existe no banco
     public Boolean buscarNome(String nome){
-        return this.resultado = tipoChamadoDAO.buscarNome(nome);
+        return this.resultado = prioridadeDAO.buscarNome(nome);
     }
 
-    //Metodo para Inserir TipoChamado
-    public void inserirTipoChamado(TipoChamado tipoChamado)
+    //Metodo para Inserir Prioridade
+    public void inserirPrioridade(Prioridade prioridade)
             throws FormatoInvalidoException, CampoExistenteException,
                 CampoVazioException{
 
-        if (tipoChamado.getNome() == null){
+        if (prioridade.getNome() == null){
             throw new CampoVazioException();
         }
 
-        buscarNome(tipoChamado.getNome());
+        buscarNome(prioridade.getNome());
 
         if (this.resultado == true){
             throw new CampoExistenteException();
         }
 
-        verificarCaracteres(tipoChamado.getNome());
+        verificarCaracteres(prioridade.getNome());
 
         if(this.resultado == false){
             throw new FormatoInvalidoException();
         }
         else{
-            tipoChamadoDAO.inserir(tipoChamado);
+            prioridadeDAO.inserir(prioridade);
         }
     }
 
-    //Metodo para Buscar o TipoChamado pelo ID
-    public TipoChamado buscarTipoChamado(int id){
-        return tipoChamadoDAO.buscarPorChave(id);
+    //Metodo para Buscar o Prioridade pelo ID
+    public Prioridade buscarPrioridade(int id){
+        return prioridadeDAO.buscarPorChave(id);
     }
     
-    public TipoChamado buscarTipoChamadoNome(String nome){
-        return tipoChamadoDAO.buscarTipoChamadoNome(nome);
+    public Prioridade buscarPrioridadeNome(String nome){
+        return prioridadeDAO.buscarPrioridadeNome(nome);
     }
 
-    //Metodo para Alterar TipoChamado
-    public void alterarTipoChamado(TipoChamado tipoChamado){
-        tipoChamadoDAO.alterar(tipoChamado);
+    //Metodo para Alterar Prioridade
+    public void alterarPrioridade(Prioridade prioridade){
+        prioridadeDAO.alterar(prioridade);
     }
 
-    //Listar todos os TipoChamado
-    public Collection<TipoChamado> listarTipoChamado(){
-        return tipoChamadoDAO.listarTipoChamado();
+    //Listar todos os Prioridade
+    public Collection<Prioridade> listarPrioridade(){
+        return prioridadeDAO.listarPrioridade();
     }
 }

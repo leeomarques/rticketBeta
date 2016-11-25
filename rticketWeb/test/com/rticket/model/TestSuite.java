@@ -9,7 +9,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     ChamadosTest.class,
     LogChamadoTest.class,
-    ModuloTest.class,    
     PerfilTest.class,  
     StatusChamadoTest.class,
     TipoChamadoTest.class,

@@ -15,12 +15,8 @@
             <p:outputLabel value="Nome: " />
             <p:inputText value="#{perfilBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText>
             <br/><br />
-            <p:growl id="msg" showDetail="true" escape="false" />
-            <h3 style="margin-top: 0">Seleção de Modulos</h3>
-            <p:pickList id="pickList" value="#{perfilBean.dualListModulo}" var="modulo" itemLabel="#{modulo}" itemValue="#{modulo}" />
-            <br />
+           
             <p:commandButton id="salvaPerfil" action="#{perfilBean.inserirPerfil()}" value="SalvaPerfil" style="margin-top:5px"></p:commandButton>
-            <p:commandButton id="citySubmit" action="#{perfilBean.inserirPerfil()}" value="Salvar/Visualizar" update="displayModulo" oncomplete="PF('moduloDialog').show()" style="margin-top:5px" />
 
             <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="moduloDialog">
                 <h:panelGrid id="displayModulo" columns="2">

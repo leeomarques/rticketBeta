@@ -15,19 +15,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "tipoChamadoBean")
-public class TipoChamadoBean implements Serializable{
+public class TipoChamadoBean implements Serializable {
 
     private String nome;
     private Collection<TipoChamado> listarTipoChamado;
     private TipoChamado tipoChamado;
     private int id;
-    
-    public TipoChamadoBean() {       
+
+    public TipoChamadoBean() {
 
     }
-    
+
     IFachada fach = new Fachada();
-    
+
     public String getNome() {
         return nome;
     }
@@ -35,7 +35,7 @@ public class TipoChamadoBean implements Serializable{
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     public Collection<TipoChamado> getListarTipoChamado() {
         return fach.listarTipoChamado();
     }
@@ -43,7 +43,7 @@ public class TipoChamadoBean implements Serializable{
     public void setListarTipoChamado(Collection<TipoChamado> listarTipoChamado) {
         this.listarTipoChamado = listarTipoChamado;
     }
-      
+
     public TipoChamado getTipoChamado() {
         return tipoChamado;
     }
@@ -51,7 +51,7 @@ public class TipoChamadoBean implements Serializable{
     public void setTipoChamado(TipoChamado tipoChamado) {
         this.tipoChamado = tipoChamado;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -69,7 +69,7 @@ public class TipoChamadoBean implements Serializable{
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("tipochamado.xhtml");
         } catch (IOException ex) {
-            Logger.getLogger(ModuloBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TipoChamadoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

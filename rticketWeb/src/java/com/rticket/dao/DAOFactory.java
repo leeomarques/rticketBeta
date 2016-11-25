@@ -4,7 +4,6 @@ import com.rticket.dao.dados.UsuarioDAO;
 import com.rticket.dao.dados.PerfilDAO;
 import com.rticket.dao.dados.TipoChamadoDAO;
 import com.rticket.dao.dados.LogChamadoDAO;
-import com.rticket.dao.dados.ModuloDAO;
 import com.rticket.dao.dados.StatusChamadoDAO;
 import com.rticket.dao.dados.ChamadosDAO;
 import java.util.logging.Level;
@@ -37,11 +36,6 @@ public abstract class DAOFactory {
 
     public static LogChamadoDAO getLogChamadoDAO() {
         LogChamadoDAO dao = new LogChamadoDAO(manager);
-        return dao;
-    }
-
-    public static ModuloDAO getModuloDAO() {
-        ModuloDAO dao = new ModuloDAO(manager);
         return dao;
     }
 

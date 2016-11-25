@@ -6,7 +6,6 @@ import com.rticket.excecao.CampoExistenteException;
 import com.rticket.excecao.FormatoInvalidoException;
 import com.rticket.model.Chamados;
 import com.rticket.model.LogChamado;
-import com.rticket.model.Modulo;
 import com.rticket.model.Perfil;
 import com.rticket.model.StatusChamado;
 import com.rticket.model.TipoChamado;
@@ -16,22 +15,10 @@ import java.util.Collection;
 
 public interface IFachada {
 
-    //<editor-fold defaultstate="collapsed" desc="Assinaturas para Modulos">
-    void inserirModulo(Modulo modulo)
-            throws CampoExistenteException, FormatoInvalidoException,
-                CampoVazioException;
-
-    Modulo buscarModulo(int id);
-
-    void alterarModulo(Modulo modulo);
-
-    Collection<Modulo> listarModulo();
-//</editor-fold>
-
     //<editor-fold defaultstate="collapsed" desc="Assinaturas para Perfis">
     void inserirPerfil(Perfil perfil)
             throws CampoExistenteException, FormatoInvalidoException,
-                CampoVazioException;
+            CampoVazioException;
 
     Perfil buscarPerfil(int id);
 
@@ -46,7 +33,7 @@ public interface IFachada {
 
     void inserirUsuario(Usuario usuario)
             throws CampoVazioException, CampoExistenteException,
-                NoSuchAlgorithmException, FormatoInvalidoException;
+            NoSuchAlgorithmException, FormatoInvalidoException;
 
     Usuario buscarUsuario(int id);
 
@@ -64,7 +51,7 @@ public interface IFachada {
     void alterarChamados(Chamados chamado);
 
     Collection<Chamados> listarChamados(Usuario user);
-    
+
     Collection<Chamados> listarChamadosTotal();
     //</editor-fold>
 
@@ -77,7 +64,7 @@ public interface IFachada {
     //<editor-fold defaultstate="collapsed" desc="Assinaturas para StatusChamado">
     public void inserirStatusChamado(StatusChamado statusChamado)
             throws FormatoInvalidoException, CampoExistenteException,
-                CampoVazioException;
+            CampoVazioException;
 
     public StatusChamado buscarStatusChamado(int id);
 
@@ -89,10 +76,10 @@ public interface IFachada {
     //<editor-fold defaultstate="collapsed" desc="Assinaturas para TipoChamado">
     public void inserirTipoChamado(TipoChamado tipoChamado)
             throws FormatoInvalidoException, CampoExistenteException,
-                CampoVazioException;
+            CampoVazioException;
 
     public TipoChamado buscarTipoChamado(int id);
-    
+
     TipoChamado buscarTipoChamadoNome(String nome);
 
     public void alterarTipoChamado(TipoChamado tipoChamado);

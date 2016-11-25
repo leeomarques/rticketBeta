@@ -23,7 +23,6 @@ public class Fachada implements IFachada {
     private ControladorStatusChamado novoStatusChamado;
     private ControladorTipoChamado   novoTipoChamado;
     private ControladorPrioridade    novoPrioridade;
-    private ControladorTipoChamado novoTipoChamado;
 
     public Fachada() {
         this.novoUsuario = new ControladorUsuario();

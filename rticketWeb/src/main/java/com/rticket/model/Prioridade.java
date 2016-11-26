@@ -5,15 +5,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "MODULO")
-public class Modulo {
 
+@Entity
+@Table(name = "PRIORIDADE")
+public class Prioridade {
+    
     @Id
     @GeneratedValue
     @Column(name = "ID", length = 6, nullable = false, unique = true)
@@ -21,22 +20,17 @@ public class Modulo {
 
     @Column(name = "NOME", length = 100, nullable = false, unique = true)
     private String nome;
-
-    @ManyToMany
-    @JoinTable(name = "PERFIL_MODULO",
-            joinColumns = {
-                @JoinColumn(name = "ID_MODULO")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "ID_PERFIL")})
-    private Collection<Perfil> perfis;
-
+    
     @Column(name = "ATIVO", length = 1, nullable = true, unique = false)
     private String ativo;
 
-    public Modulo() {
-
+    @OneToMany(mappedBy = "tipoChamados")
+    private Collection<Chamados> chamados;
+    
+    public Prioridade(){
+        
     }
-
+   
     public int getId() {
         return id;
     }
@@ -53,14 +47,6 @@ public class Modulo {
         this.nome = nome;
     }
 
-    public Collection<Perfil> getPerfis() {
-        return perfis;
-    }
-
-    public void setPerfis(Collection<Perfil> perfis) {
-        this.perfis = perfis;
-    }
-
     public String getAtivo() {
         return ativo;
     }
@@ -68,4 +54,12 @@ public class Modulo {
     public void setAtivo(String ativo) {
         this.ativo = ativo;
     }
+
+    public Collection<Chamados> getChamados() {
+        return chamados;
+    }
+
+    public void setChamados(Collection<Chamados> chamados) {
+        this.chamados = chamados;
+    }   
 }

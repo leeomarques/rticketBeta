@@ -21,7 +21,7 @@ public class StatusChamadoBean {
     private StatusChamado statusChamado;
 
     IFachada fach = new Fachada();
-    
+
     public String getNome() {
         return nome;
     }
@@ -46,7 +46,7 @@ public class StatusChamadoBean {
     public void setStatusChamado(StatusChamado statusChamado) {
         this.statusChamado = statusChamado;
     }
-    
+
     public void inserirStatusChamado() throws FormatoInvalidoException, CampoExistenteException, CampoVazioException {
         StatusChamado sts = new StatusChamado();
         sts.setNome(nome);
@@ -54,7 +54,7 @@ public class StatusChamadoBean {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("statuschamado.xhtml");
         } catch (IOException ex) {
-            Logger.getLogger(ModuloBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StatusChamadoBean.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

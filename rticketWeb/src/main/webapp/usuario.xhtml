@@ -2,14 +2,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>RTicket - Usuários</title>
     </h:head>
     <h:body>
-        <ui:include src="cabecalho.xhtml" />
+        <ui:include src="cabecalho.xhtml" /><br />
+        <h:form class="formulario">
+            <p:outputLabel value="Nome: " /><br />
+            <p:inputText value="#{usuarioBean.nome}" placeholder="" required="true" style="width:500px" requiredMessage="Digite um nome"></p:inputText><br/>
+            <br/>
+            <p:outputLabel value="Login: " /><br />
+            <p:inputText value="#{usuarioBean.login}" placeholder="" required="true" style="width:100px" requiredMessage="Digite um Usuário"></p:inputText><br />
+            <br />
+            <p:outputLabel value="Senha: " /><br />
+            <p:password feedback="true" value="#{usuarioBean.senha}" placeholder="" required="true" style="width:100px" requiredMessage="Digite uma senha"></p:password><br />
+            <br />
+            <p:selectOneMenu value="#{usuarioBean.perfil}" style="width:250px" required="true" requiredMessage="Selecione um Perfil">
+                <f:selectItem itemLabel="Perfil..." itemValue="" />
+                <f:selectItems value="#{usuarioBean.listarPerfil}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil.id}" />
+            </p:selectOneMenu><br /><br />
+
+
+            <p:commandButton value="Salvar" action="#{usuarioBean.inserirUsuario()}" ajax="false" />
+            <p></p>
+            <p:dataTable var="listUsr" value="#{usuarioBean.listarUsuario}">
+                <p:column style="width: 1%" headerText="ID">
+                    <h:outputText value="#{listUsr.id}" />
+                </p:column>
+                <p:column style="width: 20%" headerText="Nome">
+                    <h:outputText value="#{listUsr.nome}" />
+                </p:column>
+                <p:column style="width: 20%" headerText="Login">
+                    <h:outputText value="#{listUsr.login}" />
+                </p:column>
+                <p:column style="width: 20%" headerText="Perfil">
+                    <h:outputText value="#{listUsr.perfil.nome}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>  
     </h:body>
 </html>
 

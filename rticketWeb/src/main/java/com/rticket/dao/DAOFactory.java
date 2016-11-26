@@ -4,9 +4,9 @@ import com.rticket.dao.dados.UsuarioDAO;
 import com.rticket.dao.dados.PerfilDAO;
 import com.rticket.dao.dados.TipoChamadoDAO;
 import com.rticket.dao.dados.LogChamadoDAO;
-import com.rticket.dao.dados.ModuloDAO;
 import com.rticket.dao.dados.StatusChamadoDAO;
 import com.rticket.dao.dados.ChamadosDAO;
+import com.rticket.dao.dados.PrioridadeDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -40,11 +40,6 @@ public abstract class DAOFactory {
         return dao;
     }
 
-    public static ModuloDAO getModuloDAO() {
-        ModuloDAO dao = new ModuloDAO(manager);
-        return dao;
-    }
-
     public static PerfilDAO getPerfilDAO() {
         PerfilDAO dao = new PerfilDAO(manager);
         return dao;
@@ -62,6 +57,11 @@ public abstract class DAOFactory {
 
     public static UsuarioDAO getUsuarioDAO() {
         UsuarioDAO dao = new UsuarioDAO(manager);
+        return dao;
+    }
+    
+    public static PrioridadeDAO getPrioridadeDAO() {
+        PrioridadeDAO dao = new PrioridadeDAO(manager);
         return dao;
     }
 }

@@ -61,5 +61,15 @@ public class Prioridade {
 
     public void setChamados(Collection<Chamados> chamados) {
         this.chamados = chamados;
-    }   
+    }  
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (obj instanceof Prioridade) {
+    		Prioridade prioridade = (Prioridade) obj;
+        	return this.nome != null && 
+        			this.nome.equals(prioridade.nome);
+    	}
+    	return false;
+    }
 }

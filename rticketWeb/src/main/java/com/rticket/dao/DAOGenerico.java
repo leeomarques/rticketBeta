@@ -51,8 +51,7 @@ public abstract class DAOGenerico<Entidade> {
      * @param objeto a ser salvo
      */
     public void inserir(Entidade objeto) {
-        
-       EntityTransaction tx = getEntityManager().getTransaction();
+        EntityTransaction tx = getEntityManager().getTransaction();
         try {
             tx.begin();
             getEntityManager().persist(objeto);

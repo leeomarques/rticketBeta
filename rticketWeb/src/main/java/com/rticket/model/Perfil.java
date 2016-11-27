@@ -64,4 +64,14 @@ public class Perfil {
     public void setAtivo(String ativo) {
         this.ativo = ativo;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (obj instanceof Perfil) {
+    		Perfil perfil = (Perfil) obj;
+        	return this.nome != null && 
+        			this.nome.equals(perfil.nome);
+    	}
+    	return false;
+    }
 }

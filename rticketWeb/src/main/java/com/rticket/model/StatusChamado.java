@@ -72,4 +72,14 @@ public class StatusChamado {
     public void setAtivo(String ativo) {
         this.ativo = ativo;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (obj instanceof StatusChamado) {
+    		StatusChamado statusChamado = (StatusChamado) obj;
+    		return this.nome != null &&
+    				this.nome.equals(statusChamado.getNome());
+    	}
+    	return false;
+    }
 }

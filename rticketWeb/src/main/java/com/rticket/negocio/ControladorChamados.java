@@ -52,29 +52,34 @@ public class ControladorChamados {
 
     //Metodo para Alterar Chamados
     public void alterarChamados(Chamados chamado){
-        
         Chamados cham = new Chamados();
         LogChamado logChamado = new LogChamado();
         Date data = new Date();
         String logHistorico = "";
         cham = chamadosDAO.buscarPorChave(chamado.getId());
         
+        if (cham == null) {
+        	return;
+        }
+        
         chamado.setDataCriacao(cham.getDataCriacao());
         chamado.setLoginSolicitante(cham.getLoginSolicitante());
         logChamado.setChamados(chamado);
         logChamado.setUsuario(chamado.getUsuarios());
         
-        if(cham.getTipoChamados().getId() != chamado.getTipoChamados().getId()){
-            
-            logHistorico = ("Tipo: "+chamado.getTipoChamados().getNome());
+        if(cham.getTipoChamados() != null &&
+        	cham.getTipoChamados().getId() != chamado.getTipoChamados().getId()){
+            logHistorico = ("Tipo: " + chamado.getTipoChamados().getNome());
         }
         
-        if(cham.getStatusChamados().getId() != chamado.getStatusChamados().getId()){
+        if(cham.getStatusChamados() != null && 
+        	cham.getStatusChamados().getId() != chamado.getStatusChamados().getId()){
             
             logHistorico += ("; Status: "+chamado.getStatusChamados().getNome());
         }
 
-        if(chamado.getStatusChamados().getFinaliza().equals("N")){
+        if(chamado.getStatusChamados() != null && 
+        	chamado.getStatusChamados().getFinaliza().equals("N")){
             
             logChamado.setAcao("Alterar");
             logChamado.setData(data);          

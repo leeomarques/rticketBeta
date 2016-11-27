@@ -5,11 +5,12 @@ import com.rticket.model.Prioridade;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 public class PrioridadeDAO extends DAOGenerico<Prioridade>{
 
-    Collection<Prioridade> listaPrioridade = new ArrayList();
+    Collection<Prioridade> listaPrioridade = new ArrayList<Prioridade>();
     Prioridade prioridade = new Prioridade();
     
     public PrioridadeDAO(EntityManager em) {
@@ -42,14 +43,17 @@ public class PrioridadeDAO extends DAOGenerico<Prioridade>{
         return colecao;
     }
     
-    public Prioridade buscarPrioridadeNome(String nome){
+    public Prioridade buscarPrioridadeNome(String nome) {
         String sql;
 
         sql = ("SELECT p FROM Prioridade p WHERE p.nome = :nome");
         Query q = getEntityManager().createQuery(sql, Prioridade.class);
         q.setParameter("nome", nome);
-        prioridade = (Prioridade) q.getSingleResult();
         
-        return prioridade;
+        try {
+            return (Prioridade) q.getSingleResult();
+        } catch (NoResultException e) {
+        	return null;
+        }
     }
 }

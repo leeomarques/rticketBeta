@@ -11,70 +11,78 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ControladorPerfil {
-
     private PerfilDAO perfilDAO;
-    private Boolean resultado;
-
+    
     public ControladorPerfil() {
         perfilDAO = DAOFactory.getPerfilDAO();
     }
 
-    //Metodo de Verificar Caracteres Especiais
+    /**
+     * Metodo de Verificar Caracteres Especiais
+     * */
     public Boolean verificarCaracteres(String nome){
-
-        this.resultado = false;
         Pattern pattern = Pattern.compile("^[a-zA-Z]*$");
         Matcher matcher = pattern.matcher(nome);
-
-        if(matcher.find()){
-            this.resultado = true;
-        }
-
-        return this.resultado;
+        return matcher.find();
     }
 
-    //Metodo para verificar se o nome ja existe no banco
+    /**
+     * Metodo para verificar se o nome ja existe no banco
+     * */
     public Boolean buscarNome(String nome){
-        return this.resultado = perfilDAO.buscarNome(nome);
+        return perfilDAO.buscarNome(nome);
     }
 
-    //Metodo para Inserir Perfil
+    /**
+     * Metodo para Inserir Perfil
+     * */
     public void inserirPerfil(Perfil perfil)
             throws CampoExistenteException, FormatoInvalidoException,
                 CampoVazioException{
-
-        if (perfil.getNome() == null){
+        if (perfil == null || 
+        	perfil.getNome() == null ||
+        	perfil.getNome().length() <= 0){
             throw new CampoVazioException();
         }
 
-        buscarNome(perfil.getNome());
-
-        if (this.resultado == true){
+        if (buscarNome(perfil.getNome())){
             throw new CampoExistenteException();
         }
 
-        verificarCaracteres(perfil.getNome());
-
-        if(this.resultado == false){
+        boolean resultado = verificarCaracteres(perfil.getNome());
+        if(resultado){
+        	perfilDAO.inserir(perfil);
+        } else {
             throw new FormatoInvalidoException();
-        }
-        else{
-            perfilDAO.inserir(perfil);
         }
     }
 
-    //Metodo para Buscar o Perfil pelo ID
+    /**
+     * Metodo para Buscar o Perfil pelo ID
+     * */
     public Perfil buscarPerfil(int id){
         return perfilDAO.buscarPorChave(id);
     }
 
-    //Metodo para Alterar Perfil
+    /**
+     * Metodo para Alterar Perfil
+     * */
     public void alterarPerfil(Perfil perfil){
         perfilDAO.alterar(perfil);
     }
 
-    //Listar todos os Modulos
+    /**
+     * Listar todos os Modulos
+     * */
     public Collection<Perfil> listarPerfil(){
-        return perfilDAO.listarColecao();
+        return perfilDAO.listarPerfils();
     }
+
+	public boolean existePerfilNoDB(Perfil perfil) {
+		return buscarNome(perfil.getNome());
+	}
+
+	public Perfil buscarPerfilNome(String nome) {
+		return perfilDAO.buscarPerfilNome(nome);
+	}
 }

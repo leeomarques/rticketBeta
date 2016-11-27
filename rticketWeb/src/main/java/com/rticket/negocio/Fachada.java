@@ -45,7 +45,7 @@ public class Fachada implements IFachada {
     public Perfil buscarPerfil(int id) {
         return this.novoPerfil.buscarPerfil(id);
     }
-
+    
     public void alterarPerfil(Perfil perfil) {
         this.novoPerfil.alterarPerfil(perfil);
     }

@@ -5,6 +5,7 @@ import com.rticket.dao.DAOGenerico;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 public class StatusChamadoDAO extends DAOGenerico<StatusChamado>{
@@ -39,5 +40,19 @@ public class StatusChamadoDAO extends DAOGenerico<StatusChamado>{
         colecao = q.getResultList();
 
         return colecao;
+    }
+    
+    public StatusChamado buscarStatusChamadoNome(String nome) {
+        String sql;
+
+        sql = ("SELECT p FROM StatusChamado p WHERE p.nome = :nome");
+        Query q = getEntityManager().createQuery(sql, StatusChamado.class);
+        q.setParameter("nome", nome);
+        
+        try {
+            return (StatusChamado) q.getSingleResult();
+        } catch (NoResultException e) {
+        	return null;
+        }
     }
 }

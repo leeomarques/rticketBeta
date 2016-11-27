@@ -13,67 +13,73 @@ import java.util.regex.Pattern;
 public class ControladorStatusChamado {
 
     private StatusChamadoDAO statusChamadoDAO;
-    private Boolean resultado;
 
     public ControladorStatusChamado() {
         statusChamadoDAO = DAOFactory.getStatusChamadoDAO();
     }
 
-    //Metodo de Verificar Caracteres Especiais
-    public Boolean verificarCaracteres(String nome){
-
-        this.resultado = false;
+    /**
+     * Metodo de Verificar Caracteres Especiais
+     * */
+    public Boolean verificarCaracteres(String nome) {
         Pattern pattern = Pattern.compile("^[a-zA-Z]*$");
         Matcher matcher = pattern.matcher(nome);
-
-        if(matcher.find()){
-            this.resultado = true;
-        }
-
-        return this.resultado;
+        return matcher.find();
     }
 
-    //Metodo para verificar se o nome ja existe no banco
+    /**
+     * Metodo para verificar se o nome ja existe no banco
+     * */
     public Boolean buscarNome(String nome){
-        return this.resultado = statusChamadoDAO.buscarNome(nome);
+        return statusChamadoDAO.buscarNome(nome);
+    }
+    
+    public StatusChamado buscarStatusChamadoNome(String nome){
+        return statusChamadoDAO.buscarStatusChamadoNome(nome);
     }
 
-    //Metodo para Inserir StatusChamado
+    /**
+     * Metodo para Inserir StatusChamado
+     * */
     public void inserirStatusChamado(StatusChamado statusChamado)
             throws FormatoInvalidoException, CampoExistenteException,
                 CampoVazioException{
 
-        if (statusChamado.getNome() == null){
+    	if (statusChamado == null || 
+    		statusChamado.getNome() == null || 
+    		statusChamado.getNome().length() <= 0){
             throw new CampoVazioException();
         }
 
-        buscarNome(statusChamado.getNome());
-
-        if (this.resultado == true){
+        if (buscarNome(statusChamado.getNome())){
             throw new CampoExistenteException();
         }
 
-        verificarCaracteres(statusChamado.getNome());
-
-        if (this.resultado == false){
-            throw new FormatoInvalidoException();
-        }
-        else{
-            statusChamadoDAO.inserir(statusChamado);
+        boolean resultado = verificarCaracteres(statusChamado.getNome());
+        if (resultado) {
+        	statusChamadoDAO.inserir(statusChamado);
+        } else {
+        	throw new FormatoInvalidoException();
         }
     }
 
-    //Metodo para Buscar o StatusChamado pelo ID
+    /**
+     * Metodo para Buscar o StatusChamado pelo ID
+     * */
     public StatusChamado buscarStatusChamado(int id){
         return statusChamadoDAO.buscarPorChave(id);
     }
 
-    //Metodo para Alterar StatusChamado
+    /**
+     * Metodo para Alterar StatusChamado
+     * */
     public void alterarStatusChamado(StatusChamado statusChamado){
         statusChamadoDAO.alterar(statusChamado);
     }
 
-    //Listar todos os StatusChamado
+    /**
+     * Listar todos os StatusChamado
+     * */
     public Collection<StatusChamado> listarStatusChamado(){
         return statusChamadoDAO.listarStatusChamado();
     }

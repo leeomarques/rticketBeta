@@ -5,6 +5,7 @@ import com.rticket.dao.DAOGenerico;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 public class PerfilDAO extends DAOGenerico<Perfil>{
@@ -26,5 +27,30 @@ public class PerfilDAO extends DAOGenerico<Perfil>{
             verificaNome = false;
         }
         return verificaNome;
+    }
+
+	public Perfil buscarPerfilNome(String nome) {
+		String sql;
+
+        sql = ("SELECT p FROM Perfil p WHERE p.nome = :nome");
+        Query q = getEntityManager().createQuery(sql, Perfil.class);
+        q.setParameter("nome", nome);
+        
+        try {
+            return (Perfil) q.getSingleResult();
+        } catch (NoResultException e) {
+        	return null;
+        }
+	}
+	
+	public Collection<Perfil> listarPerfils() {
+        Collection<Perfil> colecao = null;
+        String sql = "";
+        sql = ("SELECT p FROM Perfil p WHERE p.ativo = null");
+        Query q = getEntityManager().createQuery(sql, Perfil.class);
+        
+        colecao = q.getResultList();
+
+        return colecao;
     }
 }

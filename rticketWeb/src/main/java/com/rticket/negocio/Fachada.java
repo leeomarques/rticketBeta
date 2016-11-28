@@ -15,14 +15,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 
 public class Fachada implements IFachada {
-
     private ControladorPerfil novoPerfil;
     private ControladorUsuario novoUsuario;
     private ControladorChamados novoChamado;
     private ControladorLogChamado novoLogChamado;
     private ControladorStatusChamado novoStatusChamado;
-    private ControladorTipoChamado   novoTipoChamado;
-    private ControladorPrioridade    novoPrioridade;
+    private ControladorTipoChamado novoTipoChamado;
+    private ControladorPrioridade novoPrioridade;
 
     public Fachada() {
         this.novoUsuario = new ControladorUsuario();
@@ -30,8 +29,8 @@ public class Fachada implements IFachada {
         this.novoChamado = new ControladorChamados();
         this.novoLogChamado = new ControladorLogChamado();
         this.novoStatusChamado = new ControladorStatusChamado();
-        this.novoTipoChamado   = new ControladorTipoChamado();
-        this.novoPrioridade    = new ControladorPrioridade();
+        this.novoTipoChamado = new ControladorTipoChamado();
+        this.novoPrioridade = new ControladorPrioridade();
         this.novoTipoChamado = new ControladorTipoChamado();
     }
 
@@ -53,7 +52,7 @@ public class Fachada implements IFachada {
     public Collection<Perfil> listarPerfil() {
         return novoPerfil.listarPerfil();
     }
-//</editor-fold>
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Metodos para Usuarios">
     public Collection<Usuario> efetuarLogin(String login, String senha)
@@ -72,7 +71,7 @@ public class Fachada implements IFachada {
     }
 
     public void alterarUsuario(Usuario usuario) throws FormatoInvalidoException,
-            NoSuchAlgorithmException {
+            NoSuchAlgorithmException, CampoVazioException {
         this.novoUsuario.alterarUsuario(usuario);
     }
 

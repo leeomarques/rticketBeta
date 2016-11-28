@@ -19,17 +19,10 @@ public class ControladorChamados {
 
     //Metodo para Inserir Chamados
     public void inserirChamados(Chamados chamado)throws CampoVazioException{
-        
+    	verificarValoresVazios(chamado);
+    	
         Date dt = new Date();
         chamado.setDataCriacao(dt);
-        if(chamado.getDataCriacao() == null || chamado.getTitulo().isEmpty() ||
-                chamado.getDescricao().isEmpty() || 
-                chamado.getStatusChamados() == null || 
-                chamado.getTipoChamados() == null || 
-                chamado.getUsuarios() == null){
-            throw new CampoVazioException();
-        }
-        
         LogChamado log = new LogChamado();
         
         log.setData(dt);
@@ -46,12 +39,13 @@ public class ControladorChamados {
 
     //Metodo para Buscar o Chamados pelo ID
     public Chamados buscarChamados(int id){
-        
         return chamadosDAO.buscarPorChave(id);
     }
 
     //Metodo para Alterar Chamados
     public void alterarChamados(Chamados chamado){
+    	if (chamado == null) return; 
+    	
         Chamados cham = new Chamados();
         LogChamado logChamado = new LogChamado();
         Date data = new Date();
@@ -79,7 +73,8 @@ public class ControladorChamados {
         }
 
         if(chamado.getStatusChamados() != null && 
-        	chamado.getStatusChamados().getFinaliza().equals("N")){
+    		chamado.getStatusChamados().getFinaliza() != null && 
+    		chamado.getStatusChamados().getFinaliza().equals("N")){
             
             logChamado.setAcao("Alterar");
             logChamado.setData(data);          
@@ -120,5 +115,20 @@ public class ControladorChamados {
     //Listar todos os Chamados
     public Collection<Chamados> listarChamadosTotal(){
         return chamadosDAO.listarColecao();
+    }
+    
+    private boolean isEmpty(String txt) {
+    	return txt == null || txt.isEmpty();
+    }
+
+    private void verificarValoresVazios(Chamados chamado) throws CampoVazioException {
+    	if(chamado == null || 
+        		isEmpty(chamado.getTitulo()) ||
+        		isEmpty(chamado.getDescricao()) || 
+                chamado.getStatusChamados() == null || 
+                chamado.getTipoChamados() == null || 
+                chamado.getUsuarios() == null) {
+            throw new CampoVazioException();
+        }
     }
 }

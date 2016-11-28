@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 public class ChamadosDAO extends DAOGenerico<Chamados>{
     
@@ -27,6 +28,7 @@ public class ChamadosDAO extends DAOGenerico<Chamados>{
             
             tx.commit();
         } catch (PersistenceException e) {
+            JOptionPane.showMessageDialog(null, e);
             tx.rollback();
         }
     }

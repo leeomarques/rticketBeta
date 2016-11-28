@@ -58,7 +58,9 @@ public class UsuarioBean {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (CampoVazioException ex) {
+        	Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+		}
     }
 
     public Collection<Usuario> listarUsuario() {

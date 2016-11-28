@@ -58,7 +58,8 @@ public class Usuario {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+    	if (nome != null)
+    		this.nome = nome;
     }
 
     public String getLogin() {
@@ -108,4 +109,16 @@ public class Usuario {
     public void setLogChamados(Collection<LogChamado> logChamados) {
         this.logChamados = logChamados;
     }
+    
+//    @Override
+//    public boolean equals(Object obj) {
+//    	boolean resultado = false;
+//    	
+//    	if (obj instanceof Usuario) {
+//    		Usuario usuario = (Usuario) obj;
+//    		
+//    	}
+//    	
+//    	return resultado;
+//    }
 }

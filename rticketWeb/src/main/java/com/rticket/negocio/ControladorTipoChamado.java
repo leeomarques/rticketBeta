@@ -43,7 +43,9 @@ public class ControladorTipoChamado {
             throws FormatoInvalidoException, CampoExistenteException,
                 CampoVazioException{
 
-        if (tipoChamado.getNome() == null){
+        if (tipoChamado == null || 
+        		tipoChamado.getNome() == null ||
+        		tipoChamado.getNome().length() <= 0){
             throw new CampoVazioException();
         }
 

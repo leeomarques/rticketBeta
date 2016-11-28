@@ -17,42 +17,39 @@ import java.util.regex.Pattern;
 public class ControladorUsuario {
 
     private UsuarioDAO usuarioDAO;
-    private Boolean resultado;
     private Usuario user;
 
     public ControladorUsuario() {
         usuarioDAO = DAOFactory.getUsuarioDAO();
     }
 
-    //Metodo de Verificar Caracteres Especiais
+    /**
+     * Metodo de Verificar Caracteres Especiais
+     * */
     public Boolean verificarCaracteres(String nome){
-
-        this.resultado = false;
         Pattern pattern = Pattern.compile("^[a-zA-Z]*$");
         Matcher matcher = pattern.matcher(nome);
-
-        if(matcher.find()){
-            this.resultado = true;
-        }
-
-        return this.resultado;
+        return matcher.find();
     }
 
-    //Metodo para EfetuarLogin
+    /**
+     * Metodo para EfetuarLogin
+     * */
     public Collection<Usuario> efetuarLogin(String login, String senha)
             throws ValidarLoginException, NoSuchAlgorithmException{
-        this.resultado = false;
-        senha = converterSenhaMD5(senha);
-        return usuarioDAO.efetuarLogin(login, senha);
+        return usuarioDAO.efetuarLogin(login, converterSenhaMD5(senha));
     }
 
-    //Metodo para verificar se o login ja existe no banco
+    /**
+     * Metodo para verificar se o login ja existe no banco
+     * */
     public Boolean buscarLogin(String login){
-        this.resultado = false;
-        return this.resultado = usuarioDAO.buscarLogin(login);
+        return usuarioDAO.buscarLogin(login);
     }
 
-    //Metodo para Encriptar a Senha do Usuario
+    /**
+     * Metodo para Encriptar a Senha do Usuario
+     * */
     public static String converterSenhaMD5(String password)
             throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
@@ -60,56 +57,74 @@ public class ControladorUsuario {
 
         return String.format("%32x", hash);
     }
+    
+    private boolean isEmpty(String txt) {
+    	return txt == null || txt.isEmpty();
+    }
 
-    //Metodo para Inserir Usuario
+    /**
+     * Metodo para Inserir Usuario
+     * */
     public void inserirUsuario(Usuario usuario)
             throws CampoVazioException, CampoExistenteException,
                 NoSuchAlgorithmException, FormatoInvalidoException{
 
-        if (usuario.getNome().isEmpty() || usuario.getLogin().isEmpty() ||
-                usuario.getSenha().isEmpty()){
-            throw new CampoVazioException();
-        }
-
-        buscarLogin(usuario.getLogin());
-
-        if (this.resultado == true){
-            throw new CampoExistenteException();
-        }
-
-        verificarCaracteres(usuario.getNome());
-
-        if(this.resultado == false){
-            throw new FormatoInvalidoException();
-        }
-        else{
-            usuario.setSenha(converterSenhaMD5(usuario.getSenha())) ;
-            usuarioDAO.inserir(usuario);
-        }
+    	validarCamposVazios(usuario);
+    	validarUsarioExiste(usuario);
+        validarFormatoInvalido(usuario);
+        
+        usuario.setSenha(converterSenhaMD5(usuario.getSenha())) ;
+        usuarioDAO.inserir(usuario);
     }
 
-    //Metodo para Buscar o Usuario pelo ID
+    /**
+     * Metodo para Buscar o Usuario pelo ID
+     * */
     public Usuario buscarUsuario(int id){
         return usuarioDAO.buscarPorChave(id);
     }
-
-    //Metodo para Alterar Usuario
-    public void alterarUsuario(Usuario usuario) throws FormatoInvalidoException,
-            NoSuchAlgorithmException{
-        
-        verificarCaracteres(usuario.getNome());
-
-        if(this.resultado == false){
-            throw new FormatoInvalidoException();
-        }
-        else{
-            usuario.setSenha(converterSenhaMD5(usuario.getSenha())) ;
-            usuarioDAO.alterar(usuario);
-        }      
+    
+    public Usuario buscarUsuario(String login) {
+        return usuarioDAO.buscarUsuario(login);
     }
 
-    //Listar todos os Usuarios
+    /**
+     * Metodo para Alterar Usuario
+     * */
+    public void alterarUsuario(Usuario usuario) throws FormatoInvalidoException,
+            NoSuchAlgorithmException, CampoVazioException{
+    	validarCamposVazios(usuario);
+        validarFormatoInvalido(usuario);
+        
+        usuario.setSenha(converterSenhaMD5(usuario.getSenha())) ;
+        usuarioDAO.alterar(usuario);
+    }
+
+    /**
+     * Listar todos os Usuarios
+     * */
     public Collection<Usuario> listarUsuario(){
         return usuarioDAO.listarColecao();
+    }
+    
+    private void validarUsarioExiste(Usuario usuario) throws CampoExistenteException {
+        if (buscarLogin(usuario.getLogin())) {
+            throw new CampoExistenteException("Usuario: " + usuario.getNome() + " já existe");
+        }
+    }
+    
+    private void validarCamposVazios(Usuario usuario) throws CampoVazioException {
+    	if (usuario == null ||
+        		isEmpty(usuario.getNome()) ||
+        		isEmpty(usuario.getLogin()) || 
+        		isEmpty(usuario.getSenha())){
+    		throw new CampoVazioException("Alterar usario com informação nula.");
+        }
+    }
+    
+    private void validarFormatoInvalido(Usuario usuario) throws FormatoInvalidoException {
+    	if (!verificarCaracteres(usuario.getLogin())) {
+    		throw new FormatoInvalidoException("Campo nome do usario está com formato errado");
+    	}
     }
 }

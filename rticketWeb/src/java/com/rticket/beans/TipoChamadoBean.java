@@ -40,7 +40,7 @@ public class TipoChamadoBean implements Serializable {
         return fach.listarTipoChamado();
     }
 
-    public void setListarTipoChamado(Collection<TipoChamado> listarTipoChamado) {
+    public void setListarTipoChamado(Collection<TipoChamado> listarTipoChamado){
         this.listarTipoChamado = listarTipoChamado;
     }
 
@@ -51,7 +51,7 @@ public class TipoChamadoBean implements Serializable {
     public void setTipoChamado(TipoChamado tipoChamado) {
         this.tipoChamado = tipoChamado;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -60,16 +60,20 @@ public class TipoChamadoBean implements Serializable {
         this.id = id;
     }
 
-    public void inserirTipoChamado() throws FormatoInvalidoException, CampoExistenteException, CampoVazioException {
+    public void inserirTipoChamado() throws FormatoInvalidoException, 
+            CampoExistenteException, CampoVazioException {
+        
         TipoChamado tpc = new TipoChamado();
         tpc.setNome(nome);
 
         fach.inserirTipoChamado(tpc);
 
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("tipochamado.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("tipochamado.xhtml");
         } catch (IOException ex) {
-            Logger.getLogger(TipoChamadoBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TipoChamadoBean.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
     }
 

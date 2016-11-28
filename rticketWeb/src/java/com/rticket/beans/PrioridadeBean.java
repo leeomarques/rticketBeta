@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+@ManagedBean(name = "prioridadeBean")
 public class PrioridadeBean {
 
     private String nome;

@@ -12,3 +12,5 @@
 hs_err_pid*
 /rticketWeb/dist/
 /ProjetoJFS/nbproject/private/
+/rticketWeb/nbproject/private/
+/rticketWeb/build/

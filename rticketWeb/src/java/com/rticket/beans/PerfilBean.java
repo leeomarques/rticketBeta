@@ -10,50 +10,24 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
-import org.primefaces.model.DualListModel;
 
 @ManagedBean(name = "perfilBean")
 public class PerfilBean {
 
-    private DualListModel<String> dualListModulo;
     private Collection<Perfil> listarPerfil;
     private String nome;
     private Perfil perfil;
 
     IFachada fach = new Fachada();
-
-    public void inserirPerfil() throws CampoExistenteException, FormatoInvalidoException, CampoVazioException {
-        Perfil per = new Perfil();
-        per.setNome(nome);
-
-        fach.inserirPerfil(per);
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
-        } catch (IOException ex) {
-            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
+    
     public Perfil buscarPerfil(int id) {
         return fach.buscarPerfil(id);
     }
 
     public void alterarPerfil(Perfil perfil) {
         fach.alterarPerfil(perfil);
-    }
-
-    public DualListModel<String> getDualListModulo() {
-        return dualListModulo;
-    }
-
-    public void setDualListModulo(DualListModel<String> dualListModulo) {
-        this.dualListModulo = dualListModulo;
     }
 
     public Collection<Perfil> getListarPerfil() {
@@ -80,18 +54,16 @@ public class PerfilBean {
         this.perfil = perfil;
     }
 
-    public void onSelect(SelectEvent event) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Selected", event.getObject().toString()));
-    }
+    public void inserirPerfil() throws CampoExistenteException, FormatoInvalidoException, CampoVazioException {
+        Perfil per = new Perfil();
+        per.setNome(nome);
 
-    public void onUnselect(UnselectEvent event) {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Unselected", event.getObject().toString()));
-    }
+        fach.inserirPerfil(per);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    public void onReorder() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
     }
 }

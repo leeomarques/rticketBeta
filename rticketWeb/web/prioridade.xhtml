@@ -13,7 +13,7 @@
         <ui:include src="cabecalho.xhtml" />
         <br />
         <h:form class="formulario">
-            <p:outputLabel value="Nome: " />
+            <p:outputLabel class="nomePrioridade" value="Nome: " />
             <p:inputText value="#{prioridadeBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
             <br/>
             <p:commandButton value="Salvar" action="#{prioridadeBean.inserirPrioridade()}" ajax="false" /><br /><br /><br />

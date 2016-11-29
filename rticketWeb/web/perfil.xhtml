@@ -14,24 +14,16 @@
         <h:form class="formulario">
             <br /><br />
             <p:outputLabel value="Nome: " />
+
             <p:inputText value="#{perfilBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText>
             <br/><br />
 
+
+            <p:inputText value="#{perfilBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br/><br />
+           
+
             <p:commandButton id="salvaPerfil" action="#{perfilBean.inserirPerfil()}" value="SalvaPerfil" style="margin-top:5px"></p:commandButton>
-
-            <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="moduloDialog">
-                <h:panelGrid id="displayModulo" columns="2">
-                    <h:outputText value="Source: " style="font-weight:bold" />
-                    <ui:repeat value="#{perfilBean.dualListModulo.source}" var="item">
-                        <h:outputText value="#{item}" style="margin-right:5px" />
-                    </ui:repeat>
-
-                    <h:outputText value="Target: " style="font-weight:bold" />
-                    <ui:repeat value="#{perfilBean.dualListModulo.target}" var="item">
-                        <h:outputText value="#{item}" style="margin-right:5px" />
-                    </ui:repeat>
-                </h:panelGrid>
-            </p:dialog>          
+  
             <br /><br />
             <p:dataTable var="listperfil" value="#{perfilBean.listarPerfil}">
                 <p:column style="width: 80%" headerText="Nome">

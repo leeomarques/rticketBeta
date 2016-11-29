@@ -12,12 +12,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
 import org.primefaces.model.DualListModel;
+
 
 @ManagedBean(name = "perfilBean")
 public class PerfilBean {
 
+
     private int idPerfil;
+
 
     private Collection<Perfil> listarPerfil;
     private String nome;
@@ -26,20 +30,7 @@ public class PerfilBean {
     private DualListModel<String> dualListModulo;
 
     IFachada fach = new Fachada();
-
-    public void inserirPerfil() throws CampoExistenteException, FormatoInvalidoException, CampoVazioException {
-        Perfil per = new Perfil();
-        per.setNome(nome);
-
-        fach.inserirPerfil(per);
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
-        } catch (IOException ex) {
-            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
+    
     public Perfil buscarPerfil(int id) {
         return fach.buscarPerfil(id);
     }
@@ -47,6 +38,7 @@ public class PerfilBean {
     public void teste() {
         System.err.println("teste");
     }
+
 
     public void alterarPerfil() {
 
@@ -85,6 +77,7 @@ public class PerfilBean {
         }
     }
 
+
     public Collection<Perfil> getListarPerfil() {
         return fach.listarPerfil();
     }
@@ -108,6 +101,7 @@ public class PerfilBean {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
+
 
     public int getIdPerfil() {
         return idPerfil;
@@ -136,6 +130,19 @@ public class PerfilBean {
 
     public String getAtivo() {
         return ativo;
+
+    public void inserirPerfil() throws CampoExistenteException, FormatoInvalidoException, CampoVazioException {
+        Perfil per = new Perfil();
+        per.setNome(nome);
+
+        fach.inserirPerfil(per);
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }
 
     public void setAtivo(String ativo) {

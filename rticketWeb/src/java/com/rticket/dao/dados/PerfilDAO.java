@@ -27,4 +27,16 @@ public class PerfilDAO extends DAOGenerico<Perfil>{
         }
         return verificaNome;
     }
+    
+        public Collection<Perfil> listarPerfil(){
+        
+        Collection<Perfil> colecao = null;
+        String sql = "";
+        sql = ("SELECT p FROM Perfil p WHERE p.ativo = null");
+        Query q = getEntityManager().createQuery(sql, Perfil.class);
+        colecao = q.getResultList();
+
+        return colecao;
+    }
+    
 }

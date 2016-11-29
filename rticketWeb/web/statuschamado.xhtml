@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>RTicket - Status de Chamados</title>
         <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
@@ -18,11 +19,19 @@
             <p:commandButton value="Salvar" action="#{statusChamadoBean.inserirStatusChamado()}" ajax="false" /><br /><br /><br />
 
             <p:dataTable var="listStatusChamado" value="#{statusChamadoBean.listarStatusChamado}">
-                <p:column style="width: 1%" headerText="ID">
-                    <h:outputText value="#{listStatusChamado.id}" />
-                </p:column>
-                <p:column style="width: 20%" headerText="Nome">
+                <p:column style="width: 80%" headerText="Nome">
                     <h:outputText value="#{listStatusChamado.nome}" />
+                </p:column>
+                <p:column style="width: 10%" headerText="Ação">
+                    <p:link style="color: #269abc" outcome="statuschamadoAlterar" value="Alterar">
+                        <f:param name="statuschamadoID" value="#{listStatusChamado.id}" />
+                        <h:outputText value="Alterar" />
+                    </p:link>                
+                    <h:outputText value=" | " />
+                    <p:link style="color: #269abc" outcome="perfilAlterar" value="Excluir">
+                        <f:param name="statusID" value="#{listStatusChamado.id}" />
+                        <h:outputText value="Excluir" />
+                    </p:link>  
                 </p:column>
             </p:dataTable>
         </h:form>  

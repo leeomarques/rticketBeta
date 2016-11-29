@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>RTicket - Usuários</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <ui:include src="cabecalho.xhtml" /><br /><br />
+
+            <h:form class="formulario">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                <p:commandButton value="Salvar" action="#{usuarioBean.alterarUsuario}" ajax="false" icon="ui-icon-disk" /><br /><br /><br />
+
+                <f:metadata>
+                    <f:viewParam name="usuarioID" value="#{usuarioBean.idUsuario}" />
+                </f:metadata>
+
+                <p:outputLabel value="Nome: " /><br />
+                <p:inputText value="#{usuarioBean.nome}" placeholder="" required="true" style="width:500px" requiredMessage="Digite um nome"></p:inputText><br/>
+                <br/>
+                <p:outputLabel value="Login: " /><br />
+                <p:inputText value="#{usuarioBean.login}" placeholder="" required="true" style="width:100px" requiredMessage="Digite um Usuário"></p:inputText><br />
+                <br />
+                <p:outputLabel value="Senha: " /><br />
+                <p:password feedback="true" value="#{usuarioBean.senha}" placeholder="" required="true" style="width:100px" requiredMessage="Digite uma senha"></p:password><br />
+                <br />
+                <p:outputLabel value="Perfil: " /><br />
+                <p:selectOneMenu value="#{usuarioBean.idPerfil}" style="width:250px" required="true" requiredMessage="Selecione um Perfil">
+                    <f:selectItem itemLabel="Perfil..." itemValue="" />
+                    <f:selectItems value="#{usuarioBean.listarPerfil}" var="perfil" itemLabel="#{perfil.nome}" itemValue="#{perfil.id}" />
+                </p:selectOneMenu><br /><br />
+            </h:form>          
+        </f:view>         
+    </h:body>
+</html>
+

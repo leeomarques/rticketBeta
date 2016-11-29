@@ -3,9 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>RTicket - Tipos de Chamados</title>
+        <title>RTicket - Perfil</title>
         <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
@@ -15,7 +16,7 @@
             <p:outputLabel value="Nome: " />
             <p:inputText value="#{perfilBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText>
             <br/><br />
-           
+
             <p:commandButton id="salvaPerfil" action="#{perfilBean.inserirPerfil()}" value="SalvaPerfil" style="margin-top:5px"></p:commandButton>
 
             <p:dialog modal="true" showEffect="fade" hideEffect="fade" widgetVar="moduloDialog">
@@ -33,12 +34,21 @@
             </p:dialog>          
             <br /><br />
             <p:dataTable var="listperfil" value="#{perfilBean.listarPerfil}">
-                <p:column style="width: 10%" headerText="ID">
-                    <h:outputText value="#{listperfil.id}" />
-                </p:column>
                 <p:column style="width: 80%" headerText="Nome">
                     <h:outputText value="#{listperfil.nome}" />
                 </p:column>
+                <p:column style="width: 10%" headerText="Ação">
+                    <p:link style="color: #269abc" outcome="perfilAlterar" value="Alterar">
+                        <f:param name="perfilID" value="#{listperfil.id}" />
+                        <h:outputText value="Alterar" />
+                    </p:link>                
+                    <h:outputText value=" | " />
+                    <p:link style="color: #269abc" outcome="perfilAlterar" value="Excluir">
+                        <f:param name="perfilID" value="#{listperfil.id}" />
+                        <h:outputText value="Alterar" />
+                    </p:link>       
+                </p:column>
+
             </p:dataTable>
         </h:form>
     </h:body>

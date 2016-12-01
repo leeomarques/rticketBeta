@@ -18,6 +18,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "usuarioBean")
 public class UsuarioBean {
 
+    private int idUsuario;
+    private int idPerfil;
     private String nome;
     private String login;
     private String senha;
@@ -36,8 +38,7 @@ public class UsuarioBean {
         usr.setSenha(senha);
 
         usr.setPerfil(fach.buscarPerfil(idPerfil));
-        
-        
+
         fach.inserirUsuario(usr);
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("usuario.xhtml");
@@ -51,14 +52,38 @@ public class UsuarioBean {
         return fach.buscarUsuario(id);
     }
 
-    public void alterarUsuario(Usuario usuario) {
+    public void alterarUsuario() {
+        Usuario usr = new Usuario();
+
+        Usuario novoUsr;
+        novoUsr = fach.buscarUsuario(idUsuario);
+
+        usr.setId(idUsuario);
+        usr.setNome(nome);
+        usr.setLogin(login);
+        usr.setSenha(senha);
+
+        Perfil novoPer;
+        novoPer = fach.buscarPerfil(idPerfil);
+        usr.setPerfil(novoPer);
+
         try {
-            fach.alterarUsuario(usuario);
+            fach.alterarUsuario(usr);
         } catch (FormatoInvalidoException ex) {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("usuario.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void limpar() {
+        Usuario usuario = new Usuario();
     }
 
     public Collection<Usuario> listarUsuario() {
@@ -112,6 +137,34 @@ public class UsuarioBean {
 
     public void setListarPerfil(Collection<Perfil> listarPerfil) {
         this.listarPerfil = listarPerfil;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+
+        int id = this.idUsuario;
+        Usuario usr;
+        IFachada fach = new Fachada();
+
+        usr = fach.buscarUsuario(id);
+
+        setNome(usr.getNome());
+        setLogin(usr.getLogin());
+        setSenha(usr.getSenha());
+        setPerfil(usr.getPerfil().getNome());
+
+    }
+
+    public int getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(int idPerfil) {
+        this.idPerfil = idPerfil;
     }
 
 }

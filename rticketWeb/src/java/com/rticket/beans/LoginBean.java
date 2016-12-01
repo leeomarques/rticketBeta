@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -58,6 +60,14 @@ public class LoginBean implements Serializable{
         
         FacesContext.getCurrentInstance().getExternalContext()
                 .invalidateSession();
+        
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("index.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         return "/index?faces-redirect=true";
     }

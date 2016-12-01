@@ -16,6 +16,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "statusChamadoBean")
 public class StatusChamadoBean {
 
+    private int idStatusChamado;
+    
     private String nome;
     private Collection<StatusChamado> listarStatusChamado;
     private StatusChamado statusChamado;
@@ -62,7 +64,41 @@ public class StatusChamadoBean {
         return fach.buscarStatusChamado(id);
     }
 
-    public void alterarStatusChamado(StatusChamado statusChamado) {
+    public void alterarStatusChamado() {
+
+        StatusChamado sc = new StatusChamado();
+
+        StatusChamado stCham;
+        stCham = fach.buscarStatusChamado(idStatusChamado);
+
+        sc.setId(idStatusChamado);
+        sc.setNome(nome);
+
+        fach.alterarStatusChamado(sc);
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("statuschamado.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         fach.alterarStatusChamado(statusChamado);
+    }
+
+    public int getIdStatusChamado() {
+        return idStatusChamado;
+    }
+
+    public void setIdStatusChamado(int idStatusChamado) {
+       this.idStatusChamado = idStatusChamado;
+
+        int id = this.idStatusChamado;
+        StatusChamado stc;
+        IFachada fach = new Fachada();
+
+        stc = fach.buscarStatusChamado(id);
+
+        setNome(stc.getNome());
+
     }
 }

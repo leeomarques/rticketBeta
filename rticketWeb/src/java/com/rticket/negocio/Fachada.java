@@ -21,8 +21,8 @@ public class Fachada implements IFachada {
     private ControladorChamados novoChamado;
     private ControladorLogChamado novoLogChamado;
     private ControladorStatusChamado novoStatusChamado;
-    private ControladorTipoChamado   novoTipoChamado;
-    private ControladorPrioridade    novoPrioridade;
+    private ControladorTipoChamado novoTipoChamado;
+    private ControladorPrioridade novoPrioridade;
 
     public Fachada() {
         this.novoUsuario = new ControladorUsuario();
@@ -30,8 +30,8 @@ public class Fachada implements IFachada {
         this.novoChamado = new ControladorChamados();
         this.novoLogChamado = new ControladorLogChamado();
         this.novoStatusChamado = new ControladorStatusChamado();
-        this.novoTipoChamado   = new ControladorTipoChamado();
-        this.novoPrioridade    = new ControladorPrioridade();
+        this.novoTipoChamado = new ControladorTipoChamado();
+        this.novoPrioridade = new ControladorPrioridade();
         this.novoTipoChamado = new ControladorTipoChamado();
     }
 
@@ -156,11 +156,11 @@ public class Fachada implements IFachada {
         return this.novoTipoChamado.buscarTipoChamadoNome(nome);
     }
 //</editor-fold>
-    
+
     //<editor-fold defaultstate="collapsed" desc="Metodos para Prioridade">
     public void inserirPrioridade(Prioridade tipoChamado)
             throws FormatoInvalidoException, CampoExistenteException,
-                CampoVazioException{
+            CampoVazioException {
         this.novoPrioridade.inserirPrioridade(tipoChamado);
     }
 
@@ -175,9 +175,9 @@ public class Fachada implements IFachada {
     public Collection<Prioridade> listarPrioridade() {
         return novoPrioridade.listarPrioridade();
     }
-    
-    public Prioridade buscarPrioridadeNome(String nome){
-         return this.novoPrioridade.buscarPrioridadeNome(nome);
+
+    public Prioridade buscarPrioridadeNome(String nome) {
+        return this.novoPrioridade.buscarPrioridadeNome(nome);
     }
 //</editor-fold>
 }

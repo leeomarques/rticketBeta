@@ -17,6 +17,8 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "tipoChamadoBean")
 public class TipoChamadoBean implements Serializable {
 
+    private int idTipoChamado;
+
     private String nome;
     private Collection<TipoChamado> listarTipoChamado;
     private TipoChamado tipoChamado;
@@ -81,7 +83,37 @@ public class TipoChamadoBean implements Serializable {
         return fach.buscarTipoChamado(id);
     }
 
-    public void alterarTipoChamado(TipoChamado tipoChamado) {
-        fach.alterarTipoChamado(tipoChamado);
+    public void alterarTipoChamado() {
+        TipoChamado tpc = new TipoChamado();
+
+        TipoChamado novoTipo;
+        novoTipo = fach.buscarTipoChamado(idTipoChamado);
+
+        tpc.setId(idTipoChamado);
+        tpc.setNome(nome);
+
+        fach.alterarTipoChamado(tpc);
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("tipochamado.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public int getIdTipoChamado() {
+        return idTipoChamado;
+    }
+
+    public void setIdTipoChamado(int idTipoChamado) {
+        this.idTipoChamado = idTipoChamado;
+
+        int id = this.idTipoChamado;
+        TipoChamado tipoc;
+        IFachada fach = new Fachada();
+
+        tipoc = fach.buscarTipoChamado(id);
+
+        setNome(tipoc.getNome());
     }
 }

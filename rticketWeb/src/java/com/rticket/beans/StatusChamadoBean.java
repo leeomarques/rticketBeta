@@ -30,6 +30,7 @@ public class StatusChamadoBean {
     private String nome;
     private Collection<StatusChamado> listarStatusChamado;
     private StatusChamado statusChamado;
+    private String finalizaProcesso;
 
     IFachada fach = new Fachada();
 
@@ -78,6 +79,7 @@ public class StatusChamadoBean {
     public void inserirStatusChamado() throws FormatoInvalidoException, CampoExistenteException, CampoVazioException {
         StatusChamado sts = new StatusChamado();
         sts.setNome(nome);
+        sts.setFinaliza(finalizaProcesso);
         fach.inserirStatusChamado(sts);
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("statuschamado.xhtml");
@@ -99,6 +101,7 @@ public class StatusChamadoBean {
 
         sc.setId(idStatusChamado);
         sc.setNome(nome);
+        sc.setFinaliza(stCham.getFinaliza());
 
         fach.alterarStatusChamado(sc);
 
@@ -126,5 +129,13 @@ public class StatusChamadoBean {
 
         setNome(stc.getNome());
 
+    }
+
+    public String getFinalizaProcesso() {
+        return finalizaProcesso;
+    }
+
+    public void setFinalizaProcesso(String finalizaProcesso) {
+        this.finalizaProcesso = finalizaProcesso;
     }
 }

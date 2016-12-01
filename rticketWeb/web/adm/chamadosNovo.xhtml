@@ -20,6 +20,11 @@
                     <f:selectItems value="#{chamadosBean.listarTipoChamados}" var="tipo" itemLabel="#{tipo.nome}" itemValue="#{tipo.id}" />
                 </p:selectOneMenu><br /><br />
                 
+                <p:selectOneMenu value="#{chamadosBean.prioridade}" style="width:250px" required="true" requiredMessage="Selecione Prioridade">
+                    <f:selectItem itemLabel="Prioridade..." itemValue="" />
+                    <f:selectItems value="#{chamadosBean.listarPrioridade}" var="prio" itemLabel="#{prio.nome}" itemValue="#{prio.id}" />
+                </p:selectOneMenu><br /><br />
+                
                 <p:inputText value="#{chamadosBean.titulo}" placeholder="Titulo" style="width:1000px" required="true" requiredMessage="Insira Titulo"></p:inputText><br /><br />
                 
                 <p:inputTextarea value="#{chamadosBean.descricao}" rows="6" cols="33" placeholder="Descrição" style="width:1000px" required="true" requiredMessage="Insira Descrição" /><br /><br />                

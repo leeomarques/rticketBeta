@@ -13,9 +13,15 @@
         <ui:include src="cabecalhoAdm.xhtml" />
         <br />
         <h:form class="formulario">
-            <p:outputLabel class="nomeStatusChamado" value="Nome: " />
+            <p:outputLabel class="nomeStatusChamado" value="Nome: " /><br />
             <p:inputText value="#{statusChamadoBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
             <br/>
+            <p:selectOneMenu value="#{statusChamadoBean.finalizaProcesso}" style="width:250px" required="true" requiredMessage="Campo Atribuido Para Obrigatorio">
+                <f:selectItem itemLabel="Finaliza Processo..." itemValue="" />
+                <f:selectItem itemLabel="Sim" itemValue="S" />
+                <f:selectItem itemLabel="Não" itemValue="N" />
+            </p:selectOneMenu><br /><br />
+                
             <p:commandButton value="Salvar" action="#{statusChamadoBean.inserirStatusChamado()}" ajax="false" /><br /><br /><br />
 
             <p:dataTable var="listStatusChamado" value="#{statusChamadoBean.listarStatusChamado}">

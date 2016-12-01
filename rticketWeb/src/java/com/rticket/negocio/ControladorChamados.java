@@ -39,7 +39,8 @@ public class ControladorChamados {
         log.setHistorico("TIPO: "+chamado.getTipoChamados().getNome()+";"
                +" STATUS: "+chamado.getStatusChamados().getNome()+";"
                +" TITULO: "+chamado.getTitulo()+";"
-               +" DESCRICAO: "+chamado.getDescricao()+";");
+               +" DESCRICAO: "+chamado.getDescricao()+";"
+               +" PRIORIDADE: "+chamado.getPrioridade().getNome()+";");
         
         chamadosDAO.inserirChamados(chamado, log);
     }
@@ -95,7 +96,7 @@ public class ControladorChamados {
         
         if(cham.getPrioridade() != chamado.getPrioridade()){
             
-            logHistorico += ("; Prioridade: "+chamado.getPrioridade());
+            logHistorico += ("; Prioridade: "+chamado.getPrioridade().getNome());
         }
         
         if(cham.getNotaChamado() != chamado.getNotaChamado()){

@@ -50,11 +50,15 @@ public class ChamadosBean {
        
     IFachada fach = new Fachada();
 
-    HttpServletRequest req;
-    HttpSession sessao = req.getSession();
+    HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance()
+                         .getExternalContext().getSession( true );
     
     String perfil = ((LoginBean) sessao.getAttribute("loginBean")).getUser()
                     .getPerfil().getNome();
+    String login  =  ((LoginBean) sessao.getAttribute("loginBean")).getUser()
+                    .getLogin();
+    int idUsuario = ((LoginBean) sessao.getAttribute("loginBean")).getUser()
+                    .getId();
     
     public int getIdChamado() {
         return idChamado;
@@ -88,7 +92,7 @@ public class ChamadosBean {
     public Collection<Chamados> getListarChamados() {
         
         Usuario usuarioLogado = new Usuario();
-        usuarioLogado.setId(1);
+        usuarioLogado.setId(idUsuario);
         
         return fach.listarChamadosTotal();
     }
@@ -252,15 +256,18 @@ public class ChamadosBean {
     public void novoChamado(){
         try {
             if(perfil.equals("Administrador")){
-                FacesContext.getCurrentInstance().getExternalContext().redirect("adm/chamadosNovo.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .redirect("chamadosNovo.xhtml");
             }
             else{
                 if(perfil.equals("Suporte")){
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("suporte/chamadosNovo.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext()
+                            .redirect("chamadosNovo.xhtml");
                 }
                 else{
                    if(perfil.equals("Usuario")){
-                        FacesContext.getCurrentInstance().getExternalContext().redirect("usuario/chamadosNovo.xhtml");
+                        FacesContext.getCurrentInstance().getExternalContext()
+                                .redirect("chamadosNovo.xhtml");
                     } 
                 }
             }
@@ -274,35 +281,39 @@ public class ChamadosBean {
             Chamados cham = new Chamados();
             Usuario user = new Usuario();
                       
-            user.setId(1);
             IFachada fachadaTipo = new Fachada();
             int idTipo = Integer.valueOf(tipoChamado);
             
+            IFachada fachadaPrio = new Fachada();
+            int idPrio = Integer.valueOf(prioridade);
+            
             IFachada fachadaStatus = new Fachada();
             
-            user.setId(1);
-            user.setLogin("Toinhotony");
-            user.setNome("AntonioCorrea");
-            
+            IFachada fachadaUsuario = new Fachada();
+           
             cham.setTipoChamado(fachadaTipo.buscarTipoChamado(idTipo));
+            cham.setPrioridade(fachadaPrio.buscarPrioridade(idPrio));
             cham.setTitulo(titulo);
             cham.setDescricao(descricao);
             cham.setStatusChamado(fachadaStatus.buscarStatusChamado(1));          
-            cham.setLoginSolicitante("Login da Sessao");
-            cham.setUsuarios(user);//Objeto Usuario da Sessao
+            cham.setLoginSolicitante(login);
+            cham.setUsuarios(fachadaUsuario.buscarUsuario(idUsuario));
                        
             fach.inserirChamados(cham);
             
             if(perfil.equals("Administrador")){
-                FacesContext.getCurrentInstance().getExternalContext().redirect("adm/chamadosList.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .redirect("chamadosList.xhtml");
             }
             else{
                 if(perfil.equals("Suporte")){
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("suporte/chamadosList.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext()
+                            .redirect("chamadosList.xhtml");
                 }
                 else{
                    if(perfil.equals("Usuario")){
-                        FacesContext.getCurrentInstance().getExternalContext().redirect("usuario/chamadosList.xhtml");
+                        FacesContext.getCurrentInstance().getExternalContext()
+                                .redirect("chamadosList.xhtml");
                     } 
                 }
             }
@@ -317,7 +328,6 @@ public class ChamadosBean {
         
         try{
             Chamados chamado = new Chamados();
-            Usuario user = new Usuario();
 
             TipoChamado tipoCham;
             tipoCham = fach.buscarTipoChamado(Integer.valueOf(tipoChamado));
@@ -326,11 +336,10 @@ public class ChamadosBean {
             statusCham = fach.buscarStatusChamado(Integer.valueOf(statusChamado));
 
             Prioridade novoPrioridade;
-            novoPrioridade = fach.buscarPrioridade(Integer.valueOf(statusChamado));
+            novoPrioridade = fach.buscarPrioridade(Integer.valueOf(prioridade));
             
-            user.setId(1);
-            user.setLogin("Toinhotony");
-            user.setNome("AntonioCorrea");
+            Usuario user;
+            user = fach.buscarUsuario(Integer.valueOf(usuarioAtendente));
 
             chamado.setId(idChamado);
             chamado.setTitulo(titulo);
@@ -338,34 +347,31 @@ public class ChamadosBean {
             chamado.setTipoChamado(tipoCham);
             chamado.setPrioridade(novoPrioridade);
             chamado.setStatusChamado(statusCham);
-            
-            if (fechadoEm != null && chamado.getStatusChamados().getId() != 2){
-                mensagemErro();
-            }
-            else{
-                if(fechadoEm == null && chamado.getStatusChamados().getId() == 2){
-                    mensagemErroSituacao();
-                }
-                else{
-                    chamado.setUsuarios(user);
-                    chamado.setResposta(resposta);
-                    chamado.setNotaChamado(avaliacao);
+            chamado.setUsuarios(user);
+            chamado.setResposta(resposta);
+            chamado.setNotaChamado(avaliacao);
 
-                    fach.alterarChamados(chamado);
+            fach.alterarChamados(chamado);
 
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosList.xhtml");
-                }
-            }          
+            FacesContext.getCurrentInstance().getExternalContext()
+                            .redirect("chamadosList.xhtml");         
         }catch (IOException ex) {
-            Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChamadosBean.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
     }
     
     public void mensagemErro() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Campo Fechado Em só deve ser preenchido se a Situação estiver como Resolvido"));
+        FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Campo "
+                        + "Fechado Em só deve ser preenchido se a Situação "
+                        + "estiver como Resolvido"));
     }
     
     public void mensagemErroSituacao() {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Situação marcada como Resolvido, favor informar a data de Fechamento"));
+        FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro!", "Situação"
+                        + " marcada como Resolvido, favor informar a "
+                        + "data de Fechamento"));
     }
 }

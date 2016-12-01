@@ -22,8 +22,8 @@ public class GUITeste {
         Usuario user = new Usuario();
         Perfil perfil = new Perfil();
         
-        //perfil.setNome("Administrador");
-        //fach.inserirPerfil(perfil);
+//        perfil.setNome("Administrador");
+//        fach.inserirPerfil(perfil);
         
         perfil = fach.buscarPerfil(1);
         

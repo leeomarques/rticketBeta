@@ -86,7 +86,7 @@ public class TipoChamadoBeanTest {
         TipoChamado tipo = new TipoChamado();
         tipo.setId(2);
         tipo.setNome("MelhoriaTeste");
-        tipoChamadoBean.alterarTipoChamado(tipo);
+        //tipoChamadoBean.alterarTipoChamado(tipo);
         
         tipo = tipoChamadoBean.buscarTipoChamado(2);
         

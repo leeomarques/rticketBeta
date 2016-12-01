@@ -2,30 +2,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>RTicket - Novo Chamado</title>
+        <title>RTicket - Status de Chamados</title>
         <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
         <f:view>
-            <ui:include src="cabecalho.xhtml" /><br /><br />
-                            
+            <ui:include src="cabecalhoAdm.xhtml" /><br /><br />
+
             <h:form class="formulario">
                 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-                <p:commandButton value="Salvar" action="#{perfilBean.alterarPerfil}" ajax="false" icon="ui-icon-disk" /><br /><br /><br />
-                
+                <p:commandButton value="Salvar" action="#{tipoChamadoBean.alterarTipoChamado}" ajax="false" icon="ui-icon-disk" /><br /><br /><br />
+
                 <f:metadata>
-                    <f:viewParam name="perfilID" value="#{perfilBean.idPerfil}" />
+                    <f:viewParam name="tipochamadoID" value="#{tipoChamadoBean.idTipoChamado}" />
                 </f:metadata>
-                                
+
                 <p:outputLabel value="Nome: " /><br />
-                <p:inputText value="#{perfilBean.nome}" style="width:1000px" required="true"></p:inputText><br /><br />
-                
+                <p:inputText value="#{tipoChamadoBean.nome}" style="width:1000px" required="true"></p:inputText><br /><br />
+
             </h:form>          
-        </f:view>         
+        </f:view> 
     </h:body>
 </html>
 

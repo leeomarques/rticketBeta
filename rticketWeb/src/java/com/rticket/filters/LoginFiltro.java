@@ -25,9 +25,9 @@ public class LoginFiltro implements Filter{
         
 	if (sessao == null || sessao.getAttribute("loginBean") == null || 
 	     ((LoginBean) sessao.getAttribute("loginBean")).getUser() == null) {
-	    RequestDispatcher dis = request.getRequestDispatcher("/index.xhtml");
+	    RequestDispatcher dis = request.getRequestDispatcher("index.xhtml");
   	    dis.forward(request, response);
-	} else {
+	} else {           
 	    chain.doFilter(request, response);
 	}
     }

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <h:head>
+        <title>RTicket - Chamados</title>
+        <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
+    </h:head>
+    <h:body>
+        <f:view>
+            <ui:include src="cabecalhoAdm.xhtml" /><br /><br />
+            <h:form class="formulario">
+                <p:commandButton action="#{chamadosBean.novoChamado}" value="Novo" icon="ui-icon-star" /><br /><br /><br />
+            
+                <p:dataTable id="tbl" var="chamado" value="#{chamadosBean.listarChamados}"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                             paginator="true" rows="10" style="margin-bottom:20px">
+ 
+                    <f:facet name="{Exporters}">
+                        <h:commandLink>
+                            <p:graphicImage url="img/excel.png" width="24" />
+                            <p:dataExporter type="xls" target="tbl" fileName="listChamados" />
+                        </h:commandLink>
+                    </f:facet>
+ 
+                    <p:column style="width:20px">
+                        <f:facet name="header">
+                            <h:outputText value="Id" />
+                        </f:facet>
+                        <p:link style="color: #269abc" outcome="chamadosConsultar" value="#{chamado.id}">
+                            <f:param name="chamadoId" value="#{chamado.id}" />
+                        </p:link>                      
+                    </p:column>
+
+                    <p:column style="width:200px">
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="#{chamado.tipoChamados.nome}" />
+                    </p:column>
+
+                    <p:column style="width:200px">
+                        <f:facet name="header">
+                            <h:outputText value="Situação" />
+                        </f:facet>
+                        <h:outputText value="#{chamado.statusChamados.nome}" />
+                    </p:column>
+
+                    <p:column style="width:600px">
+                        <f:facet name="header">
+                            <h:outputText value="Titulo" />
+                        </f:facet>
+                        <h:outputText value="#{chamado.titulo}" />
+                    </p:column>
+
+                    <p:column style="width:100px">
+                        <f:facet name="header">
+                            <h:outputText value="Criado Em" />
+                        </f:facet>
+                        <h:outputText value="#{chamado.dataCriacao}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+    </h:body>
+</html>

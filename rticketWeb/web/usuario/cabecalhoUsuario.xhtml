@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <link href="css/padrao.css" rel="stylesheet"></link>
+        <link href="../css/padrao.css" rel="stylesheet"></link>
     </h:head>
     <h:body>       
         <f:view>
@@ -16,14 +16,6 @@
                 <p:growl id="messages" />
                 <p:menubar>
                     <p:menuitem value="Chamados" url="chamadosList.xhtml" icon="ui-icon-pencil" />
-
-                    <p:submenu label="Cadastros" icon="ui-icon-gear">
-                        <p:menuitem value="Perfil" url="perfil.xhtml" icon="ui-icon-newwin" />
-                        <p:menuitem value="Prioridade" url="prioridade.xhtml" icon="ui-icon-newwin" />
-                        <p:menuitem value="Status de Chamado" url="statuschamado.xhtml" icon="ui-icon-newwin" />
-                        <p:menuitem value="Tipos de Chamados" url="tipochamado.xhtml" icon="ui-icon-newwin" />
-                        <p:menuitem value="Usuarios" url="usuario.xhtml" icon="ui-icon-newwin" />
-                    </p:submenu>
 
                     <f:facet name="options">
                         <span style="margin-right: 10px;">Olá, #{loginBean.login}</span>     

@@ -6,30 +6,33 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>RTicket - Status de Chamados</title>
+        <title>RTicket - Prioridade de Chamados</title>
         <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
-        <ui:include src="cabecalho.xhtml" />
+        <ui:include src="cabecalhoAdm.xhtml" />
         <br />
         <h:form class="formulario">
-            <p:outputLabel class="nomeStatusChamado" value="Nome: " />
-            <p:inputText value="#{statusChamadoBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
+            <p:outputLabel class="nomePrioridade" value="Nome: " />
+            <p:inputText value="#{prioridadeBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
             <br/>
-            <p:commandButton value="Salvar" action="#{statusChamadoBean.inserirStatusChamado()}" ajax="false" /><br /><br /><br />
+            <p:commandButton value="Salvar" action="#{prioridadeBean.inserirPrioridade()}" ajax="false" /><br /><br /><br />
 
-            <p:dataTable var="listStatusChamado" value="#{statusChamadoBean.listarStatusChamado}">
-                <p:column style="width: 80%" headerText="Nome">
-                    <h:outputText value="#{listStatusChamado.nome}" />
+            <p:dataTable var="listPrioridade" value="#{prioridadeBean.listarPrioridade}">
+                <p:column style="width: 1%" headerText="ID">
+                    <h:outputText value="#{listPrioridade.id}" />
+                </p:column>
+                <p:column style="width: 20%" headerText="Nome">
+                    <h:outputText value="#{listPrioridade.nome}" />
                 </p:column>
                 <p:column style="width: 10%" headerText="Ação">
-                    <p:link style="color: #269abc" outcome="statuschamadoAlterar" value="Alterar">
-                        <f:param name="statuschamadoID" value="#{listStatusChamado.id}" />
+                    <p:link style="color: #269abc" outcome="perfilAlterar" value="Alterar">
+                        <f:param name="perfilID" value="#{listperfil.id}" />
                         <h:outputText value="Alterar" />
                     </p:link>                
                     <h:outputText value=" | " />
                     <p:link style="color: #269abc" outcome="perfilAlterar" value="Excluir">
-                        <f:param name="statusID" value="#{listStatusChamado.id}" />
+                        <f:param name="perfilID" value="#{listperfil.id}" />
                         <h:outputText value="Excluir" />
                     </p:link>  
                 </p:column>
@@ -37,4 +40,3 @@
         </h:form>  
     </h:body>
 </html>
-

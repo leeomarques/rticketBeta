@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
 @ManagedBean(name = "chamadosBean")
@@ -47,6 +49,12 @@ public class ChamadosBean {
     private String logChamadoAcao;    
        
     IFachada fach = new Fachada();
+
+    HttpServletRequest req;
+    HttpSession sessao = req.getSession();
+    
+    String perfil = ((LoginBean) sessao.getAttribute("loginBean")).getUser()
+                    .getPerfil().getNome();
     
     public int getIdChamado() {
         return idChamado;
@@ -242,9 +250,20 @@ public class ChamadosBean {
     }
     
     public void novoChamado(){
-        
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosNovo.xhtml");
+            if(perfil.equals("Administrador")){
+                FacesContext.getCurrentInstance().getExternalContext().redirect("adm/chamadosNovo.xhtml");
+            }
+            else{
+                if(perfil.equals("Suporte")){
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("suporte/chamadosNovo.xhtml");
+                }
+                else{
+                   if(perfil.equals("Usuario")){
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("usuario/chamadosNovo.xhtml");
+                    } 
+                }
+            }
         } catch (IOException ex) {
             Logger.getLogger(ChamadosBean.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -273,8 +292,20 @@ public class ChamadosBean {
             cham.setUsuarios(user);//Objeto Usuario da Sessao
                        
             fach.inserirChamados(cham);
-  
-            FacesContext.getCurrentInstance().getExternalContext().redirect("chamadosList.xhtml");
+            
+            if(perfil.equals("Administrador")){
+                FacesContext.getCurrentInstance().getExternalContext().redirect("adm/chamadosList.xhtml");
+            }
+            else{
+                if(perfil.equals("Suporte")){
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("suporte/chamadosList.xhtml");
+                }
+                else{
+                   if(perfil.equals("Usuario")){
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("usuario/chamadosList.xhtml");
+                    } 
+                }
+            }
         } catch (CampoVazioException ex) {
             JOptionPane.showMessageDialog(null, "Favor preencher todos os Campos");
         }catch (IOException ex) {

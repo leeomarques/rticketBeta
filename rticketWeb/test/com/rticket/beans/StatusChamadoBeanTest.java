@@ -78,7 +78,7 @@ public class StatusChamadoBeanTest {
         StatusChamado status = new StatusChamado();
         status.setId(2);
         status.setNome("ResolvidoTeste");
-        statusChamadoBean.alterarStatusChamado(status);
+       // statusChamadoBean.alterarStatusChamado(status);
         
         status = statusChamadoBean.buscarStatusChamado(2);
         

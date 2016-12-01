@@ -6,24 +6,24 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>RTicket - Prioridade de Chamados</title>
+        <title>RTicket - Perfil</title>
         <link rel="shortcut icon" href="img/HelpDeskImage.ico" ></link>
     </h:head>
     <h:body>
-        <ui:include src="cabecalho.xhtml" />
-        <br />
+        <ui:include src="cabecalhoAdm.xhtml" />
         <h:form class="formulario">
-            <p:outputLabel class="nomePrioridade" value="Nome: " />
-            <p:inputText value="#{prioridadeBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText><br /><br />
-            <br/>
-            <p:commandButton value="Salvar" action="#{prioridadeBean.inserirPrioridade()}" ajax="false" /><br /><br /><br />
+            <br /><br />
+            <p:outputLabel value="Nome: " />
 
-            <p:dataTable var="listPrioridade" value="#{prioridadeBean.listarPrioridade}">
-                <p:column style="width: 1%" headerText="ID">
-                    <h:outputText value="#{listPrioridade.id}" />
-                </p:column>
-                <p:column style="width: 20%" headerText="Nome">
-                    <h:outputText value="#{listPrioridade.nome}" />
+            <p:inputText value="#{perfilBean.nome}" placeholder="" required="true" style="width:500px"></p:inputText>
+            <br/><br />           
+
+            <p:commandButton id="salvaPerfil" action="#{perfilBean.inserirPerfil()}" value="SalvaPerfil" style="margin-top:5px"></p:commandButton>
+  
+            <br /><br />
+            <p:dataTable var="listperfil" value="#{perfilBean.listarPerfil}">
+                <p:column style="width: 80%" headerText="Nome">
+                    <h:outputText value="#{listperfil.nome}" />
                 </p:column>
                 <p:column style="width: 10%" headerText="Ação">
                     <p:link style="color: #269abc" outcome="perfilAlterar" value="Alterar">
@@ -33,10 +33,11 @@
                     <h:outputText value=" | " />
                     <p:link style="color: #269abc" outcome="perfilAlterar" value="Excluir">
                         <f:param name="perfilID" value="#{listperfil.id}" />
-                        <h:outputText value="Excluir" />
-                    </p:link>  
+                        <h:outputText value="Alterar" />
+                    </p:link>       
                 </p:column>
+
             </p:dataTable>
-        </h:form>  
+        </h:form>
     </h:body>
 </html>

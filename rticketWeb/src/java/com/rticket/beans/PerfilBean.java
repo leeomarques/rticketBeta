@@ -130,14 +130,23 @@ public class PerfilBean {
 
     public String getAtivo() {
         return ativo;
-
-    public void inserirPerfil() throws CampoExistenteException, FormatoInvalidoException, CampoVazioException {
-        Perfil per = new Perfil();
-        per.setNome(nome);
-
-        fach.inserirPerfil(per);
+    }
+    
+    public void inserirPerfil(){
+        
         try {
+            Perfil per = new Perfil();
+            per.setNome(nome);
+      
+            fach.inserirPerfil(per);
+            
             FacesContext.getCurrentInstance().getExternalContext().redirect("perfil.xhtml");
+        } catch (CampoExistenteException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FormatoInvalidoException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (CampoVazioException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);         
         } catch (IOException ex) {
             Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
         }

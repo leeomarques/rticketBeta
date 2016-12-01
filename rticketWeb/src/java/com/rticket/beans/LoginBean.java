@@ -113,15 +113,28 @@ public class LoginBean implements Serializable{
                         this.user = (Usuario)iterator.next();
                         
                     }
-                    FacesContext.getCurrentInstance().getExternalContext()
-                            .redirect("principal.xhtml");
+                    if(user.getPerfil().getNome().equals("Administrador")){
+                        FacesContext.getCurrentInstance().getExternalContext()
+                            .redirect("adm/principalAdm.xhtml");
+                    }
+                    else{
+                        if(user.getPerfil().getNome().equals("Suporte")){
+                            FacesContext.getCurrentInstance().getExternalContext()
+                                .redirect("suporte/principalSuporte.xhtml");
+                        }
+                        else{
+                            if(user.getPerfil().getNome().equals("Usuario")){
+                                FacesContext.getCurrentInstance().getExternalContext()
+                                    .redirect("usuario/principalUsuario.xhtml");
+                            }
+                        }
+                    }                   
                 }
             }
         } catch (ValidarLoginException e) {
             FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage("Login/Senha inexistente"));
-        }
-        
+        }       
         return "/index?faces-redirect=true";
     }
 }

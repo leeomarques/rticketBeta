@@ -13,7 +13,7 @@
     </h:head>
     <h:body>
         <f:view>
-            <ui:include src="cabecalho.xhtml" /><br /><br />
+            <ui:include src="cabecalhoSuporte.xhtml" /><br /><br />
             <h:form class="formulario">
                 <p:commandButton action="#{chamadosBean.novoChamado}" value="Novo" icon="ui-icon-star" /><br /><br /><br />
             
@@ -25,11 +25,6 @@
                         <h:commandLink>
                             <p:graphicImage url="img/excel.png" width="24" />
                             <p:dataExporter type="xls" target="tbl" fileName="listChamados" />
-                        </h:commandLink>
-
-                        <h:commandLink>
-                            <p:graphicImage url="img/pdf.png" width="24"/>
-                            <p:dataExporter type="pdf" target="tbl" fileName="listChamados"/>
                         </h:commandLink>
                     </f:facet>
  

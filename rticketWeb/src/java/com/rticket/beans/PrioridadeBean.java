@@ -17,6 +17,7 @@ import javax.faces.context.FacesContext;
 public class PrioridadeBean {
 
     private String nome;
+    private String ativo;
     private Collection<Prioridade> listarPrioridade;
     private Prioridade prioridade;
     private int id;
@@ -79,5 +80,30 @@ public class PrioridadeBean {
 
     public void alterarPrioridade(Prioridade prioridade) {
         fach.alterarPrioridade(prioridade);
+    }
+
+    public void excluirPrioridade() {
+        Prioridade pri = new Prioridade();
+
+        Prioridade novoPri;
+        novoPri = fach.buscarPrioridade(id);
+
+        pri.setAtivo(ativo);
+
+        fach.alterarPrioridade(pri);
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("prioridade.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
     }
 }

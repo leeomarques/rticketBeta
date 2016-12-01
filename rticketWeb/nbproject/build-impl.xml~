@@ -1004,9 +1004,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.hibernate-entitymanager-4.1.2.Final.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.hibernate-jpa-2.0-api-1.0.1.Final.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.javassist-3.15.0-GA.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-
         <copyfiles files="${file.reference.javax.servlet-3.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-
         <copyfiles files="${file.reference.jboss-logging-3.1.0.GA.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jboss-transaction-api_1.1_spec-1.0.0.Final.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jsf-api-2.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
@@ -1024,10 +1022,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.hibernate-entitymanager-4.1.2.Final.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.hibernate-jpa-2.0-api-1.0.1.Final.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.javassist-3.15.0-GA.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-
         <copyfiles files="${file.reference.javax.servlet-3.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-
-
         <copyfiles files="${file.reference.jboss-logging-3.1.0.GA.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jboss-transaction-api_1.1_spec-1.0.0.Final.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jsf-api-2.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
@@ -1455,7 +1450,6 @@ exists or setup the property manually. For example like this:
         <delete includeEmptyDirs="true" quiet="true">
             <fileset dir="${build.dir.to.clean}/WEB-INF/lib"/>
         </delete>
-        <delete dir="${build.dir}"/>
         <available file="${build.dir.to.clean}/WEB-INF/lib" property="status.clean-failed" type="dir"/>
         <delete dir="${dist.dir}"/>
     </target>

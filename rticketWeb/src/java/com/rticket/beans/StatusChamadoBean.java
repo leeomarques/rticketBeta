@@ -17,7 +17,16 @@ import javax.faces.context.FacesContext;
 public class StatusChamadoBean {
 
     private int idStatusChamado;
-    
+
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
+    }
+
+    String ativo;
     private String nome;
     private Collection<StatusChamado> listarStatusChamado;
     private StatusChamado statusChamado;
@@ -39,6 +48,23 @@ public class StatusChamadoBean {
 
     public void setListarStatusChamado(Collection<StatusChamado> listarStatusChamado) {
         this.listarStatusChamado = listarStatusChamado;
+    }
+
+    public void excluirStatusChamado() {
+        StatusChamado stc = new StatusChamado();
+
+        StatusChamado novoStc;
+        novoStc = fach.buscarStatusChamado(idStatusChamado);
+
+        stc.setAtivo(ativo);
+
+        fach.alterarStatusChamado(stc);
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("statuschamado.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public StatusChamado getStatusChamado() {
@@ -90,7 +116,7 @@ public class StatusChamadoBean {
     }
 
     public void setIdStatusChamado(int idStatusChamado) {
-       this.idStatusChamado = idStatusChamado;
+        this.idStatusChamado = idStatusChamado;
 
         int id = this.idStatusChamado;
         StatusChamado stc;

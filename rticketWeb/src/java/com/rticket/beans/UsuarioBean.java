@@ -21,6 +21,7 @@ public class UsuarioBean {
     private int idUsuario;
     private int idPerfil;
     private String nome;
+    private String ativo;
     private String login;
     private String senha;
     private Collection<Usuario> listarUsuario;
@@ -165,6 +166,37 @@ public class UsuarioBean {
 
     public void setIdPerfil(int idPerfil) {
         this.idPerfil = idPerfil;
+    }
+
+    public void excluirUsuario() {
+        Usuario usr = new Usuario();
+
+        Usuario novoUsr;
+        novoUsr = fach.buscarUsuario(idUsuario);
+
+        usr.setAtivo(ativo);
+
+        try {
+            fach.alterarUsuario(usr);
+        } catch (FormatoInvalidoException ex) {
+            Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UsuarioBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("usuario.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
     }
 
 }

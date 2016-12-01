@@ -20,6 +20,7 @@ public class TipoChamadoBean implements Serializable {
     private int idTipoChamado;
 
     private String nome;
+    private String ativo;
     private Collection<TipoChamado> listarTipoChamado;
     private TipoChamado tipoChamado;
     private int id;
@@ -42,7 +43,7 @@ public class TipoChamadoBean implements Serializable {
         return fach.listarTipoChamado();
     }
 
-    public void setListarTipoChamado(Collection<TipoChamado> listarTipoChamado){
+    public void setListarTipoChamado(Collection<TipoChamado> listarTipoChamado) {
         this.listarTipoChamado = listarTipoChamado;
     }
 
@@ -53,7 +54,7 @@ public class TipoChamadoBean implements Serializable {
     public void setTipoChamado(TipoChamado tipoChamado) {
         this.tipoChamado = tipoChamado;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -62,9 +63,9 @@ public class TipoChamadoBean implements Serializable {
         this.id = id;
     }
 
-    public void inserirTipoChamado() throws FormatoInvalidoException, 
+    public void inserirTipoChamado() throws FormatoInvalidoException,
             CampoExistenteException, CampoVazioException {
-        
+
         TipoChamado tpc = new TipoChamado();
         tpc.setNome(nome);
 
@@ -81,6 +82,23 @@ public class TipoChamadoBean implements Serializable {
 
     public TipoChamado buscarTipoChamado(int id) {
         return fach.buscarTipoChamado(id);
+    }
+
+    public void excluirTipoChamado() {
+        TipoChamado tpc = new TipoChamado();
+
+        TipoChamado novoTpc;
+        novoTpc = fach.buscarTipoChamado(idTipoChamado);
+
+        tpc.setAtivo(ativo);
+
+        fach.alterarTipoChamado(tpc);
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("tipochamado.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(PerfilBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void alterarTipoChamado() {
@@ -115,5 +133,13 @@ public class TipoChamadoBean implements Serializable {
         tipoc = fach.buscarTipoChamado(id);
 
         setNome(tipoc.getNome());
+    }
+
+    public String getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(String ativo) {
+        this.ativo = ativo;
     }
 }
